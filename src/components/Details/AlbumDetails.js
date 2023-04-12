@@ -54,7 +54,7 @@ const AlbumDetails = ({albumId}) => {
                         <span className="wd-details-release-date">
                             {album.release_date}
                         </span>
-                        <span className="wd-details-total-tracks ms-2">
+                        <span className="wd-details-total-tracks ms-3">
                             {album.tracks.items.length} Songs
                         </span>
                     </div>

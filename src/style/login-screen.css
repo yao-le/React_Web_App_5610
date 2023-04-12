@@ -1,0 +1,63 @@
+.wd-login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #121212;
+}
+
+.wd-login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    background-color: #181818;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.wd-login-title {
+    color: #1db954;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.wd-login-button {
+    background-color: #1db954;
+    width: 100%;
+    padding: 0.5rem;
+    border: none #1db954;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.wd-login-button:hover,
+.wd-login-button:focus {
+    background-color: #1ed760;
+    border-color: #1ed760;
+}
+
+.wd-login-form-group {
+    margin-bottom: 1rem;
+}
+
+.wd-login-form-label {
+    color: #ffffff;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.wd-login-form-input {
+    width: 100%;
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #333333;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.wd-login-form-input:focus {
+    border-color: #1db954;
+    box-shadow: 0 0 0 0.25rem rgba(29, 185, 84, 0.25);
+}

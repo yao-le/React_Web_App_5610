@@ -44,7 +44,7 @@ const PlaylistDetails = ({playlistId}) => {
                         <span className="wd-details-owner">
                             By {playlist.owner?.display_name}
                         </span>
-                        <span className="wd-details-total-tracks ms-2">
+                        <span className="wd-details-total-tracks ms-3">
                             {playlist.tracks?.total} Songs
                         </span>
                     </div>
