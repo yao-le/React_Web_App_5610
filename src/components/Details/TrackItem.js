@@ -1,4 +1,5 @@
 import '../../style/track-details.css';
+import {Link} from "react-router-dom";
 
 
 const TrackItem = ({track}) => {
@@ -10,6 +11,7 @@ const TrackItem = ({track}) => {
 
     const {
         name,
+        album,
         duration_ms,
         preview_url,
     } = track;
@@ -25,7 +27,15 @@ const TrackItem = ({track}) => {
                     <h3 className="wd-track-details-title">{name}</h3>
                     <i className="bi bi-heart fs-5 ms-3" onClick={handleClick}></i>
                 </div>
-                <div className="wd-track-details-duration">{duration}</div>
+                <div className="d-flex flex-row align-items-center text-muted">
+                    {
+                        album && (
+                        <Link to={`/details?album=${album.id}`} className="wd-link-no-decoration">
+                            <div className="wd-track-details-album">{album.name}</div>
+                        </Link>
+                    )}
+                    <div className={`wd-track-details-duration ${album ? ` ms-3` : ""}`}>{duration}</div>
+                </div>
             </div>
 
 

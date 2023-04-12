@@ -1,10 +1,10 @@
-import { getAlbumById } from '../../services/album-service';
-import { useEffect, useState } from 'react';
+import {getAlbumById} from '../../services/album-service';
+import {useEffect, useState} from 'react';
 import '../../style/details-style.css';
 import TrackItem from './TrackItem';
 import ReviewForm from "../Review/ReviewForm";
 
-const AlbumDetails = ({ albumId }) => {
+const AlbumDetails = ({albumId}) => {
     const [album, setAlbum] = useState(null);
 
     const submitReview = (reviewText) => {
@@ -63,14 +63,14 @@ const AlbumDetails = ({ albumId }) => {
 
             {/*Review Form*/}
             <div>
-                <ReviewForm submitReview={submitReview} />
+                <ReviewForm submitReview={submitReview}/>
             </div>
 
             {/*Track List*/}
             <div className="wd-details-tracks mt-5">
                 <ul>
                     {album.tracks.items.map((track) => (
-                        <TrackItem key={track.id} track={track} />
+                        <TrackItem key={track.id} track={track}/>
                     ))}
                 </ul>
             </div>
