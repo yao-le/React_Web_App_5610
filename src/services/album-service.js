@@ -22,8 +22,3 @@ export const getNewReleases = async (countryCode, limit=20) => {
 }
 
 
-
-
-
-
-

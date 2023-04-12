@@ -1,0 +1,55 @@
+.wd-details {
+    color: #fff;
+}
+
+.wd-details-header {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+.wd-details-img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.wd-details-info {
+    margin-left: 20px;
+}
+
+.wd-details-title {
+    font-size: 46px;
+    margin-bottom: 5px;
+}
+
+.wd-details-artist,
+.wd-details-description {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.wd-details-meta {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+
+.wd-details-total-tracks {
+    margin-left: 10px;
+}
+
+.wd-details-tracks {
+    margin-top: 20px;
+}
+
+.wd-details-tracks ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.wd-details-type {
+    font-weight: bold;
+    text-transform: capitalize;
+}

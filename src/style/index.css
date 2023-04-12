@@ -1,0 +1,68 @@
+body,
+html {
+  height: 100%;
+  margin: 0;
+}
+
+.root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.wd-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 16px;
+  padding: 12px;
+}
+
+.wd-summary-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 1rem;
+}
+
+.wd-summary-cover {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.wd-summary-info {
+  margin-top: 0.5rem;
+}
+
+.wd-summary-name {
+  font-weight: bold;
+  color: white;
+}
+
+.wd-summary-artist {
+  font-weight: bold;
+  color: lightgray;
+}
+
+.wd-summary-title {
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+
+.wd-bg-color-black {
+  background-color: #191414;
+}
+
+.wd-link-no-decoration {
+  text-decoration: none;
+  color: inherit;
+}
+
+.wd-link-no-decoration:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
