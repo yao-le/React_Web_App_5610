@@ -21,7 +21,7 @@ const Navbar = () => {
                 </Link>
                 <Link to="/login" className="wd-link-no-decoration">
                     <li className="wd-navbar-menu-item">
-                        <i className="bi bi-person-add"></i>
+                        <i className="bi bi-person-circle"></i>ç
                         <span className="ms-3 d-none d-xl-inline">Sign in</span>
                     </li>
                 </Link>

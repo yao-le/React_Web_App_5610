@@ -2,9 +2,6 @@ import {useSearchParams} from "react-router-dom";
 import AlbumDetails from "./AlbumDetails";
 import PlayListDetails from "./PlayListDetails";
 import Navbar from "../Navbar";
-import PlaylistGrid from "../Summary/PlaylistGrid";
-import AlbumGrid from "../Summary/AlbumGrid";
-
 
 
 const DetailsScreen = () => {
