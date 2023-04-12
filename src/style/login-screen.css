@@ -71,3 +71,19 @@
     color: white;
     margin-left: 3px;
 }
+
+.wd-toggle-form {
+    text-align: center;
+    color: white;
+}
+
+.wd-toggle-form-button {
+    background: none;
+    border: none;
+    color: #1db954;
+    cursor: pointer;
+}
+
+.wd-text-underline {
+    text-decoration: underline;
+}

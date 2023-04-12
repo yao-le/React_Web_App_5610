@@ -41,7 +41,7 @@ const AlbumDetails = ({albumId}) => {
                     <div className="mb-2 text-uppercase fw-bold text-muted">
                         {album.type}
                     </div>
-                    <div className="wd-details-title">{album.name}</div>
+                    <div className="wd-details-title text-uppercase">{album.name}</div>
                     <p className="wd-details-artist fw-bold text-muted">
                         {album.artists.map((artist, index) => (
                             <span key={artist.id}>

@@ -37,7 +37,7 @@ const PlaylistDetails = ({playlistId}) => {
                     <div className="mb-2 text-uppercase fw-bold text-muted">
                         {playlist.type}
                     </div>
-                    <div className="wd-details-title">{playlist.name}</div>
+                    <div className="wd-details-title text-uppercase">{playlist.name}</div>
                     <div className="wd-details-description fw-bold text-muted">{playlist.description}</div>
 
                     <div className="wd-details-meta text-muted fs-6 fw-bold mt-2">
