@@ -61,3 +61,13 @@
     border-color: #1db954;
     box-shadow: 0 0 0 0.25rem rgba(29, 185, 84, 0.25);
 }
+
+.wd-login-radio-group {
+    display: flex;
+    gap: 16px;
+}
+
+.wd-login-radio-label {
+    color: white;
+    margin-left: 3px;
+}
