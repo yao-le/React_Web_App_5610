@@ -3,7 +3,7 @@ const AlbumItem = ({album}) => {
         <div className="wd-summary-card">
             <img
                 className="wd-summary-cover"
-                src={album.images[1].url}
+                src={album.images && album.images[1]?.url}
                 alt={album.name}
             />
             <div className="wd-summary-info">

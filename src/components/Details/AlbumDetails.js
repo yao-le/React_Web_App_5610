@@ -4,13 +4,16 @@ import '../../style/details-style.css';
 import TrackItem from './TrackItem';
 import ReviewForm from "../Review/ReviewForm";
 
+
 const AlbumDetails = ({albumId}) => {
     const [album, setAlbum] = useState(null);
 
+
     const submitReview = (reviewText) => {
         console.log('Album review submitted:', reviewText);
-        // Implement review submission logic here
+        // Implement review submission logic here. Need to call local API to create a review
     };
+
 
     const fetchAlbumInfo = async () => {
         const albumInfo = await getAlbumById(albumId);
@@ -74,6 +77,7 @@ const AlbumDetails = ({albumId}) => {
                     ))}
                 </ul>
             </div>
+
         </div>
     );
 };

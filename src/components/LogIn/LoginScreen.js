@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 const LoginScreen = () => {
     const [showLoginForm, setShowLoginForm] = useState(true);
 
+    const [username, setUsername] = useState(''); // used for register
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [role, setRole] = useState("listener");
@@ -23,7 +24,7 @@ const LoginScreen = () => {
         event.preventDefault();
         // for testing
         console.log("from register");
-        console.log({email, password, role});
+        console.log({email, password, role, username});
         // add register logic
     }
 
@@ -38,6 +39,18 @@ const LoginScreen = () => {
 
 
                 <form onSubmit={showLoginForm ? handleLoginSubmit : handleRegisterSubmit}>
+
+                    {!showLoginForm &&
+                        <div className="wd-login-form-group">
+                            <label className="wd-login-form-label">Username</label>
+                            <input
+                                type="text"
+                                className="wd-login-form-input"
+                                required
+                                onChange={(e) => setUsername(e.target.value)}
+                            />
+                        </div>
+                    }
 
                     <div className="wd-login-form-group">
                         <label className="wd-login-form-label">Email address</label>
@@ -110,22 +123,22 @@ const LoginScreen = () => {
                 </form>
 
                 <div className="wd-toggle-form mt-4">
-                    { showLoginForm ? (
+                    {showLoginForm ? (
                         <div> Don't have an account?
                             <button
                                 className="wd-toggle-form-button ms-3"
                                 onClick={() => setShowLoginForm(false)}>
-                                    Register
+                                Register
                             </button>
-                         </div>
+                        </div>
                     ) : (
                         <div> Already have an account?
                             <button
                                 className="wd-toggle-form-button ms-2"
                                 onClick={() => setShowLoginForm(true)}>
-                                    Log In
-                             </button>
-                         </div>
+                                Log In
+                            </button>
+                        </div>
                     )}
                 </div>
 

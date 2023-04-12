@@ -3,7 +3,7 @@ const PlaylistItem = ({playlist}) => {
         <div className="wd-summary-card">
             <img
                 className="wd-summary-cover"
-                src={playlist.images[0].url}
+                src={playlist.images && playlist.images[0]?.url}
                 alt={playlist.name}
             />
             <div className="wd-summary-info">
