@@ -19,10 +19,12 @@ const Navbar = () => {
                         <span className="ms-3 d-none d-xl-inline">Search</span>
                     </li>
                 </Link>
-                <li className="wd-navbar-menu-item">
-                    <i className="bi bi-person-add"></i>
-                    <span className="ms-3 d-none d-xl-inline">Sign in</span>
-                </li>
+                <Link to="/login" className="wd-link-no-decoration">
+                    <li className="wd-navbar-menu-item">
+                        <i className="bi bi-person-add"></i>
+                        <span className="ms-3 d-none d-xl-inline">Sign in</span>
+                    </li>
+                </Link>
             </ul>
         </nav>
     );

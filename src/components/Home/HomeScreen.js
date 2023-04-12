@@ -3,6 +3,7 @@ import {getNewReleases} from "../../services/album-service";
 import {getFeaturedPlaylists} from "../../services/playlist-service";
 import AlbumGrid from "../Summary/AlbumGrid";
 import PlaylistGrid from "../Summary/PlaylistGrid";
+import Navbar from "../Navbar";
 
 const HomeScreen = () => {
     const [newReleases, setNewReleases] = useState([]);
@@ -31,13 +32,22 @@ const HomeScreen = () => {
 
 
     return (
-        <div className="wd-bg-color-black">
+        <div className="row wd-bg-color-black wd-container">
+            <div className="d-none d-sm-none d-md-block col-2">
+                <Navbar/>
+            </div>
 
-            <h3 className="fw-bold text-white wd-summary-title">New Releases</h3>
-            <AlbumGrid albums={newReleases}/>
+            <div className="col-12 col-md-10">
+                <div className="wd-width-90">
+                    <div className="wd-bg-color-black">
+                        <h3 className="fw-bold text-white wd-summary-title">Featured Playlists</h3>
+                        <PlaylistGrid playlists={featuredPlaylists}/>
 
-            <h3 className="fw-bold text-white wd-summary-title">Featured Playlists</h3>
-            <PlaylistGrid playlists={featuredPlaylists}/>
+                        <h3 className="fw-bold text-white wd-summary-title">New Releases</h3>
+                        <AlbumGrid albums={newReleases}/>
+                    </div>
+                </div>
+            </div>
 
         </div>
     )

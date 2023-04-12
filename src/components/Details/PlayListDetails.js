@@ -2,9 +2,15 @@ import {useState, useEffect} from 'react';
 import '../../style/details-style.css';
 import {getPlaylistById} from '../../services/playlist-service';
 import TrackItem from './TrackItem';
+import ReviewForm from "../Review/ReviewForm";
 
 const PlaylistDetails = ({playlistId}) => {
     const [playlist, setPlaylist] = useState(null);
+
+    const submitReview = (reviewText) => {
+        console.log('Playlist review submitted:', reviewText);
+        // Implement review submission logic here
+    };
 
     const fetchPlaylistInfo = async () => {
         const playlistInfo = await getPlaylistById(playlistId);
@@ -43,6 +49,11 @@ const PlaylistDetails = ({playlistId}) => {
                         </span>
                     </div>
                 </div>
+            </div>
+
+            {/*Review Form*/}
+            <div>
+                <ReviewForm submitReview={submitReview} />
             </div>
 
             <div className="wd-details-tracks mt-5">

@@ -1,0 +1,22 @@
+.wd-review-form {
+    background-color: #282828;
+    padding: 20px;
+    border-radius: 8px;
+    color: #ffffff;
+}
+
+.wd-review-form-label {
+    font-weight: bold;
+}
+
+.wd-review-form-textarea {
+    background-color: #373737;
+    border: none;
+    color: #ffffff;
+    resize: none;
+}
+
+.wd-review-form-textarea:focus {
+    outline: none;
+    box-shadow: none;
+}

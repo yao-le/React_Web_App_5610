@@ -3,6 +3,7 @@ import '../../style/track-details.css';
 
 const TrackItem = ({track}) => {
 
+    // need to add some logic to handle the click event on the heart icon
     const handleClick = () => {
         console.log('clicked');
     }

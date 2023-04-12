@@ -10,6 +10,10 @@ html {
   flex-direction: column;
 }
 
+.wd-container {
+  min-height: 100vh;
+  background-color: #000000;
+}
 
 .wd-summary-grid {
   display: grid;
@@ -64,5 +68,9 @@ html {
 .wd-link-no-decoration:hover {
   text-decoration: none;
   color: inherit;
+}
+
+.wd-width-90 {
+  width: 90%;
 }
 

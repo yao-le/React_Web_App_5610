@@ -3,6 +3,7 @@ import {useSearchParams} from "react-router-dom";
 import {searchForItems} from "../../services/search-service";
 import SearchResults from "./SearchResults";
 import SearchBar from "./SearchBar";
+import Navbar from "../Navbar";
 
 
 const SearchScreen = () => {
@@ -30,13 +31,23 @@ const SearchScreen = () => {
 
 
     return (
+        <div className="row wd-bg-color-black wd-container">
+            <div className="d-none d-sm-none d-md-block col-2">
+                <Navbar/>
+            </div>
 
-        <div>
-            <SearchBar/>
-            {
-                query != null &&
-                <SearchResults albums={albums} playlists={playlists}/>
-            }
+            <div className="col-12 col-md-10">
+                <div className="wd-width-90">
+                    <div className="wd-bg-color-black">
+                        <SearchBar/>
+                        {
+                            query != null &&
+                            <SearchResults albums={albums} playlists={playlists}/>
+                        }
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     );
