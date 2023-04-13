@@ -6,7 +6,7 @@ const ReviewForm = ({ submitReview }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // add some logic to submit the review
+        //submit the review
         submitReview(reviewText);
         setReviewText('');
     };

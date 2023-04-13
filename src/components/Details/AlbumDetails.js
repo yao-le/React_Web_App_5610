@@ -3,15 +3,27 @@ import {useEffect, useState} from 'react';
 import '../../style/details-style.css';
 import TrackItem from './TrackItem';
 import ReviewForm from "../Review/ReviewForm";
+import {createReview} from "../../services/review-service";
+import {updateUserReviews} from "../../services/user-service";
 
 
 const AlbumDetails = ({albumId}) => {
     const [album, setAlbum] = useState(null);
 
 
-    const submitReview = (reviewText) => {
-        console.log('Album review submitted:', reviewText);
-        // Implement review submission logic here. Need to call local API to create a review
+    // need to be modified
+    const submitReview = async (reviewText) => {
+        console.log("Submit review: ", reviewText);
+        // implement review submission logic. Need to call local API to create a review
+        // const newReview = {
+        //     albumId,
+        //     userId: "643804088859bb18110f5e4e", // hard coded for testing, should use thunk to get user id
+        //     text: reviewText,
+        // }
+        // const res = await createReview(newReview);
+        // console.log("create review success ", res);
+        // await updateUserReviews("643804088859bb18110f5e4e", {reviewId: res._id});
+        // console.log("update User reviews success ");
     };
 
 
@@ -22,7 +34,7 @@ const AlbumDetails = ({albumId}) => {
 
     useEffect(() => {
         fetchAlbumInfo();
-    });
+    },[]);
 
 
     if (!album) {

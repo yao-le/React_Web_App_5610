@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import "../../style/login-screen.css";
 import {Link} from "react-router-dom";
+//import {login, register} from "../../services/user-service";
+//import {useNavigate} from "react-router";
 
 const LoginScreen = () => {
     const [showLoginForm, setShowLoginForm] = useState(true);
@@ -10,22 +12,41 @@ const LoginScreen = () => {
     const [password, setPassword] = useState('');
     const [role, setRole] = useState("listener");
 
+
     // need to be modified
-    const handleLoginSubmit = (event) => {
+    const handleLoginSubmit = async (event) => {
         event.preventDefault();
-        // for testing
-        console.log("from login");
-        console.log({email, password, role});
-        // add login logic
+
+        const user = {
+            email,
+            password,
+            role
+        };
+
+        console.log(user);
+        // const res = await login(user);
+        // console.log("login success ", res);
+        // navigate("/profile");
+
     };
 
     // need to be modified
-    const handleRegisterSubmit = (event) => {
+    const handleRegisterSubmit = async (event) => {
         event.preventDefault();
-        // for testing
-        console.log("from register");
-        console.log({email, password, role, username});
-        // add register logic
+
+        const newUser = {
+            username, email, password
+        };
+        console.log(newUser);
+        // const res =  await register(newUser);
+        // console.log("register success ", res);
+    }
+
+    const resetForm = () => {
+        setUsername('')
+        setEmail('')
+        setPassword('')
+        setRole('listener')
     }
 
     return (
@@ -46,6 +67,7 @@ const LoginScreen = () => {
                             <input
                                 type="text"
                                 className="wd-login-form-input"
+                                value={username}
                                 required
                                 onChange={(e) => setUsername(e.target.value)}
                             />
@@ -57,6 +79,7 @@ const LoginScreen = () => {
                         <input
                             type="email"
                             className="wd-login-form-input"
+                            value={email}
                             required
                             onChange={(e) => setEmail(e.target.value)}
                         />
@@ -66,6 +89,7 @@ const LoginScreen = () => {
                         <input
                             type="password"
                             className="wd-login-form-input"
+                            value={password}
                             required
                             onChange={(e) => setPassword(e.target.value)}
                         />
@@ -127,7 +151,10 @@ const LoginScreen = () => {
                         <div> Don't have an account?
                             <button
                                 className="wd-toggle-form-button ms-3"
-                                onClick={() => setShowLoginForm(false)}>
+                                onClick={() => {
+                                    resetForm()
+                                    setShowLoginForm(false)
+                                }}>
                                 Register
                             </button>
                         </div>
@@ -135,7 +162,10 @@ const LoginScreen = () => {
                         <div> Already have an account?
                             <button
                                 className="wd-toggle-form-button ms-2"
-                                onClick={() => setShowLoginForm(true)}>
+                                onClick={() => {
+                                    resetForm()
+                                    setShowLoginForm(true)
+                                }}>
                                 Log In
                             </button>
                         </div>

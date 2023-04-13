@@ -19,7 +19,7 @@ const PlaylistDetails = ({playlistId}) => {
 
     useEffect(() => {
         fetchPlaylistInfo();
-    });
+    },[]);
 
     if (!playlist) {
         return <div>Loading playlist details...</div>;

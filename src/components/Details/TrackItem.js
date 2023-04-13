@@ -22,10 +22,9 @@ const TrackItem = ({track}) => {
         <div className="wd-track-details wd-track-details-content
         d-flex flex-row align-items-center">
 
-            <div className="d-flex flex-column">
+            <div className="d-flex flex-column w-75">
                 <div className="d-flex flex-row align-items-center">
                     <h3 className="wd-track-details-title">{name}</h3>
-                    <i className="bi bi-heart fs-5 ms-3" onClick={handleClick}></i>
                 </div>
                 <div className="d-flex flex-row align-items-center text-muted">
                     {
@@ -34,7 +33,8 @@ const TrackItem = ({track}) => {
                             <div className="wd-track-details-album">{album.name}</div>
                         </Link>
                     )}
-                    <div className={`wd-track-details-duration ${album ? ` ms-3` : ""}`}>{duration}</div>
+                    <div className={`wd-track-details-duration ${album ? ` ms-2` : ""}`}>{duration}</div>
+                    <i className="bi bi-heart fs-5 ms-2" onClick={handleClick}></i>
                 </div>
             </div>
 

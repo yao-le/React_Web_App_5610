@@ -5,7 +5,7 @@ import {seedArtists} from "../utils/seeds";
 
 const BASE_API = "https://api.spotify.com/v1/tracks";
 
-const LOCAL_BASE_API = "http://localhost:4000/api/tracks"
+//const LOCAL_BASE_API = "http://localhost:4000/api/tracks"
 
 
 // https://developer.spotify.com/documentation/web-api/reference/get-recommendations#available-genre-seeds
