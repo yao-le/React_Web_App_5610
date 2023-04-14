@@ -4,7 +4,6 @@ import '../../style/details-style.css';
 import TrackItem from './TrackItem';
 import ReviewForm from "../Review/ReviewForm";
 import {createReview} from "../../services/review-service";
-import {updateUserReviews} from "../../services/user-service";
 
 
 const AlbumDetails = ({albumId}) => {
@@ -22,7 +21,6 @@ const AlbumDetails = ({albumId}) => {
         // }
         // const res = await createReview(newReview);
         // console.log("create review success ", res);
-        // await updateUserReviews("643804088859bb18110f5e4e", {reviewId: res._id});
         // console.log("update User reviews success ");
     };
 

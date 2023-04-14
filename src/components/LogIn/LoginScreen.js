@@ -1,45 +1,52 @@
 import React, {useState} from "react";
 import "../../style/login-screen.css";
 import {Link} from "react-router-dom";
-//import {login, register} from "../../services/user-service";
-//import {useNavigate} from "react-router";
+import {useNavigate} from "react-router";
+import {useDispatch} from "react-redux";
+import {loginThunk, registerThunk} from "../../services/auth-thunks";
+
 
 const LoginScreen = () => {
     const [showLoginForm, setShowLoginForm] = useState(true);
 
     const [username, setUsername] = useState(''); // used for register
-    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    // used for registration
+    const [email, setEmail] = useState('');
     const [role, setRole] = useState("listener");
 
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-    // need to be modified
-    const handleLoginSubmit = async (event) => {
-        event.preventDefault();
 
-        const user = {
-            email,
-            password,
-            role
-        };
-
-        console.log(user);
-        // const res = await login(user);
-        // console.log("login success ", res);
-        // navigate("/profile");
-
+    const handleLogin = async () => {
+        const response = await dispatch(loginThunk({username, password}));
+        if (!response.error) {
+            navigate("/profile");
+        } else {
+            console.log(response.error);
+            resetForm();
+            alert("Login failed");
+        }
     };
 
-    // need to be modified
-    const handleRegisterSubmit = async (event) => {
-        event.preventDefault();
 
+    const handleRegister = async () => {
         const newUser = {
-            username, email, password
+            username,
+            password,
+            role,
+            email
         };
-        console.log(newUser);
-        // const res =  await register(newUser);
-        // console.log("register success ", res);
+
+        const response = await dispatch(registerThunk(newUser));
+        if (!response.error) {
+            navigate("/profile");
+        } else {
+            console.log(response.error);
+            resetForm();
+            alert("Register failed");
+        }
     }
 
     const resetForm = () => {
@@ -59,92 +66,98 @@ const LoginScreen = () => {
                 }
 
 
-                <form onSubmit={showLoginForm ? handleLoginSubmit : handleRegisterSubmit}>
-
-                    {!showLoginForm &&
-                        <div className="wd-login-form-group">
-                            <label className="wd-login-form-label">Username</label>
-                            <input
-                                type="text"
-                                className="wd-login-form-input"
-                                value={username}
-                                required
-                                onChange={(e) => setUsername(e.target.value)}
-                            />
-                        </div>
-                    }
+                <div>
 
                     <div className="wd-login-form-group">
-                        <label className="wd-login-form-label">Email address</label>
+                        <label className="wd-login-form-label">Username</label>
                         <input
-                            type="email"
+                            type="text"
                             className="wd-login-form-input"
-                            value={email}
+                            placeholder="your username"
+                            value={username}
                             required
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(e) => setUsername(e.target.value)}
                         />
                     </div>
+
                     <div className="wd-login-form-group">
                         <label className="wd-login-form-label">Password</label>
                         <input
                             type="password"
                             className="wd-login-form-input"
                             value={password}
+                            placeholder="your password"
                             required
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
 
-                    <div className="wd-login-form-group">
-                        <label className="wd-login-form-label">Role</label>
-                        <div className="wd-login-radio-group">
-                            <div>
-                                <input
-                                    type="radio"
-                                    id="listener"
-                                    name="role"
-                                    value="listener"
-                                    checked={role === "listener"}
-                                    onChange={(e) => setRole(e.target.value)}
-                                />
-                                <label htmlFor="listener" className="wd-login-radio-label">
-                                    Listener
-                                </label>
-                            </div>
-                            <div>
-                                <input
-                                    type="radio"
-                                    id="publisher"
-                                    name="role"
-                                    value="publisher"
-                                    checked={role === "publisher"}
-                                    onChange={(e) => setRole(e.target.value)}
-                                />
-                                <label htmlFor="publisher" className="wd-login-radio-label">
-                                    Publisher
-                                </label>
-                            </div>
-                            <div>
-                                <input
-                                    type="radio"
-                                    id="admin"
-                                    name="role"
-                                    value="admin"
-                                    checked={role === "admin"}
-                                    onChange={(e) => setRole(e.target.value)}
-                                />
-                                <label htmlFor="admin" className="wd-login-radio-label">
-                                    Admin
-                                </label>
+                    {!showLoginForm &&
+                        <div className="wd-login-form-group">
+                            <label className="wd-login-form-label">Email address (optional)</label>
+                            <input
+                                type="email"
+                                className="wd-login-form-input"
+                                placeholder="your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
+                    }
+
+                    {!showLoginForm &&
+                        <div className="wd-login-form-group">
+                            <label className="wd-login-form-label">Role</label>
+                            <div className="wd-login-radio-group">
+                                <div>
+                                    <input
+                                        type="radio"
+                                        id="listener"
+                                        name="role"
+                                        value="listener"
+                                        checked={role === "listener"}
+                                        onChange={(e) => setRole(e.target.value)}
+                                    />
+                                    <label htmlFor="listener" className="wd-login-radio-label">
+                                        Listener
+                                    </label>
+                                </div>
+                                <div>
+                                    <input
+                                        type="radio"
+                                        id="publisher"
+                                        name="role"
+                                        value="publisher"
+                                        checked={role === "publisher"}
+                                        onChange={(e) => setRole(e.target.value)}
+                                    />
+                                    <label htmlFor="publisher" className="wd-login-radio-label">
+                                        Publisher
+                                    </label>
+                                </div>
+                                <div>
+                                    <input
+                                        type="radio"
+                                        id="admin"
+                                        name="role"
+                                        value="admin"
+                                        checked={role === "admin"}
+                                        onChange={(e) => setRole(e.target.value)}
+                                    />
+                                    <label htmlFor="admin" className="wd-login-radio-label">
+                                        Admin
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
 
 
-                    <button type="submit" className="wd-login-button mt-4">
+                    <button onClick={showLoginForm ? handleLogin : handleRegister}
+                            className="wd-login-button mt-4">
                         {showLoginForm ? "Login" : "Register"}
                     </button>
-                </form>
+                </div>
 
                 <div className="wd-toggle-form mt-4">
                     {showLoginForm ? (

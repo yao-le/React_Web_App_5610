@@ -2,8 +2,11 @@ import React from 'react';
 import "../style/navbar.css";
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
+import {useSelector} from "react-redux";
 
 const Navbar = () => {
+
+    const { currentUser } = useSelector((state) => state.user);
 
     const navigate = useNavigate();
 
@@ -27,12 +30,20 @@ const Navbar = () => {
                         <span className="ms-3 d-none d-xl-inline">Search</span>
                     </li>
                 </Link>
-                <Link to="/login" className="wd-link-no-decoration">
+
+                {!currentUser && <Link to="/login" className="wd-link-no-decoration">
                     <li className="wd-navbar-menu-item">
-                        <i className="bi bi-person-circle"></i>
+                        <i className="bi bi-box-arrow-in-right"></i>
                         <span className="ms-3 d-none d-xl-inline">Sign in</span>
                     </li>
-                </Link>
+                </Link>}
+
+                {currentUser && <Link to="/" className="wd-link-no-decoration">
+                    <li className="wd-navbar-menu-item">
+                        <i className="bi bi-box-arrow-right"></i>
+                        <span className="ms-3 d-none d-xl-inline">Log out</span>
+                    </li>
+                </Link>}
 
                 <li className="wd-navbar-menu-item wd-navbar-menu-item-back">
                     <i className="bi bi-backspace-fill"></i>
