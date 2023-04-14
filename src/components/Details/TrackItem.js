@@ -10,6 +10,11 @@ const TrackItem = ({track}) => {
         console.log('clicked');
     }
 
+    // if track is null, return an empty div
+    if (!track) {
+        return <div></div>
+    }
+
     const {
         name,
         album,
@@ -19,6 +24,7 @@ const TrackItem = ({track}) => {
 
     const duration = (duration_ms / 60000).toFixed(2).replace('.', ':');
 
+
     return (
         <div className="wd-track-details wd-track-details-content
         d-flex flex-row align-items-center">
@@ -26,7 +32,7 @@ const TrackItem = ({track}) => {
             <div className="d-flex flex-column w-75">
                 <div className="d-flex flex-row align-items-center">
                     <h3 className="wd-track-details-title">{name}</h3>
-                    <i className="bi bi-bookmark-star-fill fs-5 ms-2 text-muted" onClick={handleClick}></i>
+                    <i className="bi bi-bookmark-star-fill fs-5 ms-2 text-muted wd-bookmark" onClick={handleClick}></i>
                 </div>
                 <div className="d-flex flex-row align-items-center text-muted">
                     {

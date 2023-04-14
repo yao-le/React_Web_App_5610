@@ -1,10 +1,34 @@
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
+import ProfileGrid from "../Summary/ProfileGrid";
+import {useEffect, useState} from "react";
+
+// only for testing purpose
+import userArray from "../../utils/users.js";
 
 
 const ViewerProfile = () => {
 
     const { currentUser } = useSelector((state) => state.user);
+
+    const [followers, setFollowers] = useState([]);
+    const [following, setFollowing] = useState([]);
+
+    // fetch current user's followers
+    const fetchFollowers = async () => {
+
+    }
+
+    // fetch current user's following
+    const fetchFollowing = async () => {
+
+    }
+
+    useEffect(() => {
+        fetchFollowers();
+        fetchFollowing();
+    }, []);
+
 
     return (
         <div className="wd-details mt-5">
@@ -50,10 +74,14 @@ const ViewerProfile = () => {
 
             <div className="mt-3">
                 <h3 className="fw-bold text-white wd-summary-title">Followers</h3>
+                {/*hard code for now*/}
+                <ProfileGrid users={userArray.slice(0, 5)} />
             </div>
 
             <div className="mt-3">
                 <h3 className="fw-bold text-white wd-summary-title">Following</h3>
+                {/*hard code for now*/}
+                <ProfileGrid users={userArray.slice(0, 5)} />
             </div>
         </div>
 

@@ -26,6 +26,8 @@ const OtherProfileScreen = () => {
                     <Navbar/>
                 </div>
 
+                {/*需要修改：如何识别fetched user 的 role， 需要分成三种类型吗？other viewer profile,
+                 other publisher profile, other admin profile ?*/}
                 {/*Profile*/}
                 <div className="col-12 col-md-10">
                     <div className="text-white">Other Profile Screen</div>

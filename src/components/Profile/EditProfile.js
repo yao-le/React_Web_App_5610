@@ -94,13 +94,13 @@ const EditProfile = () => {
                 </div>
 
                 {/* Update button */}
-                <button type="button" className="btn btn-primary wd-edit-profile-btn"
+                <button type="button" className="btn btn-success rounded-pill wd-edit-profile-btn"
                         onClick={handleUpdate}>
-                    Update Profile
+                    Save Profile
                 </button>
 
                 {/* Cancel button */}
-                <Link to="/profile" className="btn btn-secondary wd-edit-profile-btn">
+                <Link to="/profile" className="btn btn-secondary rounded-pill wd-edit-profile-btn">
                     Cancel
                 </Link>
             </form>

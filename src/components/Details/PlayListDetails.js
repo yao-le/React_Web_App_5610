@@ -47,7 +47,7 @@ const PlaylistDetails = ({playlistId}) => {
                         <span className="wd-details-total-tracks ms-3">
                             {playlist.tracks?.total} Songs
                         </span>
-                        <i className="bi bi-heart-fill ms-3 fs-4"></i>
+                        <i className="bi bi-heart-fill ms-3 fs-4 wd-bookmark"></i>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@ const PlaylistDetails = ({playlistId}) => {
             <div className="wd-details-tracks mt-5">
                 <ul>
                     {playlist.tracks?.items?.map((item) => (
-                        <TrackItem key={item.track.id} track={item.track}/>
+                        <TrackItem key={item.track?.id} track={item.track}/>
                     ))}
                 </ul>
             </div>

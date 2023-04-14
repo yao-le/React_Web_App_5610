@@ -1,17 +1,20 @@
-const AlbumItem = ({album}) => {
+import "../../style/profile-item.css";
+
+
+const ProfileItem = ({ user }) => {
     return (
-        <div className="wd-summary-card">
+        <div className="wd-profile-item">
             <img
-                className="wd-summary-cover"
-                src={album.images && album.images[1]?.url}
-                alt={album.name}
+                className="wd-profile-avatar"
+                src={user.avatarUrl}
+                alt={user.username}
             />
-            <div className="wd-summary-info">
-                <div className="wd-summary-name">{album.name}</div>
-                <div className="wd-summary-artist">{album.artists[0].name}</div>
+            <div className="wd-profile-info">
+                <div className="wd-profile-username">{user.username}</div>
+                <div className="wd-profile-label text-muted">Profile</div>
             </div>
         </div>
     );
-}
+};
 
-export default AlbumItem;
+export default ProfileItem;

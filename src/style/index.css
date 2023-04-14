@@ -17,7 +17,14 @@ html {
 
 .wd-summary-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  grid-gap: 16px;
+  padding: 12px;
+}
+
+.wd-profile-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   grid-gap: 16px;
   padding: 12px;
 }
@@ -28,6 +35,11 @@ html {
   align-items: center;
   text-align: center;
   margin: 1rem;
+  transition: transform 0.2s ease-in-out;
+}
+
+.wd-summary-card:hover {
+  transform: scale(1.05);
 }
 
 .wd-summary-cover {
@@ -68,6 +80,10 @@ html {
 .wd-link-no-decoration:hover {
   text-decoration: none;
   color: inherit;
+}
+
+.wd-bookmark:hover {
+  transform: scale(1.2);
 }
 
 .wd-width-95 {
