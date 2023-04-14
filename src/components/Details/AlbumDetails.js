@@ -40,7 +40,7 @@ const AlbumDetails = ({albumId}) => {
     }
 
     return (
-        <div className="wd-details mt-5">
+        <div className="wd-details mt-5 container">
             <div className="wd-details-header">
                 {/*cover image of album*/}
                 <img
@@ -70,6 +70,7 @@ const AlbumDetails = ({albumId}) => {
                         <span className="wd-details-total-tracks ms-3">
                             {album.tracks.items.length} Songs
                         </span>
+                        <i className="bi bi-heart-fill ms-3 fs-4"></i>
                     </div>
                 </div>
             </div>
@@ -81,11 +82,11 @@ const AlbumDetails = ({albumId}) => {
 
             {/*Track List*/}
             <div className="wd-details-tracks mt-5">
-                <ul>
+
                     {album.tracks.items.map((track) => (
                         <TrackItem key={track.id} track={track}/>
                     ))}
-                </ul>
+
             </div>
 
         </div>

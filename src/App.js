@@ -32,7 +32,7 @@ function App() {
                     <Route path="/login" element={<LoginScreen/>}/>
                     <Route path="/profile" element={<ProfileScreen/>}/>
                     <Route path="/edit-profile" element={<EditProfile/>}/>
-                    {/*<Route path="/profile/:userId" element={<OtherProfileScreen/>}/>*/}
+                    <Route path="/profile/:userId" element={<OtherProfileScreen/>}/>
                 </Routes>
             </BrowserRouter>
         </Provider>

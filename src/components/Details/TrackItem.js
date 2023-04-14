@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 const TrackItem = ({track}) => {
 
     // need to add some logic to handle the click event on the heart icon
+    // 根据后端调整
     const handleClick = () => {
         console.log('clicked');
     }
@@ -25,6 +26,7 @@ const TrackItem = ({track}) => {
             <div className="d-flex flex-column w-75">
                 <div className="d-flex flex-row align-items-center">
                     <h3 className="wd-track-details-title">{name}</h3>
+                    <i className="bi bi-bookmark-star-fill fs-5 ms-2 text-muted" onClick={handleClick}></i>
                 </div>
                 <div className="d-flex flex-row align-items-center text-muted">
                     {
@@ -34,7 +36,6 @@ const TrackItem = ({track}) => {
                         </Link>
                     )}
                     <div className={`wd-track-details-duration ${album ? ` ms-2` : ""}`}>{duration}</div>
-                    <i className="bi bi-heart fs-5 ms-2" onClick={handleClick}></i>
                 </div>
             </div>
 

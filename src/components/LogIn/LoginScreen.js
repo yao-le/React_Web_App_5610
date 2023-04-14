@@ -7,6 +7,7 @@ import {loginThunk, registerThunk} from "../../services/auth-thunks";
 
 // 需要根据后端修改
 const LoginScreen = () => {
+    // used to toggle between login and register form
     const [showLoginForm, setShowLoginForm] = useState(true);
 
     const [username, setUsername] = useState(''); // used for register

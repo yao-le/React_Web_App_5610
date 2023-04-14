@@ -34,21 +34,18 @@ const HomeScreen = () => {
     return (
         <div className="row wd-bg-color-black wd-container">
             <div className="d-none d-sm-none d-md-block col-2">
-                <Navbar/>
+                <Navbar />
             </div>
 
             <div className="col-12 col-md-10">
-                <div className="wd-width-90">
-                    <div className="wd-bg-color-black">
+                <div className="wd-bg-color-black">
 
-                        <h3 className="fw-bold text-white wd-summary-title">New Album Releases</h3>
-                        <AlbumGrid albums={newReleases}/>
+                    <h3 className="fw-bold text-white wd-summary-title">New Album Releases</h3>
+                    <AlbumGrid albums={newReleases}/>
 
-                        {/*不需要的功能*/}
-                        {/*<h3 className="fw-bold text-white wd-summary-title">Featured Playlists</h3>*/}
-                        {/*<PlaylistGrid playlists={featuredPlaylists}/>*/}
-                    </div>
-
+                    {/*不需要的功能*/}
+                    {/*<h3 className="fw-bold text-white wd-summary-title">Featured Playlists</h3>*/}
+                    {/*<PlaylistGrid playlists={featuredPlaylists}/>*/}
                 </div>
             </div>
 
