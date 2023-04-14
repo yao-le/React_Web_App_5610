@@ -5,7 +5,7 @@ import {useNavigate} from "react-router";
 import {useDispatch} from "react-redux";
 import {loginThunk, registerThunk} from "../../services/auth-thunks";
 
-
+// 需要根据后端修改
 const LoginScreen = () => {
     const [showLoginForm, setShowLoginForm] = useState(true);
 
@@ -13,14 +13,16 @@ const LoginScreen = () => {
     const [password, setPassword] = useState('');
     // used for registration
     const [email, setEmail] = useState('');
-    const [role, setRole] = useState("listener");
+    const [role, setRole] = useState("viewer"); //
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
 
     const handleLogin = async () => {
+        // 根据role来dispatch不同的loginthunk，可以给viewer，publisher, admin分别写一个loginthunk
         const response = await dispatch(loginThunk({username, password}));
+
         if (!response.error) {
             navigate("/profile");
         } else {
@@ -105,8 +107,7 @@ const LoginScreen = () => {
                         </div>
                     }
 
-                    {!showLoginForm &&
-                        <div className="wd-login-form-group">
+                    <div className="wd-login-form-group">
                             <label className="wd-login-form-label">Role</label>
                             <div className="wd-login-radio-group">
                                 <div>
@@ -114,8 +115,8 @@ const LoginScreen = () => {
                                         type="radio"
                                         id="listener"
                                         name="role"
-                                        value="listener"
-                                        checked={role === "listener"}
+                                        value="viewer"
+                                        checked={role === "viewer"}
                                         onChange={(e) => setRole(e.target.value)}
                                     />
                                     <label htmlFor="listener" className="wd-login-radio-label">
@@ -150,7 +151,6 @@ const LoginScreen = () => {
                                 </div>
                             </div>
                         </div>
-                    }
 
 
                     <button onClick={showLoginForm ? handleLogin : handleRegister}

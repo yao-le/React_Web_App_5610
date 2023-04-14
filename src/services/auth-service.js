@@ -8,6 +8,8 @@ const USERS_URL = `${SERVER_API_URL}/users`;
 const api = axios.create({ withCredentials: true });
 
 
+// need to be modified based on the backend interface
+
 export const register = async (newUser) => {
     const response = await api.post(`${USERS_URL}/register`, newUser);
     // return current user

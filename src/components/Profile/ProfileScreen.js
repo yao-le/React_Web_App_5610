@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "../../style/profile.css";
 import {useSelector} from "react-redux";
 import Navbar from "../Navbar";
+import ViewerProfile from "./ViewerProfile";
 
 
 const ProfileScreen = () => {
@@ -18,7 +19,8 @@ const ProfileScreen = () => {
 
             {/*Profile*/}
             <div className="col-12 col-md-10">
-                <h2 className="text-white">Profile Screen</h2>
+                {/*需要修改： 根据current user 的role，来显示不同的profile： viewerProfile, adminProfile, publisherProfile*/}
+                <ViewerProfile user={currentUser} />
             </div>
 
         </div>
