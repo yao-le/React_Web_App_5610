@@ -38,12 +38,22 @@ const Navbar = () => {
                     </li>
                 </Link>
 
-                {!currentUser && <Link to="/login" className="wd-link-no-decoration">
-                    <li className="wd-navbar-menu-item">
-                        <i className="bi bi-box-arrow-in-right"></i>
-                        <span className="ms-3 d-none d-xl-inline">Sign in</span>
-                    </li>
+                {!currentUser &&
+                    <Link to="/login" className="wd-link-no-decoration">
+                        <li className="wd-navbar-menu-item">
+                            <i className="bi bi-box-arrow-in-right"></i>
+                            <span className="ms-3 d-none d-xl-inline">Sign in</span>
+                        </li>
                 </Link>}
+
+                {currentUser &&
+                    <Link to="/profile" className="wd-link-no-decoration">
+                        <li className="wd-navbar-menu-item">
+                            <i className="bi bi-person-circle"></i>
+                            <span className="ms-3 d-none d-xl-inline">Profile</span>
+                        </li>
+                    </Link>
+                }
 
                 {currentUser &&
                     <Link to="/" className="wd-link-no-decoration"
@@ -55,9 +65,9 @@ const Navbar = () => {
                     </Link>
                 }
 
-                <li className="wd-navbar-menu-item wd-navbar-menu-item-back">
+                <li className="wd-navbar-menu-item wd-navbar-menu-item-back" onClick={navigateBack}>
                     <i className="bi bi-backspace-fill"></i>
-                    <span className="ms-3 d-none d-xl-inline" onClick={navigateBack}>Back</span>
+                    <span className="ms-3 d-none d-xl-inline">Back</span>
                 </li>
 
             </ul>

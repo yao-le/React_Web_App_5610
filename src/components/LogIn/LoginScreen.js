@@ -55,7 +55,7 @@ const LoginScreen = () => {
         setUsername('')
         setEmail('')
         setPassword('')
-        setRole('listener')
+        setRole('viewer')
     }
 
     return (
@@ -113,14 +113,14 @@ const LoginScreen = () => {
                                 <div>
                                     <input
                                         type="radio"
-                                        id="listener"
+                                        id="viewer"
                                         name="role"
                                         value="viewer"
                                         checked={role === "viewer"}
                                         onChange={(e) => setRole(e.target.value)}
                                     />
-                                    <label htmlFor="listener" className="wd-login-radio-label">
-                                        Listener
+                                    <label htmlFor="viewer" className="wd-login-radio-label">
+                                        Viewer
                                     </label>
                                 </div>
                                 <div>
