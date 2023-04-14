@@ -19,3 +19,9 @@ export const login = async ({username, password}) => {
     // return current user
     return response.data;
 }
+
+export const logout = async () => {
+    const response = await api.post(`${USERS_URL}/logout`);
+    // return "OK" if successfully logged out
+    return response.data;
+}

@@ -2,17 +2,24 @@ import React from 'react';
 import "../style/navbar.css";
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {logoutThunk} from "../services/auth-thunks";
 
 const Navbar = () => {
 
     const { currentUser } = useSelector((state) => state.user);
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const navigateBack = () => {
         navigate(-1);
     };
+
+    const handleLogout = () => {
+        dispatch(logoutThunk());
+        navigate("/");
+    }
 
 
     return (
@@ -38,12 +45,15 @@ const Navbar = () => {
                     </li>
                 </Link>}
 
-                {currentUser && <Link to="/" className="wd-link-no-decoration">
-                    <li className="wd-navbar-menu-item">
-                        <i className="bi bi-box-arrow-right"></i>
-                        <span className="ms-3 d-none d-xl-inline">Log out</span>
-                    </li>
-                </Link>}
+                {currentUser &&
+                    <Link to="/" className="wd-link-no-decoration"
+                            onClick={handleLogout}>
+                        <li className="wd-navbar-menu-item">
+                            <i className="bi bi-box-arrow-right"></i>
+                            <span className="ms-3 d-none d-xl-inline">Log out</span>
+                        </li>
+                    </Link>
+                }
 
                 <li className="wd-navbar-menu-item wd-navbar-menu-item-back">
                     <i className="bi bi-backspace-fill"></i>

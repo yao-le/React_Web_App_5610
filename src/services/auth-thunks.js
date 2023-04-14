@@ -15,3 +15,10 @@ export const registerThunk = createAsyncThunk(
         return user;
     }
 );
+
+export const logoutThunk = createAsyncThunk(
+    "user/logout", async () => {
+        const response = await authService.logout();
+        return response;
+    }
+);
