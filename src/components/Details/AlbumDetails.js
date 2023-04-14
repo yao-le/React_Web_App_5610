@@ -3,25 +3,32 @@ import {useEffect, useState} from 'react';
 import '../../style/details-style.css';
 import TrackItem from './TrackItem';
 import ReviewForm from "../Review/ReviewForm";
-import {createReview} from "../../services/review-service";
+import {useSelector} from "react-redux";
+import {useNavigate} from "react-router";
 
 
 const AlbumDetails = ({albumId}) => {
     const [album, setAlbum] = useState(null);
 
+    const { currentUser } = useSelector((state) => state.user);
+    const navigate = useNavigate();
+
+    // handle click on the heart button
+    const handleLikeClick = () => {
+        if (!currentUser) {
+            alert("Please login first");
+            navigate("/login");
+        }
+        console.log("like an album");
+        // implement collect logic
+
+    }
+
 
     // need to be modified
     const submitReview = async (reviewText) => {
         console.log("Submit review: ", reviewText);
-        // implement review submission logic. Need to call local API to create a review
-        // const newReview = {
-        //     albumId,
-        //     userId: "643804088859bb18110f5e4e", // hard coded for testing, should use thunk to get user id
-        //     text: reviewText,
-        // }
-        // const res = await createReview(newReview);
-        // console.log("create review success ", res);
-        // console.log("update User reviews success ");
+
     };
 
 
@@ -70,7 +77,11 @@ const AlbumDetails = ({albumId}) => {
                         <span className="wd-details-total-tracks ms-3">
                             {album.tracks.items.length} Songs
                         </span>
-                        <i className="bi bi-heart-fill ms-3 fs-4 wd-bookmark"></i>
+
+                        {/*collect the album*/}
+                        <i className="bi bi-heart-fill ms-3 fs-4 wd-bookmark"
+                        onClick={handleLikeClick}>
+                        </i>
                     </div>
                 </div>
             </div>

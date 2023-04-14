@@ -1,13 +1,23 @@
 import '../../style/track-details.css';
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
+import {useNavigate} from "react-router";
 
 
 const TrackItem = ({track}) => {
 
-    // need to add some logic to handle the click event on the heart icon
+    const { currentUser } = useSelector((state) => state.user);
+    const navigate = useNavigate();
+
+    // need to add some logic to handle the click event on the bookmark icon
     // 根据后端调整
-    const handleClick = () => {
-        console.log('clicked');
+    const handleCollectClick = () => {
+        if (!currentUser) {
+            alert("Please login first");
+            navigate("/login");
+        }
+        console.log("collect a song");
+        // implement like logic
     }
 
     // if track is null, return an empty div
@@ -32,7 +42,9 @@ const TrackItem = ({track}) => {
             <div className="d-flex flex-column w-75">
                 <div className="d-flex flex-row align-items-center">
                     <h3 className="wd-track-details-title">{name}</h3>
-                    <i className="bi bi-bookmark-star-fill fs-5 ms-2 text-muted wd-bookmark" onClick={handleClick}></i>
+                    <i className="bi bi-bookmark-star-fill fs-5 ms-2 text-muted wd-bookmark"
+                       onClick={handleCollectClick}>
+                    </i>
                 </div>
                 <div className="d-flex flex-row align-items-center text-muted">
                     {
