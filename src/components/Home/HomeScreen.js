@@ -7,27 +7,27 @@ import Navbar from "../Navbar";
 
 const HomeScreen = () => {
     const [newReleases, setNewReleases] = useState([]);
-    const [featuredPlaylists, setFeaturedPlaylists] = useState([]);
+    // const [featuredPlaylists, setFeaturedPlaylists] = useState([]);
 
 
     const fetchNewReleases = async () => {
-        const data = await getNewReleases("US", 10);
+        const data = await getNewReleases("US", 32);
         if (data.albums) {
             setNewReleases([...data.albums.items]);
         }
     }
 
-    const fetchFeaturedPlaylists = async () => {
-        const data = await getFeaturedPlaylists("US", 10);
-        if (data.playlists) {
-            setFeaturedPlaylists([...data.playlists.items]);
-        }
-    }
+    // const fetchFeaturedPlaylists = async () => {
+    //     const data = await getFeaturedPlaylists("US", 10);
+    //     if (data.playlists) {
+    //         setFeaturedPlaylists([...data.playlists.items]);
+    //     }
+    // }
 
 
     useEffect(() => {
         fetchNewReleases();
-        fetchFeaturedPlaylists();
+        //fetchFeaturedPlaylists();
     }, []);
 
 
@@ -40,12 +40,15 @@ const HomeScreen = () => {
             <div className="col-12 col-md-10">
                 <div className="wd-width-90">
                     <div className="wd-bg-color-black">
-                        <h3 className="fw-bold text-white wd-summary-title">Featured Playlists</h3>
-                        <PlaylistGrid playlists={featuredPlaylists}/>
 
-                        <h3 className="fw-bold text-white wd-summary-title">New Releases</h3>
+                        <h3 className="fw-bold text-white wd-summary-title">New Album Releases</h3>
                         <AlbumGrid albums={newReleases}/>
+
+                        {/*不需要的功能*/}
+                        {/*<h3 className="fw-bold text-white wd-summary-title">Featured Playlists</h3>*/}
+                        {/*<PlaylistGrid playlists={featuredPlaylists}/>*/}
                     </div>
+
                 </div>
             </div>
 
