@@ -17,10 +17,10 @@ const DetailsScreen = () => {
             </div>
 
             <div className="col-12 col-md-10">
-                <div className="wd-width-90">
+                <div className="wd-width-95">
                     <div className="wd-bg-color-black">
-                        { albumId && <AlbumDetails albumId={albumId} /> }
-                        { playlistId && <PlayListDetails playlistId={playlistId}/> }
+                        {albumId && <AlbumDetails albumId={albumId}/>}
+                        {playlistId && <PlayListDetails playlistId={playlistId}/>}
                     </div>
                 </div>
             </div>
