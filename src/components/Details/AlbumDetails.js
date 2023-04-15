@@ -65,7 +65,7 @@ const AlbumDetails = ({albumId}) => {
     useEffect(() => {
         fetchAlbumInfo();
         fetchAlbumReviews();
-    },[]);
+    },[reviews]);
 
 
     if (!album) {

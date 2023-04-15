@@ -19,6 +19,11 @@ export const createComment = async (newComment) => {
     return response.data;
 }
 
+export const deleteComment = async (rid) => {
+    const response  = await api.delete(`${COMMENTS_URL}/${rid}`);
+    return response.data;
+}
+
 
 // export const findMyReviews = async (userId) => {
 //     const response = await api.get(`${REVIEWS_API}/user/qwerqwer`);

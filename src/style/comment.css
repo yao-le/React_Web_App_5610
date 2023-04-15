@@ -34,3 +34,15 @@
     color: #ffffff;
     margin-top: 0.5rem;
 }
+
+.wd-delete-icon {
+    color: #6c757d;
+    transition: all 0.2s ease;
+    font-size: 1.2rem;
+}
+
+.wd-delete-icon:hover {
+    color: #1db954;
+    cursor: pointer;
+    transform: scale(1.2);
+}
