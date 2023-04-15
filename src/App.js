@@ -1,4 +1,4 @@
-import {Routes, Route} from "react-router";
+import {Routes, Route, useLocation} from "react-router";
 import {BrowserRouter} from "react-router-dom";
 import authReducer from "./reducers/auth-reducer";
 import {configureStore} from '@reduxjs/toolkit';
@@ -11,6 +11,7 @@ import Login from "./components/LogIn/Login";
 import Profile from "./components/Profile/Profile";
 import OtherProfile from "./components/Profile/OtherProfile";
 import EditProfile from "./components/Profile/EditProfile";
+import {useEffect} from "react";
 
 
 const store = configureStore(

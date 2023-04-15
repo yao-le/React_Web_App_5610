@@ -1,11 +1,14 @@
 import ProfileGrid from "../Summary/ProfileGrid";
 import {useSelector} from "react-redux";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 import userArray from "../../utils/users.js";
+import {useLocation} from "react-router";
 
 // other viewer's profile page
 const OtherViewerProfile = ({ user }) => {
+
+    const { pathname } = useLocation();
 
     const { currentUser } = useSelector((state) => state.user);
 
@@ -17,6 +20,11 @@ const OtherViewerProfile = ({ user }) => {
         // add login
 
     };
+
+    // scroll to the top of the page whenever the path changes.
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [pathname]);
 
 
     return (
