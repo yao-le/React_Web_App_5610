@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 import Navbar from "../Navbar";
 
 
-const SearchScreen = () => {
+const Search = () => {
     const [albums, setAlbums] = useState([]);
     const [playlists, setPlaylists] = useState([]);
 
@@ -53,4 +53,4 @@ const SearchScreen = () => {
     );
 };
 
-export default SearchScreen;
+export default Search;

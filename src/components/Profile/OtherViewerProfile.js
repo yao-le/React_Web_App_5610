@@ -9,7 +9,7 @@ const OtherViewerProfile = ({ user }) => {
 
     const { currentUser } = useSelector((state) => state.user);
 
-    // 需要修改
+    // 需要修改, 可以把以下代码放到OtherProfile.js中，然后传入isFollowing参数?
     const [isFollowing, setIsFollowing] = useState(false);
 
     const handleFollow = () => {

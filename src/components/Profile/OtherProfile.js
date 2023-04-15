@@ -9,7 +9,7 @@ import OtherViewerProfile from "./OtherViewerProfile";
 import userArray from "../../utils/users.js";
 
 
-const OtherProfileScreen = () => {
+const OtherProfile = () => {
     const [user, setUser] = useState({});
 
     const {userId} = useParams();
@@ -49,4 +49,4 @@ const OtherProfileScreen = () => {
 
         </div>)
 }
-export default OtherProfileScreen;
+export default OtherProfile;

@@ -5,7 +5,7 @@ import AlbumGrid from "../Summary/AlbumGrid";
 import PlaylistGrid from "../Summary/PlaylistGrid";
 import Navbar from "../Navbar";
 
-const HomeScreen = () => {
+const Home = () => {
     const [newReleases, setNewReleases] = useState([]);
     // const [featuredPlaylists, setFeaturedPlaylists] = useState([]);
 
@@ -55,4 +55,4 @@ const HomeScreen = () => {
     )
 }
 
-export default HomeScreen;
+export default Home;

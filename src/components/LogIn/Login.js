@@ -6,7 +6,7 @@ import {useDispatch} from "react-redux";
 import {loginThunk, registerThunk} from "../../services/auth-thunks";
 
 // 需要根据后端修改
-const LoginScreen = () => {
+const Login = () => {
     // used to toggle between login and register form
     const [showLoginForm, setShowLoginForm] = useState(true);
 
@@ -202,4 +202,4 @@ const LoginScreen = () => {
     );
 };
 
-export default LoginScreen;
+export default Login;

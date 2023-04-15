@@ -4,12 +4,12 @@ import authReducer from "./reducers/auth-reducer";
 import {configureStore} from '@reduxjs/toolkit';
 import {Provider} from "react-redux";
 
-import HomeScreen from "./components/Home/HomeScreen";
-import SearchScreen from "./components/Search/SearchScreen";
-import DetailsScreen from "./components/Details/DetailsScreen";
-import LoginScreen from "./components/LogIn/LoginScreen";
-import ProfileScreen from "./components/Profile/ProfileScreen";
-import OtherProfileScreen from "./components/Profile/OtherProfileScreen";
+import Home from "./components/Home/Home";
+import Search from "./components/Search/Search";
+import Details from "./components/Details/Details";
+import Login from "./components/LogIn/Login";
+import Profile from "./components/Profile/Profile";
+import OtherProfile from "./components/Profile/OtherProfile";
 import EditProfile from "./components/Profile/EditProfile";
 
 
@@ -26,13 +26,13 @@ function App() {
         <Provider store={store}>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<HomeScreen/>}/>
-                    <Route path="/search" element={<SearchScreen/>}/>
-                    <Route path="/details" element={<DetailsScreen/>}/>
-                    <Route path="/login" element={<LoginScreen/>}/>
-                    <Route path="/profile" element={<ProfileScreen/>}/>
+                    <Route path="/" element={<Home/>}/>
+                    <Route path="/search" element={<Search/>}/>
+                    <Route path="/details" element={<Details/>}/>
+                    <Route path="/login" element={<Login/>}/>
+                    <Route path="/profile" element={<Profile/>}/>
                     <Route path="/edit-profile" element={<EditProfile/>}/>
-                    <Route path="/profile/:userId" element={<OtherProfileScreen/>}/>
+                    <Route path="/profile/:userId" element={<OtherProfile/>}/>
                 </Routes>
             </BrowserRouter>
         </Provider>

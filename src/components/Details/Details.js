@@ -4,7 +4,7 @@ import PlayListDetails from "./PlayListDetails";
 import Navbar from "../Navbar";
 
 
-const DetailsScreen = () => {
+const Details = () => {
     const [searchParams] = useSearchParams();
     const albumId = searchParams.get("album");
     const playlistId = searchParams.get("playlist")
@@ -30,4 +30,4 @@ const DetailsScreen = () => {
 
 }
 
-export default DetailsScreen;
+export default Details;

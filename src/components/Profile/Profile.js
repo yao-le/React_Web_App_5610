@@ -5,7 +5,7 @@ import Navbar from "../Navbar";
 import ViewerProfile from "./ViewerProfile";
 
 
-const ProfileScreen = () => {
+const Profile = () => {
 
     const { currentUser } = useSelector((state) => state.user)
 
@@ -28,4 +28,4 @@ const ProfileScreen = () => {
 
 };
 
-export default ProfileScreen;
+export default Profile;
