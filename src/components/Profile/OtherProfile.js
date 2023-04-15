@@ -15,7 +15,7 @@ const OtherProfile = () => {
     const {userId} = useParams();
 
     // fetch other user
-    // only for testing purpose, need to be modified
+    // hard code only for testing purpose, need to be modified
     const fetchUser = async () => {
         console.log(userId);
         // add logic to fetch user
@@ -36,10 +36,9 @@ const OtherProfile = () => {
                     <Navbar/>
                 </div>
 
-                {/*需要修改：如何识别fetched user 的 role， 页面需要分成三种类型吗？other viewer profile,
+                {/*需要修改：如何识别fetched user 的 role， profile 页面需要分成三种类型吗？other viewer profile,
                  other publisher profile, other admin profile ?*/}
                 {/*Profile*/}
-
                 <div className="col-12 col-md-10">
                     <OtherViewerProfile user={user}/>
                 </div>

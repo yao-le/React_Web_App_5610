@@ -46,7 +46,7 @@ const ViewerProfile = () => {
             <div className="wd-details-header">
                 <img
                     className="wd-details-img"
-                    src={currentUser.avatarUrl}
+                    src={currentUser.portrait}
                     alt="avatar"
                 />
                 <div className="wd-details-info ms-4">
@@ -54,7 +54,7 @@ const ViewerProfile = () => {
                         <span>Profile</span>
                     </div>
 
-                    <div className="wd-details-title">{currentUser.username}</div>
+                    <div className="wd-details-title">{currentUser.name}</div>
 
                     {/*user email*/}
                     {currentUser.email &&

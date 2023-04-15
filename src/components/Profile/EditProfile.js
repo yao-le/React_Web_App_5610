@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 import "../../style/edit-profile.css";
 import { useSelector } from "react-redux";
 
+// currently only work for viewers and publishers, because admins don't have portrait image field
 const EditProfile = () => {
 
     const { currentUser } = useSelector((state) => state.user);
 
-    const [username, setUsername] = useState(currentUser.username);
+    const [name, setName] = useState(currentUser.name);
     const [password, setPassword] = useState(currentUser.password);
     const [email, setEmail] = useState(currentUser.email);
-    const [avatarUrl, setAvatarUrl] = useState(currentUser.avatarUrl);
+    const [portrait, setPortrait] = useState(currentUser.portrait);
 
     // ??? 上传图片功能需要修改
     // this URL is only available for the current session, and it won't be stored permanently.
@@ -18,17 +19,17 @@ const EditProfile = () => {
     const handleAvatarChange = (event) => {
         if (event.target.files && event.target.files[0]) {
             const imageUrl = URL.createObjectURL(event.target.files[0]);
-            setAvatarUrl(imageUrl);
+            setPortrait(imageUrl);
         }
     };
 
     const handleUpdate = () => {
         console.log("update profile");
         const user = {
-            username,
+            name,
             password,
             email,
-            avatarUrl
+            portrait
         }
         console.log(user);
         // dispatch(updateUserThunk(user));
@@ -43,7 +44,7 @@ const EditProfile = () => {
                 <div className="mb-3 wd-edit-profile-avatar-container">
                     <img
                         className="wd-edit-profile-avatar"
-                        src={avatarUrl}
+                        src={portrait}
                         alt="avatar"
                     />
                     <input
@@ -62,8 +63,8 @@ const EditProfile = () => {
                         className="form-control wd-edit-profile-input"
                         id="username"
                         placeholder="Your username"
-                        value={username}
-                        onChange={(event) => setUsername(event.target.value)}
+                        value={name}
+                        onChange={(event) => setName(event.target.value)}
                     />
                 </div>
 

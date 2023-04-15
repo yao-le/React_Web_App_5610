@@ -3,26 +3,50 @@ import "../../style/login-screen.css";
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import {useDispatch} from "react-redux";
-import {loginThunk, registerThunk} from "../../services/auth-thunks";
 
-// 需要根据后端修改
+import { viewerRegisterThunk }
+    from "../../services/auth/viewer-auth-thunk.js";
+import { publisherRegisterThunk }
+    from "../../services/auth/publisher-auth-thunk";
+import { adminRegisterThunk }
+    from "../../services/auth/admin-auth-thunk.js";
+import {loginThunk} from "../../services/auth/auth-thunks";
+
+
+// need to be modified based on backend interfaces
 const Login = () => {
     // used to toggle between login and register form
     const [showLoginForm, setShowLoginForm] = useState(true);
 
-    const [username, setUsername] = useState(''); // used for register
+    const [name, setName] = useState('');
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState("viewer");
     // used for registration
     const [email, setEmail] = useState('');
-    const [role, setRole] = useState("viewer"); //
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
 
+    const registerBasedOnRole = async (role) => {
+        const newUser = {
+            name,
+            password,
+            email
+        };
+
+        if (role === "viewer") {
+            return dispatch(viewerRegisterThunk(newUser));
+        } else if (role === "publisher") {
+            return dispatch(publisherRegisterThunk(newUser));
+        } else if (role === "admin") {
+            return dispatch(adminRegisterThunk(newUser));
+        }
+    }
+
+
     const handleLogin = async () => {
-        // 根据role来dispatch不同的loginthunk，可以给viewer，publisher, admin分别写一个loginthunk
-        const response = await dispatch(loginThunk({username, password}));
+        const response = await dispatch(loginThunk({name, password, role}));
 
         if (!response.error) {
             sessionStorage.setItem("currentUser", JSON.stringify(response.payload));
@@ -36,16 +60,10 @@ const Login = () => {
 
 
     const handleRegister = async () => {
-        const newUser = {
-            username,
-            password,
-            role,
-            email
-        };
+        const response = await registerBasedOnRole(role);
 
-        const response = await dispatch(registerThunk(newUser));
         if (!response.error) {
-            // in case user refreshes the page, we store the user info in sessionStorage
+            // in case user refreshes the page, we store the current user info in sessionStorage
             sessionStorage.setItem("currentUser", JSON.stringify(response.payload));
             navigate("/profile");
         } else {
@@ -56,7 +74,7 @@ const Login = () => {
     }
 
     const resetForm = () => {
-        setUsername('')
+        setName('')
         setEmail('')
         setPassword('')
         setRole('viewer')
@@ -73,16 +91,15 @@ const Login = () => {
 
 
                 <div>
-
                     <div className="wd-login-form-group">
                         <label className="wd-login-form-label">Username</label>
                         <input
                             type="text"
                             className="wd-login-form-input"
                             placeholder="your username"
-                            value={username}
+                            value={name}
                             required
-                            onChange={(e) => setUsername(e.target.value)}
+                            onChange={(e) => setName(e.target.value)}
                         />
                     </div>
 
@@ -98,7 +115,9 @@ const Login = () => {
                         />
                     </div>
 
-                    {!showLoginForm &&
+                    {/*only for register: email address (optional)*/}
+                    {
+                        !showLoginForm &&
                         <div className="wd-login-form-group">
                             <label className="wd-login-form-label">Email address (optional)</label>
                             <input
@@ -111,7 +130,10 @@ const Login = () => {
                         </div>
                     }
 
-                    <div className="wd-login-form-group">
+                    {/*only for register: select roles*/}
+                    {
+                        !showLoginForm &&
+                        <div className="wd-login-form-group">
                             <label className="wd-login-form-label">Role</label>
                             <div className="wd-login-radio-group">
                                 <div>
@@ -155,6 +177,7 @@ const Login = () => {
                                 </div>
                             </div>
                         </div>
+                    }
 
 
                     <button onClick={showLoginForm ? handleLogin : handleRegister}

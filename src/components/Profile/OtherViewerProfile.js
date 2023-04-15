@@ -32,7 +32,7 @@ const OtherViewerProfile = ({ user }) => {
             <div className="wd-details-header">
                 <img
                     className="wd-details-img"
-                    src={user.avatarUrl}
+                    src={user.portrait}
                     alt="avatar"
                 />
                 <div className="wd-details-info ms-4">
@@ -41,7 +41,7 @@ const OtherViewerProfile = ({ user }) => {
                     </div>
 
                     {/*username*/}
-                    <div className="wd-details-title">{user.username}</div>
+                    <div className="wd-details-title">{user.name}</div>
 
 
                     {/*created at*/}

@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { loginThunk, logoutThunk, registerThunk} from "../services/auth-thunks";
+import { viewerRegisterThunk }
+    from "../services/auth/viewer-auth-thunk.js";
+import { publisherRegisterThunk }
+    from "../services/auth/publisher-auth-thunk";
+import { adminRegisterThunk }
+    from "../services/auth/admin-auth-thunk.js";
+import { loginThunk, logoutThunk } from "../services/auth/auth-thunks";
 
+// currentUser's role field: "viewer", "publisher", "admin"
 
-// 如果后端分成三个user model，可能需要在这里设定一下user role，不太清楚
-// const initialState = {
-//     currentUser: null,
-//     role: "",
-// }
 
 // Check if the currentUser object exists in sessionStorage
 const currentUser = sessionStorage.getItem("currentUser");
@@ -16,15 +18,19 @@ const initialState = currentUser ? { currentUser:  JSON.parse(currentUser) } : {
 
 
 
-// 需要根据后端修改
+// need to be modified based on backend interfaces
 const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {},
     extraReducers: {
-        [loginThunk.fulfilled]: (state, { payload }) => {
+        [viewerRegisterThunk.fulfilled]: (state, { payload }) => {
             state.currentUser = payload;},
-        [registerThunk.fulfilled]: (state, { payload }) => {
+        [publisherRegisterThunk.fulfilled]: (state, { payload }) => {
+            state.currentUser = payload;},
+        [adminRegisterThunk.fulfilled]: (state, { payload }) => {
+            state.currentUser = payload;},
+        [loginThunk.fulfilled]: (state, { payload }) => {
             state.currentUser = payload;},
         [logoutThunk.fulfilled]: (state) => {
             state.currentUser = null;},

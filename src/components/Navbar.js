@@ -3,7 +3,8 @@ import "../style/navbar.css";
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
-import {logoutThunk} from "../services/auth-thunks";
+
+import {logoutThunk} from "../services/auth/auth-thunks";
 
 const Navbar = () => {
 
@@ -15,6 +16,7 @@ const Navbar = () => {
     const navigateBack = () => {
         navigate(-1);
     };
+
 
     const handleLogout = () => {
         // Remove the currentUser object from sessionStorage
@@ -32,7 +34,7 @@ const Navbar = () => {
                 {currentUser &&
                     <li className="wd-navbar-username mb-3">
                         <i className="bi bi-boombox-fill"></i>
-                        <span className="ms-3 d-none d-xl-inline">{currentUser.username}</span>
+                        <span className="ms-3 d-none d-xl-inline">{currentUser.name}</span>
                     </li>
                 }
 

@@ -6,7 +6,7 @@ import ViewerProfile from "./ViewerProfile";
 
 
 const Profile = () => {
-
+    // need modification
     const { currentUser } = useSelector((state) => state.user)
 
     return <div>
