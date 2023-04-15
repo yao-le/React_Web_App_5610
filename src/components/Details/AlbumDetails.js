@@ -27,6 +27,10 @@ const AlbumDetails = ({albumId}) => {
 
     // need to be modified
     const submitReview = async (reviewText) => {
+        if (!currentUser) {
+            alert("Please login first");
+            navigate("/login");
+        }
         console.log("Submit review: ", reviewText);
 
     };
@@ -75,12 +79,12 @@ const AlbumDetails = ({albumId}) => {
                             {album.release_date}
                         </span>
                         <span className="wd-details-total-tracks ms-3">
-                            {album.tracks.items.length} Songs
+                            {album.tracks.items.length} {album.tracks.items.length > 1 ? "Songs" : "Song"}
                         </span>
 
                         {/*collect the album*/}
-                        <i className="bi bi-heart-fill ms-3 fs-4 wd-bookmark"
-                        onClick={handleLikeClick}>
+                        <i className="bi bi-heart-fill ms-3 fs-5 wd-bookmark"
+                           onClick={handleLikeClick}>
                         </i>
                     </div>
                 </div>
@@ -91,13 +95,16 @@ const AlbumDetails = ({albumId}) => {
                 <ReviewForm submitReview={submitReview}/>
             </div>
 
-            {/*Track List*/}
-            <div className="wd-details-tracks mt-5">
+            {/*Review from other users*/}
+            <div className="mt-3">
+                <h3> Reviews from other users</h3>
+            </div>
 
+            {/*Track List*/}
+            <div className="wd-details-tracks my-5">
                     {album.tracks.items.map((track) => (
                         <TrackItem key={track.id} track={track}/>
                     ))}
-
             </div>
 
         </div>

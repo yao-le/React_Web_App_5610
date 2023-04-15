@@ -1,0 +1,13 @@
+.wd-follow-button {
+    background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 8px 20px;
+    text-transform: uppercase;
+    transition: background-color 0.3s, color 0.3s;
+}
+

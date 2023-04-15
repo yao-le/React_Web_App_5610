@@ -17,6 +17,9 @@ const Navbar = () => {
     };
 
     const handleLogout = () => {
+        // Remove the currentUser object from sessionStorage
+        sessionStorage.removeItem("currentUser");
+
         dispatch(logoutThunk());
         navigate("/");
     }
@@ -24,7 +27,15 @@ const Navbar = () => {
 
     return (
         <nav className="wd-navbar d-flex flex-column">
+
             <ul className="wd-navbar-menu">
+                {currentUser &&
+                    <li className="wd-navbar-username mb-3">
+                        <i className="bi bi-boombox-fill"></i>
+                        <span className="ms-3 d-none d-xl-inline">{currentUser.username}</span>
+                    </li>
+                }
+
                 <Link to="/" className="wd-link-no-decoration">
                     <li className="wd-navbar-menu-item">
                         <i className="bi bi-house-door-fill"></i>
@@ -65,7 +76,8 @@ const Navbar = () => {
                     </Link>
                 }
 
-                <li className="wd-navbar-menu-item wd-navbar-menu-item-back" onClick={navigateBack}>
+                <li className="wd-navbar-menu-item wd-navbar-menu-item-back"
+                    onClick={navigateBack}>
                     <i className="bi bi-backspace-fill"></i>
                     <span className="ms-3 d-none d-xl-inline">Back</span>
                 </li>

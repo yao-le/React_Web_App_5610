@@ -25,6 +25,7 @@ const LoginScreen = () => {
         const response = await dispatch(loginThunk({username, password}));
 
         if (!response.error) {
+            sessionStorage.setItem("currentUser", JSON.stringify(response.payload));
             navigate("/profile");
         } else {
             console.log(response.error);
@@ -44,6 +45,8 @@ const LoginScreen = () => {
 
         const response = await dispatch(registerThunk(newUser));
         if (!response.error) {
+            // in case user refreshes the page, we store the user info in sessionStorage
+            sessionStorage.setItem("currentUser", JSON.stringify(response.payload));
             navigate("/profile");
         } else {
             console.log(response.error);

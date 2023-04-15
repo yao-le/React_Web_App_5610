@@ -57,7 +57,7 @@ const PlaylistDetails = ({playlistId}) => {
                 <ReviewForm submitReview={submitReview} />
             </div>
 
-            <div className="wd-details-tracks mt-5">
+            <div className="wd-details-tracks my-5">
                 <ul>
                     {playlist.tracks?.items?.map((item) => (
                         <TrackItem key={item.track?.id} track={item.track}/>

@@ -4,11 +4,11 @@ import {useNavigate} from "react-router";
 
 const SearchResults = ({albums, playlists}) => {
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    if (!albums.length && !playlists.length) {
-        navigate("/search");
-    }
+    // if (!albums.length && !playlists.length) {
+    //     navigate("/search");
+    // }
 
     return (
         <div className="wd-bg-color-black">

@@ -5,7 +5,7 @@
     padding: 1rem 2rem;
     background-color: #000;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
     height: 100%;
     position: fixed;
@@ -26,6 +26,7 @@
     width: 100%;
 }
 
+.wd-navbar-username
 .wd-navbar-menu-item {
     cursor: pointer;
     display: flex;
@@ -33,6 +34,7 @@
     width: 100%;
 }
 
+.wd-navbar-username i
 .wd-navbar-menu-item i {
     margin-right: 8px;
 }

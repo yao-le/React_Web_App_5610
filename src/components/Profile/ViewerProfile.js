@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 // only for testing purpose
 import userArray from "../../utils/users.js";
 
-
+// current user's profile page
 const ViewerProfile = () => {
 
     const { currentUser } = useSelector((state) => state.user);
@@ -46,15 +46,17 @@ const ViewerProfile = () => {
                     <div className="wd-details-title">{currentUser.username}</div>
 
                     {/*user email*/}
-                    <div className="fw-bold text-muted fs-6 mt-2">
-                        <i className="bi bi-envelope-at-fill"></i>
-                        <span className="ms-2">{currentUser.email}</span>
-                    </div>
+                    {currentUser.email &&
+                        <div className="fw-bold text-muted fs-6 mt-2">
+                            <i className="bi bi-envelope-at-fill"></i>
+                            <span className="ms-2">{currentUser.email}</span>
+                        </div>
+                    }
 
                     {/*created at*/}
                     <div className="fw-bold text-muted fs-6 mt-2">
                         <i className="bi bi-calendar3"></i>
-                        <span className="ms-2">Joined {currentUser.createdAt.slice(0, 7)}</span>
+                        <span className="ms-2">Joined {currentUser.createdAt && currentUser.createdAt.slice(0, 7)}</span>
                     </div>
 
                     <div className="mt-2 fw-bold text-muted">
