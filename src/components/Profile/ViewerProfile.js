@@ -5,6 +5,8 @@ import {useEffect, useState} from "react";
 
 // only for testing purpose
 import userArray from "../../utils/users.js";
+import albumArray from "../../utils/albums.js";
+import AlbumGrid from "../Summary/AlbumGrid";
 
 // current user's profile page
 const ViewerProfile = () => {
@@ -13,6 +15,8 @@ const ViewerProfile = () => {
 
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
+
+    const [collection, setCollection] = useState([]);
 
     // fetch current user's followers
     const fetchFollowers = async () => {
@@ -24,9 +28,16 @@ const ViewerProfile = () => {
 
     }
 
+    // fetch current user's album collection
+    const fetchCollection = async () => {
+
+    }
+
+
     useEffect(() => {
         fetchFollowers();
         fetchFollowing();
+        fetchCollection();
     }, []);
 
 
@@ -69,18 +80,19 @@ const ViewerProfile = () => {
             </div>
 
 
-            {/*display current viewer's liked songs*/}
-            <div>
-                <h3 className="fw-bold text-white wd-summary-title">Liked Songs</h3>
+            {/*display current viewer's liked albums*/}
+            <div className="mt-1">
+                <h3 className="fw-bold text-white wd-summary-title">Favourites</h3>
+                <AlbumGrid albums={albumArray} />
             </div>
 
-            <div className="mt-3">
+            <div className="mt-2">
                 <h3 className="fw-bold text-white wd-summary-title">Followers</h3>
                 {/*hard code for now*/}
                 <ProfileGrid users={userArray.slice(0, 5)} />
             </div>
 
-            <div className="mt-3">
+            <div className="mt-2">
                 <h3 className="fw-bold text-white wd-summary-title">Following</h3>
                 {/*hard code for now*/}
                 <ProfileGrid users={userArray.slice(0, 5)} />

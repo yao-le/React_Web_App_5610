@@ -25,7 +25,7 @@ html {
 .wd-profile-summary-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  grid-gap: 16px;
+  grid-gap: 14px;
   padding: 12px;
 }
 
@@ -43,8 +43,8 @@ html {
 }
 
 .wd-summary-cover {
-  width: 100%;
-  height: auto;
+  width: 250px;
+  height: 250px;
   border-radius: 5px;
 }
 
