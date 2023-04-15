@@ -1,22 +1,35 @@
 .wd-review-form {
-    background-color: #282828;
-    padding: 20px;
-    border-radius: 8px;
-    color: #ffffff;
+    background-color: #181818;
+    padding: 1rem;
+    border-radius: 4px;
 }
 
-.wd-review-form-label {
+.wd-commenterName {
     font-weight: bold;
+    color: #ffffff;
 }
 
 .wd-review-form-textarea {
-    background-color: #373737;
-    border: none;
+    background-color: #282828;
     color: #ffffff;
+    border: none;
     resize: none;
+}
+
+.wd-review-form-textarea::placeholder {
+    color: #828282;
 }
 
 .wd-review-form-textarea:focus {
     outline: none;
-    box-shadow: none;
+    box-shadow: 0 0 0 0.2rem rgba(30, 215, 96, 0.25);
+}
+
+.btn-primary {
+    background-color: #1db954;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #1ed760;
 }
