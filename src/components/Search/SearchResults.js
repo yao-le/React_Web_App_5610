@@ -15,14 +15,14 @@ const SearchResults = ({albums, playlists}) => {
 
             <h3 className="fw-bold text-white wd-summary-title mb-2">Search Results</h3>
 
-            { albums.length &&
+            { albums.length > 0 &&
                 <div>
                     <h3 className="fw-bold text-white wd-summary-title">Albums</h3>
                     <AlbumGrid albums={albums}/>
                 </div>
             }
 
-            { playlists.length &&
+            { playlists.length > 0 &&
                 <div>
                     <h3 className="fw-bold text-white wd-summary-title">Playlists</h3>
                     <PlaylistGrid playlists={playlists}/>
