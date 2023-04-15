@@ -2,13 +2,16 @@ import {getAlbumById} from '../../services/album-service';
 import {useEffect, useState} from 'react';
 import '../../style/details-style.css';
 import TrackItem from './TrackItem';
-import ReviewForm from "../Review/ReviewForm";
+import CommentForm from "../Comment/CommentForm";
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router";
+import {createComment, getCommentForAlbum} from "../../services/comment-service";
+import CommentItem from "../Comment/CommentItem";
 
 
 const AlbumDetails = ({albumId}) => {
     const [album, setAlbum] = useState(null);
+    const [reviews, setReviews] = useState([]);
 
     const { currentUser } = useSelector((state) => state.user);
     const navigate = useNavigate();
@@ -18,6 +21,7 @@ const AlbumDetails = ({albumId}) => {
         if (!currentUser) {
             alert("Please login first");
             navigate("/login");
+            return;
         }
         console.log("like an album");
         // implement collect logic
@@ -25,14 +29,25 @@ const AlbumDetails = ({albumId}) => {
     }
 
 
+
     // need to be modified
     const submitReview = async (reviewText) => {
+        // log in before submitting review
         if (!currentUser) {
             alert("Please login first");
             navigate("/login");
+            return;
         }
-        console.log("Submit review: ", reviewText);
-
+        // only logged-in user can submit review
+        const newComment = {
+            commenter: currentUser._id,
+            albumId: albumId,
+            content: reviewText,
+            albumName: album.name,
+        }
+        const response = await createComment(newComment);// return a new comment object
+        console.log(response);
+        setReviews([response, ...reviews]);
     };
 
 
@@ -41,8 +56,15 @@ const AlbumDetails = ({albumId}) => {
         setAlbum(albumInfo);
     };
 
+    const fetchAlbumReviews = async() => {
+        const albumReviews = await getCommentForAlbum(albumId);
+        setReviews(albumReviews);
+    }
+
+
     useEffect(() => {
         fetchAlbumInfo();
+        fetchAlbumReviews();
     },[]);
 
 
@@ -90,21 +112,32 @@ const AlbumDetails = ({albumId}) => {
                 </div>
             </div>
 
-            {/*Review Form*/}
+            {/*Comment Form*/}
             <div>
-                <ReviewForm submitReview={submitReview}/>
+                <CommentForm submitReview={submitReview} albumId={albumId}/>
             </div>
 
-            {/*Review from other users*/}
+            {/*Comment from users*/}
             <div className="mt-3">
-                <h3> Reviews from other users</h3>
+                {reviews.length === 0 && <h3 className="text-muted">No comments yet</h3>}
+                {reviews.length > 0 && <h3 className="text-muted">Comments</h3>}
+
+                <div>
+                    {reviews.map((review) => (
+                        <CommentItem key={review._id} comment={review}/>
+                    ))}
+                </div>
+
             </div>
 
             {/*Track List*/}
+
             <div className="wd-details-tracks my-5">
-                    {album.tracks.items.map((track) => (
-                        <TrackItem key={track.id} track={track}/>
-                    ))}
+                {album.tracks.items.length > 0 && <h3 className="text-muted">Tracks</h3>}
+
+                {album.tracks.items.map((track) => (
+                    <TrackItem key={track.id} track={track}/>
+                ))}
             </div>
 
         </div>

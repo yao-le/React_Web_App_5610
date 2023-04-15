@@ -5,6 +5,7 @@ import {getHeaders} from "../utils/auth";
 const BASE_API = "https://api.spotify.com/v1/albums";
 
 
+// use spotify api
 export const getAlbumById  = async (albumId) => {
     const headers = await getHeaders();
     const response = await axios.get(`${BASE_API}/${albumId}`, { headers });
@@ -20,5 +21,3 @@ export const getNewReleases = async (countryCode, limit=20) => {
         { headers });
     return response.data;
 }
-
-

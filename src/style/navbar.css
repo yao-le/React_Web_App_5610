@@ -4,7 +4,7 @@
     align-items: flex-start;
     padding: 1rem 2rem;
     background-color: #000;
-    color: white;
+    color: rgba(255, 255, 255, 0.8);
     font-size: 1.1rem;
     font-weight: bold;
     height: 100%;
@@ -40,6 +40,6 @@
 }
 
 .wd-navbar-menu-item:hover {
-    color: rgba(255, 255, 255, 0.8);
+    color: white;
 }
 

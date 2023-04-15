@@ -15,6 +15,7 @@ const TrackItem = ({track}) => {
         if (!currentUser) {
             alert("Please login first");
             navigate("/login");
+            return;
         }
         console.log("collect a song");
         // implement like logic

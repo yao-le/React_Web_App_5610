@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import '../../style/details-style.css';
 import {getPlaylistById} from '../../services/playlist-service';
 import TrackItem from './TrackItem';
-import ReviewForm from "../Review/ReviewForm";
+import CommentForm from "../Comment/CommentForm";
 
 const PlaylistDetails = ({playlistId}) => {
     const [playlist, setPlaylist] = useState(null);
@@ -52,9 +52,9 @@ const PlaylistDetails = ({playlistId}) => {
                 </div>
             </div>
 
-            {/*Review Form*/}
+            {/*Comment Form*/}
             <div>
-                <ReviewForm submitReview={submitReview} />
+                <CommentForm submitReview={submitReview} />
             </div>
 
             <div className="wd-details-tracks my-5">

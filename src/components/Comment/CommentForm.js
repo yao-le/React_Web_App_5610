@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import '../../style/review-form.css';
+import "../../style/comment.css";
 
-const ReviewForm = ({ submitReview }) => {
+const CommentForm = ({ submitReview }) => {
     const [reviewText, setReviewText] = useState('');
 
     const handleSubmit = (e) => {
@@ -12,24 +13,25 @@ const ReviewForm = ({ submitReview }) => {
     };
 
     return (
-        <form className="wd-review-form w-50" onSubmit={handleSubmit}>
+        <form className="wd-review-form w-75" onSubmit={handleSubmit}>
             <div className="mb-3">
-                <label htmlFor="reviewText" className="form-label wd-review-form-label">
-                    Write your review:
-                </label>
+                {/*<label htmlFor="reviewText" className="form-label wd-review-form-label">*/}
+                {/*    Add a comment:*/}
+                {/*</label>*/}
                 <textarea
                     className="form-control wd-review-form-textarea"
                     id="reviewText"
                     value={reviewText}
                     onChange={(e) => setReviewText(e.target.value)}
                     rows="3"
+                    placeholder="Add a comment..."
                 ></textarea>
             </div>
-            <button type="submit" className="btn btn-success">
+            <button className="btn btn-success">
                 Submit
             </button>
         </form>
     );
 };
 
-export default ReviewForm;
+export default CommentForm;

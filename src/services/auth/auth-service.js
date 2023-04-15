@@ -21,7 +21,7 @@ export const logout = async () => {
     return response.data;
 }
 
-// for path "/profile/:uid
+
 export const getUserById = async (uid) => {
     const response = await api.get(`${USERS_URL}/${uid}`);
     return response.data;
