@@ -27,9 +27,11 @@ const CommentForm = ({ submitReview }) => {
                     placeholder="Add a comment..."
                 ></textarea>
             </div>
-            <button className="btn btn-success">
-                Submit
-            </button>
+            <div className="text-end">
+                <button className="btn btn-success">
+                    Submit
+                </button>
+            </div>
         </form>
     );
 };
