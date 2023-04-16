@@ -16,7 +16,7 @@ const EditProfile = () => {
     const [email, setEmail] = useState(currentUser.email);
     const [portrait, setPortrait] = useState(currentUser.portrait);
 
-    const [selectedGenres, setSelectedGenres] = useState(currentUser.favoriteGenres);
+    // const [selectedGenres, setSelectedGenres] = useState(currentUser.favoriteGenres);
 
     // ??? 上传图片功能需要修改
     // this URL is only available for the current session, and it won't be stored permanently.
@@ -100,14 +100,14 @@ const EditProfile = () => {
                 </div>
 
                 {/* Favorite Genres */}
-                <div className="mb-3">
-                    <label htmlFor="genres" className="form-label wd-edit-profile-label">Favorite Genres</label>
-                    <MultiSelect
-                        options={genres}
-                        selectedOptions={selectedGenres}
-                        setSelectedOptions={setSelectedGenres}
-                    />
-                </div>
+                {/*<div className="mb-3">*/}
+                {/*    <label htmlFor="genres" className="form-label wd-edit-profile-label">Favorite Genres</label>*/}
+                {/*    <MultiSelect*/}
+                {/*        options={genres}*/}
+                {/*        selectedOptions={selectedGenres}*/}
+                {/*        setSelectedOptions={setSelectedGenres}*/}
+                {/*    />*/}
+                {/*</div>*/}
 
                 {/* Update button */}
                 <button type="button" className="btn btn-success rounded-pill wd-edit-profile-btn"
