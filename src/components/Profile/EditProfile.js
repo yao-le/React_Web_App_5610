@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import "../../style/edit-profile.css";
 import { useSelector } from "react-redux";
 import UploadImage from "../LogIn/UploadImage";
+import MultiSelect from "../LogIn/MultiSelect";
+import {genres} from "../../utils/genres";
 
 // currently only work for viewers and publishers, because admins don't have portrait image field
 const EditProfile = () => {
@@ -13,6 +15,8 @@ const EditProfile = () => {
     const [password, setPassword] = useState(currentUser.password);
     const [email, setEmail] = useState(currentUser.email);
     const [portrait, setPortrait] = useState(currentUser.portrait);
+
+    const [selectedGenres, setSelectedGenres] = useState(currentUser.favoriteGenres);
 
     // ??? 上传图片功能需要修改
     // this URL is only available for the current session, and it won't be stored permanently.
@@ -92,6 +96,16 @@ const EditProfile = () => {
                         placeholder="Your email"
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
+                    />
+                </div>
+
+                {/* Favorite Genres */}
+                <div className="mb-3">
+                    <label htmlFor="genres" className="form-label wd-edit-profile-label">Favorite Genres</label>
+                    <MultiSelect
+                        options={genres}
+                        selectedOptions={selectedGenres}
+                        setSelectedOptions={setSelectedGenres}
                     />
                 </div>
 

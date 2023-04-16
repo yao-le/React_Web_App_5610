@@ -45,11 +45,11 @@ const ViewerProfile = () => {
         <div className="wd-details mt-5">
             <div className="wd-details-header">
                 <img
-                    className="wd-details-img"
+                    className="wd-details-img rounded-circle"
                     src={currentUser.portrait}
                     alt="avatar"
                 />
-                <div className="wd-details-info ms-4">
+                <div className="wd-details-info ms-5">
                     <div className="mb-2 text-uppercase fw-bold text-muted">
                         <span>Profile</span>
                     </div>

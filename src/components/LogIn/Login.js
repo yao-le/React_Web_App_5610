@@ -12,6 +12,8 @@ import { adminRegisterThunk }
     from "../../services/auth/admin-auth-thunk.js";
 import {loginThunk} from "../../services/auth/auth-thunks";
 import UploadImage from "./UploadImage";
+import MultiSelect from "./MultiSelect";
+import {genres} from "../../utils/genres";
 
 
 // need to be modified based on backend interfaces
@@ -24,20 +26,28 @@ const Login = () => {
     const [role, setRole] = useState("viewer");
     // used for registration
     const [email, setEmail] = useState('');
-    const [portrait, setPortrait] = useState(null);
+    const [portrait, setPortrait] = useState('');
+    const [selectedOptions, setSelectedOptions] = useState([]);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
 
     const registerBasedOnRole = async (role) => {
-        const newUser = {
+        let newUser = {
             name,
             password,
             email
         };
 
+        if (portrait !== '') {
+            newUser = {...newUser, portrait};
+        }
+
         if (role === "viewer") {
+            if (selectedOptions.length > 0) {
+                newUser = {...newUser, favoriteGenres: selectedOptions};
+            }
             return dispatch(viewerRegisterThunk(newUser));
         } else if (role === "publisher") {
             return dispatch(publisherRegisterThunk(newUser));
@@ -80,7 +90,8 @@ const Login = () => {
         setEmail('')
         setPassword('')
         setRole('viewer')
-        setPortrait(null)
+        setPortrait('')
+        setSelectedOptions([])
     }
 
     // handle image upload, need modification?
@@ -205,6 +216,21 @@ const Login = () => {
                                     </label>
                                 </div>
                             </div>
+                        </div>
+                    }
+
+                    {
+                        !showLoginForm && role === "viewer" &&
+                        <div className="wd-login-form-group">
+                            <label htmlFor="genreSelect" className="wd-login-form-label">
+                                Please choose your favorite genres
+                            </label>
+                            <MultiSelect
+                                id="genreSelect"
+                                options={genres}
+                                selectedOptions={selectedOptions}
+                                setSelectedOptions={setSelectedOptions}
+                            />
                         </div>
                     }
 

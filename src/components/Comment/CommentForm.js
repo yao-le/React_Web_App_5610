@@ -21,15 +21,15 @@ const CommentForm = ({submitReview}) => {
                 {
                     currentUser &&
                     <>
-                        <div className="mb-1 text-muted">Commenting as</div>
+                        <div className="mb-2 text-muted">Commenting as</div>
                         <div className="d-flex flex-row align-items-center">
                             <img className="rounded-circle me-2" width="60px" height="60px"
                                  src={currentUser.portrait} alt="avatar"/>
-                            <div className="wd-commenterName">{currentUser.name}</div>
+                            <div className="wd-commenterName ms-2">{currentUser.name}</div>
                         </div>
                     </>
                 }
-                <div className="mb-2 mt-1">
+                <div className="mb-2 mt-3">
                     <textarea
                     className="form-control wd-review-form-textarea"
                     id="reviewText"

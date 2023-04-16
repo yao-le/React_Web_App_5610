@@ -19,14 +19,14 @@ html {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   grid-gap: 16px;
-  padding: 12px;
+  /*padding: 12px;*/
 }
 
 .wd-profile-summary-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   grid-gap: 14px;
-  padding: 12px;
+  /*padding: 12px;*/
 }
 
 .wd-summary-card {
@@ -122,5 +122,40 @@ html {
   font-weight: 500;
 }
 
+/*multi select style*/
+.wd-multiselect-container {
+  width: 100%;
+  border: 1px solid #2d3436;
+  border-radius: 4px;
+  overflow: auto;
+}
 
+.wd-multiselect {
+  width: 100%;
+  height: auto;
+  border: none;
+  background: none;
+  outline: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
 
+.wd-multiselect option {
+  display: block;
+  padding: 10px;
+  background-color: #282828;
+  color: #b3b3b3;
+  border-bottom: 1px solid #2d3436;
+  font-size: 15px;
+}
+
+.wd-multiselect option:last-child {
+  border-bottom: none;
+}
+
+.wd-multiselect option:checked,
+.wd-multiselect option:hover {
+  background-color: darkgreen;
+  color: #fff;
+}
