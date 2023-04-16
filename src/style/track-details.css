@@ -10,6 +10,7 @@
 
 .wd-track-info .wd-track-name {
     font-weight: 600;
+    color: white
 }
 
 .wd-track-info .wd-track-artists {
@@ -27,14 +28,16 @@
     position: relative;
 }
 
+
 .wd-track-controls audio {
     width: 180px;
-    margin-right: 60px;
+    /*margin-right: 60px;*/
 }
+
 
 .wd-track-heart .bi {
     font-size: 1.2rem;
-    color: #999;
+    /*color: #999;*/
     /*color: #1db954;*/
 }
 
@@ -51,6 +54,9 @@
 
 @media (max-width: 768px) {
     .wd-track-controls audio {
+        display: none;
+    }
+    .wd-no-preview {
         display: none;
     }
 }

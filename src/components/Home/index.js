@@ -6,6 +6,7 @@ import PlaylistGrid from "../Summary/PlaylistGrid";
 import Navbar from "../Navbar";
 import {getRecommendations} from "../../services/track-service";
 import {useSelector} from "react-redux";
+import LikedSongs from "./LikedSongs";
 
 const Home = () => {
     const {currentUser} = useSelector((state) => state.user);
@@ -59,6 +60,15 @@ const Home = () => {
                 <div className="wd-width-95">
                     <div className="wd-bg-color-black">
 
+                        {/*only for logged-in users*/}
+                        {
+                            currentUser && <LikedSongs />
+                        }
+
+                        <h3 className="fw-bold text-white wd-summary-title">New Album Releases</h3>
+                        <AlbumGrid albums={newReleases}/>
+
+                        {/*不需要的功能*/}
                         {/*/!*for viewers*!/*/}
                         {/*{*/}
                         {/*    currentUser && currentUser.role === "viewer" &&*/}
@@ -69,10 +79,6 @@ const Home = () => {
                         {/*    </>*/}
                         {/*}*/}
 
-                        <h3 className="fw-bold text-white wd-summary-title">New Album Releases</h3>
-                        <AlbumGrid albums={newReleases}/>
-
-                        {/*不需要的功能*/}
                         {/*<h3 className="fw-bold text-white wd-summary-title">Featured Playlists</h3>*/}
                         {/*<PlaylistGrid playlists={featuredPlaylists}/>*/}
                     </div>

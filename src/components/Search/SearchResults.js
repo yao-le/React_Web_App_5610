@@ -1,8 +1,9 @@
 import AlbumGrid from "../Summary/AlbumGrid";
 import PlaylistGrid from "../Summary/PlaylistGrid";
 import {useNavigate} from "react-router";
+import TrackDetails from "../Details/TrackDetails";
 
-const SearchResults = ({albums, playlists}) => {
+const SearchResults = ({albums, tracks, playlists}) => {
 
     // const navigate = useNavigate();
 
@@ -15,6 +16,15 @@ const SearchResults = ({albums, playlists}) => {
 
             <h3 className="fw-bold text-white wd-summary-title mb-2">Search Results</h3>
 
+            { tracks.length > 0 &&
+                <div>
+                    <h3 className="fw-bold text-white wd-summary-title">Tracks</h3>
+                    {
+                        tracks.map((track) => <TrackDetails key={track.id} trackId={track.id}/>)
+                    }
+                </div>
+            }
+
             { albums.length > 0 &&
                 <div>
                     <h3 className="fw-bold text-white wd-summary-title">Albums</h3>
@@ -22,12 +32,13 @@ const SearchResults = ({albums, playlists}) => {
                 </div>
             }
 
-            { playlists.length > 0 &&
-                <div>
-                    <h3 className="fw-bold text-white wd-summary-title">Playlists</h3>
-                    <PlaylistGrid playlists={playlists}/>
-                </div>
-            }
+            {/*disabled for now*/}
+            {/*{ playlists.length > 0 &&*/}
+            {/*    <div>*/}
+            {/*        <h3 className="fw-bold text-white wd-summary-title">Playlists</h3>*/}
+            {/*        <PlaylistGrid playlists={playlists}/>*/}
+            {/*    </div>*/}
+            {/*}*/}
 
         </div>
     )

@@ -8,6 +8,6 @@ const BASE_API = "https://api.spotify.com/v1/search";
 export const searchForItems = async (query) => {
     const headers = await getHeaders();
     const response = await axios.get(
-        `${BASE_API}?q=${query}&type=album,track,artist,playlist&limit=12`, { headers });
+        `${BASE_API}?q=${query}&type=album,track,artist,playlist&limit=16`, { headers });
     return response.data;
 }

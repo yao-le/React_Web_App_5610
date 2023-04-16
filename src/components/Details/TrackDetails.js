@@ -1,11 +1,11 @@
 import {Link} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {useNavigate} from "react-router";
 import {getTrackById} from "../../services/track-service";
 import {useEffect, useState} from "react";
+import HeartIcon from "./HeartIcon";
 import "../../style/track-details.css";
 
 // used for home page and profile page?
+// trackId refers to the spotidy track id
 const TrackDetails = ({trackId}) => {
 
     const [track, setTrack] = useState(null);
@@ -37,7 +37,8 @@ const TrackDetails = ({trackId}) => {
 
 
     return (
-        <div className="wd-track-item d-flex flex-row align-items-center wd-width-90">
+        <div className="wd-track-item d-flex flex-row align-items-center
+                        wd-width-85 container">
             <div className="wd-track-album-cover">
                 <img src={album?.images[0].url} alt="album cover" className="img-fluid"/>
             </div>
@@ -73,12 +74,12 @@ const TrackDetails = ({trackId}) => {
                 )}
                 {
                     !preview_url &&
-                    <div className="fw-bold text-muted fs-6">Preview not available</div>
+                    <div className="fw-bold text-muted fs-6 wd-no-preview">Preview not available</div>
                 }
             </div>
 
             <div className="wd-track-heart ms-4">
-                <i className="bi bi-suit-heart-fill"></i>
+                <HeartIcon track={track} />}
             </div>
 
             <div className="wd-track-duration ms-4">

@@ -7,7 +7,6 @@ import {useSelector} from "react-redux";
 import {useNavigate} from "react-router";
 import {createComment, getCommentForAlbum} from "../../services/comment-service";
 import CommentItem from "../Comment/CommentItem";
-import TrackDetails from "./TrackDetails";
 
 
 const AlbumDetails = ({albumId}) => {
@@ -106,7 +105,7 @@ const AlbumDetails = ({albumId}) => {
                         </span>
 
                         {/*collect the album*/}
-                        <i className="bi bi-heart-fill ms-3 fs-5 wd-bookmark"
+                        <i className="bi bi-bookmark-star-fill ms-3 fs-5 wd-bookmark"
                            onClick={handleLikeClick}>
                         </i>
                     </div>

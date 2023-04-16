@@ -82,7 +82,20 @@ html {
   color: inherit;
 }
 
+
 .wd-bookmark:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+  color: #999;
+}
+
+.wd-bookmark {
+  color: #999;
+}
+
+.wd-bookmark-liked {
+  cursor: pointer;
+  color: #1db954;
   transform: scale(1.2);
 }
 

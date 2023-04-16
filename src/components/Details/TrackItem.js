@@ -1,25 +1,9 @@
 import '../../style/track-item.css';
 import {Link} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {useNavigate} from "react-router";
+import HeartIcon from "./HeartIcon";
 
 // used for album details page
 const TrackItem = ({track}) => {
-
-    const {currentUser} = useSelector((state) => state.user);
-    const navigate = useNavigate();
-
-    // need to add some logic to handle the click event on the bookmark icon
-    // 根据后端调整
-    const handleCollectClick = () => {
-        if (!currentUser) {
-            alert("Please login first");
-            navigate("/login");
-            return;
-        }
-        console.log("collect a song");
-        // implement like logic
-    }
 
     // if track is null, return an empty div
     if (!track) {
@@ -43,9 +27,7 @@ const TrackItem = ({track}) => {
 
                     <div className="d-flex flex-row align-items-center">
                         <h3 className="wd-track-details-title">{name}</h3>
-                        <i className="bi bi-bookmark-star-fill fs-5 ms-2 text-muted wd-bookmark"
-                           onClick={handleCollectClick}>
-                        </i>
+                        <HeartIcon track={track} />
                     </div>
 
                     <div className="d-flex flex-row align-items-center text-muted">

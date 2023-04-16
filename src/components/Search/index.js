@@ -8,6 +8,7 @@ import Navbar from "../Navbar";
 
 const Search = () => {
     const [albums, setAlbums] = useState([]);
+    const [tracks, setTracks] = useState([]);
     const [playlists, setPlaylists] = useState([]);
 
     const [searchParams] = useSearchParams();
@@ -15,11 +16,11 @@ const Search = () => {
 
 
     const searchItems = async (val) => {
-        const {albums, playlists} = await searchForItems(val);
+        const {albums, tracks, playlists} = await searchForItems(val);
 
         setAlbums([...albums.items]);
+        setTracks([...tracks.items]);
         setPlaylists([...playlists.items]);
-
     };
 
 
@@ -42,7 +43,7 @@ const Search = () => {
                         <SearchBar/>
                         {
                             query != null &&
-                            <SearchResults albums={albums} playlists={playlists}/>
+                            <SearchResults albums={albums} tracks={tracks} playlists={playlists}/>
                         }
                     </div>
                 </div>
