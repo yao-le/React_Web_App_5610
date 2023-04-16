@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import "../../style/login-screen.css";
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router";
@@ -23,6 +23,7 @@ const Login = () => {
     const [role, setRole] = useState("viewer");
     // used for registration
     const [email, setEmail] = useState('');
+    const [portrait, setPortrait] = useState(null);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -80,13 +81,53 @@ const Login = () => {
         setRole('viewer')
     }
 
+    // handle image upload, need modification?
+    const fileInputRef = useRef(null);
+    const handleUploadClick = () => {
+        fileInputRef.current.click();
+    };
+
+    const handlePortraitChange = (event) => {
+        if (event.target.files && event.target.files[0]) {
+            const imageUrl = URL.createObjectURL(event.target.files[0]);
+            setPortrait(imageUrl);
+        }
+    };
+
+
     return (
         <div className="wd-login-screen">
             <div className="wd-login-container">
 
-                {showLoginForm ?
+                {
+                    showLoginForm ?
                     <h2 className="wd-login-title">Login</h2> :
                     <h2 className="wd-login-title">Register</h2>
+                }
+
+                {/*only for registration: upload avtar image*/}
+                {
+                    !showLoginForm &&
+                    <div className="d-flex justify-content-center align-items-center mb-2">
+                        <div className="wd-avatar-container d-flex flex-column align-items-center">
+                            <img
+                                src={portrait || 'https://cdn2.iconfinder.com/data/icons/communication-489/24/account_profile_user_contact_person_avatar_placeholder-512.png'}
+                                alt="avatar"
+                                className="wd-avatar-image rounded-circle mb-2"
+                            />
+                            <input
+                                type="file"
+                                onChange={handlePortraitChange}
+                                ref={fileInputRef}
+                                className="wd-avatar-input "
+                                accept="image/*"
+                            />
+                            <button type="button" className="btn wd-upload-avatar-button text-white"
+                                    onClick={handleUploadClick}>
+                                Choose photo
+                            </button>
+                        </div>
+                    </div>
                 }
 
 
