@@ -1,42 +1,58 @@
-.wd-track-details {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    background-color: #282828;
-    color: #ffffff;
-    padding: 20px;
-    border-radius: 5px;
+.wd-track-item {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.wd-track-details-img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 5px;
-    margin-right: 20px;
+.wd-track-album-cover img {
+    width: 60px;
+    height: 60px;
 }
 
-.wd-track-details-content {
-    display: flex;
-    flex-direction: column;
+.wd-track-info .wd-track-name {
+    font-weight: 600;
 }
 
-.wd-track-details-title {
-    margin: 0;
-    font-weight: bold;
-    font-size: 24px;
+.wd-track-info .wd-track-artists {
+    font-size: 0.8rem;
 }
 
-.wd-track-details-artist {
-    margin: 5px 0;
-    font-size: 18px;
+.wd-track-album-name {
+    font-size: 0.9rem;
+    color: #999;
+    margin-left: 10px;
+    flex-grow: 1;
 }
 
-.wd-track-details-album .wd-track-details-duration {
-    margin: 5px 0;
-    font-size: 16px;
+.wd-track-controls {
+    position: relative;
 }
 
-.wd-me-20 {
-    margin-right: 20px;
+.wd-track-controls audio {
+    width: 180px;
+    margin-right: 60px;
 }
+
+.wd-track-heart .bi {
+    font-size: 1.2rem;
+    color: #999;
+    /*color: #1db954;*/
+}
+
+.wd-track-heart .bi:hover {
+    cursor: pointer;
+}
+
+
+.wd-track-duration {
+    font-size: 0.9rem;
+    color: #999;
+    margin-left: 15px;
+}
+
+@media (max-width: 768px) {
+    .wd-track-controls audio {
+        display: none;
+    }
+}
+
+

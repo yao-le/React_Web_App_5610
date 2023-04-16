@@ -27,7 +27,7 @@ const Login = () => {
     // used for registration
     const [email, setEmail] = useState('');
     const [portrait, setPortrait] = useState('');
-    const [selectedOptions, setSelectedOptions] = useState([]);
+    //const [selectedOptions, setSelectedOptions] = useState([]);
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -45,9 +45,9 @@ const Login = () => {
         }
 
         if (role === "viewer") {
-            if (selectedOptions.length > 0) {
-                newUser = {...newUser, favoriteGenres: selectedOptions};
-            }
+            // if (selectedOptions.length > 0) {
+            //     newUser = {...newUser, favoriteGenres: selectedOptions};
+            // }
             return dispatch(viewerRegisterThunk(newUser));
         } else if (role === "publisher") {
             return dispatch(publisherRegisterThunk(newUser));
@@ -91,7 +91,7 @@ const Login = () => {
         setPassword('')
         setRole('viewer')
         setPortrait('')
-        setSelectedOptions([])
+        //setSelectedOptions([])
     }
 
     // handle image upload, need modification?
@@ -219,20 +219,21 @@ const Login = () => {
                         </div>
                     }
 
-                    {
-                        !showLoginForm && role === "viewer" &&
-                        <div className="wd-login-form-group">
-                            <label htmlFor="genreSelect" className="wd-login-form-label">
-                                Please choose your favorite genres
-                            </label>
-                            <MultiSelect
-                                id="genreSelect"
-                                options={genres}
-                                selectedOptions={selectedOptions}
-                                setSelectedOptions={setSelectedOptions}
-                            />
-                        </div>
-                    }
+                    {/*select favorite genres*/}
+                    {/*{*/}
+                    {/*    !showLoginForm && role === "viewer" &&*/}
+                    {/*    <div className="wd-login-form-group">*/}
+                    {/*        <label htmlFor="genreSelect" className="wd-login-form-label">*/}
+                    {/*            Please choose your favorite genres*/}
+                    {/*        </label>*/}
+                    {/*        <MultiSelect*/}
+                    {/*            id="genreSelect"*/}
+                    {/*            options={genres}*/}
+                    {/*            selectedOptions={selectedOptions}*/}
+                    {/*            setSelectedOptions={setSelectedOptions}*/}
+                    {/*        />*/}
+                    {/*    </div>*/}
+                    {/*}*/}
 
 
                     <button onClick={showLoginForm ? handleLogin : handleRegister}

@@ -1,5 +1,6 @@
 import React from 'react';
 
+// disabled this component in login page
 const MultiSelect = ({ options, selectedOptions, setSelectedOptions }) => {
 
     const handleChange = (event) => {

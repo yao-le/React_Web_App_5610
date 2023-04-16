@@ -1,4 +1,4 @@
-import '../../style/track-details.css';
+import '../../style/track-item.css';
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router";

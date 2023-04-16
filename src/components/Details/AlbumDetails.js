@@ -7,6 +7,7 @@ import {useSelector} from "react-redux";
 import {useNavigate} from "react-router";
 import {createComment, getCommentForAlbum} from "../../services/comment-service";
 import CommentItem from "../Comment/CommentItem";
+import TrackDetails from "./TrackDetails";
 
 
 const AlbumDetails = ({albumId}) => {
@@ -131,7 +132,6 @@ const AlbumDetails = ({albumId}) => {
             </div>
 
             {/*Track List*/}
-
             <div className="wd-details-tracks my-5">
                 {album.tracks.items.length > 0 && <h3 className="text-muted">Tracks</h3>}
 

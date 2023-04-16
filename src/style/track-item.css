@@ -1,0 +1,42 @@
+.wd-track-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #282828;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.wd-track-details-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+.wd-track-details-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.wd-track-details-title {
+    margin: 0;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.wd-track-details-artist {
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+.wd-track-details-album .wd-track-details-duration {
+    margin: 5px 0;
+    font-size: 16px;
+}
+
+.wd-me-20 {
+    margin-right: 20px;
+}
