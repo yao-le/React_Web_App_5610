@@ -98,3 +98,29 @@ html {
   width: 85%;
 }
 
+/*upload image*/
+
+.wd-avatar-container {
+  width: 200px;
+}
+
+.wd-avatar-image {
+  width: 160px;
+  height: 160px;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.wd-avatar-input {
+  display: none;
+}
+
+.wd-upload-avatar-button {
+  background-color: #1db954;
+  border-color: #1db954;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+
+

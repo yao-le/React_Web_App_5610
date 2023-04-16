@@ -11,6 +11,7 @@ import { publisherRegisterThunk }
 import { adminRegisterThunk }
     from "../../services/auth/admin-auth-thunk.js";
 import {loginThunk} from "../../services/auth/auth-thunks";
+import UploadImage from "./UploadImage";
 
 
 // need to be modified based on backend interfaces
@@ -79,6 +80,7 @@ const Login = () => {
         setEmail('')
         setPassword('')
         setRole('viewer')
+        setPortrait(null)
     }
 
     // handle image upload, need modification?
@@ -108,26 +110,12 @@ const Login = () => {
                 {/*only for registration: upload avtar image*/}
                 {
                     !showLoginForm &&
-                    <div className="d-flex justify-content-center align-items-center mb-2">
-                        <div className="wd-avatar-container d-flex flex-column align-items-center">
-                            <img
-                                src={portrait || 'https://cdn2.iconfinder.com/data/icons/communication-489/24/account_profile_user_contact_person_avatar_placeholder-512.png'}
-                                alt="avatar"
-                                className="wd-avatar-image rounded-circle mb-2"
-                            />
-                            <input
-                                type="file"
-                                onChange={handlePortraitChange}
-                                ref={fileInputRef}
-                                className="wd-avatar-input "
-                                accept="image/*"
-                            />
-                            <button type="button" className="btn wd-upload-avatar-button text-white"
-                                    onClick={handleUploadClick}>
-                                Choose photo
-                            </button>
-                        </div>
-                    </div>
+                    <UploadImage
+                        portrait={portrait}
+                        fileInputRef={fileInputRef}
+                        handlePortraitChange={handlePortraitChange}
+                        handleUploadClick={handleUploadClick}
+                    />
                 }
 
 

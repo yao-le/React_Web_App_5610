@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, {useRef, useState} from 'react';
 import { Link } from 'react-router-dom';
 import "../../style/edit-profile.css";
 import { useSelector } from "react-redux";
+import UploadImage from "../LogIn/UploadImage";
 
 // currently only work for viewers and publishers, because admins don't have portrait image field
 const EditProfile = () => {
@@ -16,12 +17,19 @@ const EditProfile = () => {
     // ??? 上传图片功能需要修改
     // this URL is only available for the current session, and it won't be stored permanently.
     // For permanent storage, need to upload the image to a server then store the returned URL.
-    const handleAvatarChange = (event) => {
+    const fileInputRef = useRef(null);
+
+    const handleUploadClick = () => {
+        fileInputRef.current.click();
+    };
+
+    const handlePortraitChange = (event) => {
         if (event.target.files && event.target.files[0]) {
             const imageUrl = URL.createObjectURL(event.target.files[0]);
             setPortrait(imageUrl);
         }
     };
+
 
     const handleUpdate = () => {
         console.log("update profile");
@@ -40,20 +48,13 @@ const EditProfile = () => {
         <div className="wd-edit-profile-container">
             <h2 className="wd-edit-profile-title">Edit Profile</h2>
             <form className="wd-edit-profile-form">
-                {/* Avatar */}
-                <div className="mb-3 wd-edit-profile-avatar-container">
-                    <img
-                        className="wd-edit-profile-avatar"
-                        src={portrait}
-                        alt="avatar"
-                    />
-                    <input
-                        type="file"
-                        className="form-control mt-4"
-                        id="avatar"
-                        onChange={handleAvatarChange}
-                    />
-                </div>
+                {/* upload portrait */}
+                <UploadImage
+                    portrait={portrait}
+                    fileInputRef={fileInputRef}
+                    handlePortraitChange={handlePortraitChange}
+                    handleUploadClick={handleUploadClick}
+                />
 
                 {/* Username */}
                 <div className="mb-3">
