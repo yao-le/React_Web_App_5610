@@ -37,7 +37,7 @@ const TrackItem = ({track}) => {
 
 
     return (
-        <div className="row align-items-center mb-4 me-2 wd-width-90">
+        <div className="row align-items-center mb-4 wd-width-90">
             <div className="col-md-7 col-sm-12">
                 <div className="d-flex flex-column">
 

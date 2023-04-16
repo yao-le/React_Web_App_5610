@@ -4,9 +4,9 @@ import authReducer from "./reducers/auth-reducer";
 import {configureStore} from '@reduxjs/toolkit';
 import {Provider} from "react-redux";
 
-import Home from "./components/Home/Home";
-import Search from "./components/Search/Search";
-import Details from "./components/Details/Details";
+import Home from "./components/Home";
+import Search from "./components/Search";
+import Details from "./components/Details";
 import Login from "./components/LogIn/Login";
 import Profile from "./components/Profile/Profile";
 import OtherProfile from "./components/Profile/OtherProfile";
