@@ -1,7 +1,7 @@
 .wd-commentItem {
     display: flex;
     flex-direction: row;
-    margin-bottom: 1rem;
+    margin-bottom: 0.6rem;
     padding: 1rem;
     background-color: #282828;
     border-radius: 4px;

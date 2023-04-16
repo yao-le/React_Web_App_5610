@@ -23,7 +23,7 @@ const CommentForm = ({submitReview}) => {
                     <>
                         <div className="mb-1 text-muted">Commenting as</div>
                         <div className="d-flex flex-row align-items-center">
-                            <img className="rounded-circle me-2" width="50px" height="50px"
+                            <img className="rounded-circle me-2" width="60px" height="60px"
                                  src={currentUser.portrait} alt="avatar"/>
                             <div className="wd-commenterName">{currentUser.name}</div>
                         </div>
@@ -39,7 +39,7 @@ const CommentForm = ({submitReview}) => {
                     placeholder="Add a comment..."
                     ></textarea>
                 </div>
-                <div className="text-end">
+                <div className="text-end mt-1">
                     <button className="btn btn-success">
                         Submit
                     </button>
