@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 import {useNavigate} from "react-router";
 
-
+// used for album details page
 const TrackItem = ({track}) => {
 
     const {currentUser} = useSelector((state) => state.user);

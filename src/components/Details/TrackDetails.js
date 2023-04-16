@@ -5,7 +5,7 @@ import {getTrackById} from "../../services/track-service";
 import {useEffect, useState} from "react";
 import "../../style/track-details.css";
 
-
+// used for home page and profile page?
 const TrackDetails = ({trackId}) => {
 
     const [track, setTrack] = useState(null);
@@ -44,10 +44,14 @@ const TrackDetails = ({trackId}) => {
 
             <div className="wd-track-info d-flex flex-column ms-3">
                 <div className="d-flex flex-row align-items-center">
+                    {/*artist name*/}
                     <div className="wd-track-name">{name}</div>
-                    <div className="wd-track-album-name ms-2">
-                        {album?.name}
-                    </div>
+                    {/*album name*/}
+                    <Link to={`/details?album=${album?.id}`} className="wd-link-no-decoration">
+                        <div className="wd-track-album-name ms-2">
+                            {album?.name}
+                        </div>
+                    </Link>
                 </div>
 
                 <div className="wd-track-artists text-muted">
