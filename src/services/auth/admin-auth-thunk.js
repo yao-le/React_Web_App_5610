@@ -16,6 +16,14 @@ export const adminRegisterThunk = createAsyncThunk(
     }
 );
 
+export const updateAdminThunk = createAsyncThunk(
+    "admin/update",
+    async (admin) => {
+        const status = await adminService.updateAdmin(admin);
+        return admin;
+    }
+);
+
 // export const adminLogoutThunk = createAsyncThunk(
 //     "admin/logout", async () => {
 //         const response = await adminService.logout();

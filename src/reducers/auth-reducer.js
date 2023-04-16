@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { viewerRegisterThunk }
+import {viewerRegisterThunk, updateViewerThunk}
     from "../services/auth/viewer-auth-thunk.js";
-import { publisherRegisterThunk }
+import {publisherRegisterThunk, updatePublisherThunk}
     from "../services/auth/publisher-auth-thunk";
-import { adminRegisterThunk }
+import {adminRegisterThunk, updateAdminThunk}
     from "../services/auth/admin-auth-thunk.js";
 import { loginThunk, logoutThunk } from "../services/auth/auth-thunks";
 
@@ -34,6 +34,15 @@ const authSlice = createSlice({
             state.currentUser = payload;},
         [logoutThunk.fulfilled]: (state) => {
             state.currentUser = null;},
+        [updateViewerThunk.fulfilled]: (state, { payload }) => {
+            state.currentUser = payload;
+        },
+        [updatePublisherThunk.fulfilled]: (state, { payload }) => {
+            state.currentUser = payload;
+        },
+        [updateAdminThunk.fulfilled]: (state, { payload }) => {
+            state.currentUser = payload;
+        },
     },
 });
 

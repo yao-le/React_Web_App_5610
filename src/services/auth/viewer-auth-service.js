@@ -14,6 +14,12 @@ export const register = async (newUser) => {
     return response.data;
 }
 
+export const updateViewer = async (viewer) => {
+    const response = await api.put(`${VIEWERS_URL}/${viewer._id}`, viewer);
+    const status = response.data;
+    return status;
+};
+
 // export const login = async ({name, password}) => {
 //     const response = await api.post(`${VIEWERS_URL}/login`, {name, password});
 //     // return current viewer

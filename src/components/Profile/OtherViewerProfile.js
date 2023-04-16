@@ -3,19 +3,28 @@ import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 
 import userArray from "../../utils/users.js";
-import {useLocation} from "react-router";
+import {useLocation, useNavigate} from "react-router";
 
 // other viewer's profile page
 const OtherViewerProfile = ({ user }) => {
+    const { currentUser } = useSelector((state) => state.user);
 
     const { pathname } = useLocation();
-
-    const { currentUser } = useSelector((state) => state.user);
+    const navigate = useNavigate();
 
     // 需要修改, 可以把以下代码放到OtherProfile.js中，然后传入isFollowing参数?
     const [isFollowing, setIsFollowing] = useState(false);
 
+
+
+
     const handleFollow = () => {
+        if (!currentUser) {
+            alert("Please login first");
+            navigate("/login");
+            return;
+        }
+        // only logged-in user can follow other users
         setIsFollowing(!isFollowing);
         // add login
 

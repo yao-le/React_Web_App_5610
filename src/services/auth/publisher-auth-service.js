@@ -14,6 +14,12 @@ export const register = async (newUser) => {
     return response.data;
 }
 
+export const updatePublisher = async (publisher) => {
+    const response = await api.put(`${PUBLISHERS_URL}/${publisher._id}`, publisher);
+    const status = response.data;
+    return status;
+};
+
 // export const login = async ({name, password}) => {
 //     const response = await api.post(`${PUBLISHERS_URL}/login`, {name, password});
 //     // return current publisher

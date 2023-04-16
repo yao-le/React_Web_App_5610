@@ -92,8 +92,12 @@ const ViewerProfile = () => {
 
             {/*display current viewer's album collections*/}
             <div className="mt-1">
-                <h3 className="fw-bold text-white wd-summary-title">Album Collections</h3>
-                <AlbumGrid albums={albumCollection} />
+                <h3 className="fw-bold text-white wd-summary-title mt-5">Album Collections</h3>
+                {
+                    albumCollection.length > 0 ?
+                        <AlbumGrid albums={albumCollection} /> :
+                        <h4 className="fw-bold text-muted wd-summary-title mb-5">No album collections yet</h4>
+                }
             </div>
 
             <div className="mt-2">

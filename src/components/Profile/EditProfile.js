@@ -1,12 +1,16 @@
 import React, {useRef, useState} from 'react';
 import { Link } from 'react-router-dom';
 import "../../style/edit-profile.css";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import UploadImage from "../LogIn/UploadImage";
 import MultiSelect from "../LogIn/MultiSelect";
 import {genres} from "../../utils/genres";
+import {updateViewerThunk} from "../../services/auth/viewer-auth-thunk";
+import {updatePublisherThunk} from "../../services/auth/publisher-auth-thunk";
+import {updateAdminThunk} from "../../services/auth/admin-auth-thunk";
+import {useNavigate} from "react-router";
 
-// currently only work for viewers and publishers, because admins don't have portrait image field
+
 const EditProfile = () => {
 
     const { currentUser } = useSelector((state) => state.user);
@@ -17,6 +21,9 @@ const EditProfile = () => {
     const [portrait, setPortrait] = useState(currentUser.portrait);
 
     // const [selectedGenres, setSelectedGenres] = useState(currentUser.favoriteGenres);
+
+    const navigate  = useNavigate();
+    const dispatch = useDispatch();
 
     // ??? 上传图片功能需要修改
     // this URL is only available for the current session, and it won't be stored permanently.
@@ -34,17 +41,36 @@ const EditProfile = () => {
         }
     };
 
-
-    const handleUpdate = () => {
-        console.log("update profile");
-        const user = {
+    // need to be modified?
+    const updateBasedOnRole = async () => {
+        const updatedInfo = {
             name,
             password,
             email,
             portrait
         }
-        console.log(user);
-        // dispatch(updateUserThunk(user));
+        const newProfile = { ...currentUser, ...updatedInfo };
+        if (currentUser.role === "viewer") {
+            return dispatch(updateViewerThunk(newProfile));
+        } else if (currentUser.role === "publisher") {
+            return dispatch(updatePublisherThunk(newProfile));
+        } else if (currentUser.role === "admin") {
+            return dispatch(updateAdminThunk(newProfile));
+        }
+    }
+
+    // update the profile of the current user
+    const handleUpdate = async () => {
+        console.log("update profile");
+        const response = await updateBasedOnRole();
+        if (!response.error) {
+            // in case user refreshes the page, we store the current user info in sessionStorage
+            sessionStorage.setItem("currentUser", JSON.stringify(response.payload));
+            navigate("/profile");
+        } else {
+            console.log(response.error);
+            alert("Update failed");
+        }
     }
 
     return (

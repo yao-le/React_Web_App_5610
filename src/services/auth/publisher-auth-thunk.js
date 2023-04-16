@@ -16,6 +16,14 @@ export const publisherRegisterThunk = createAsyncThunk(
     }
 );
 
+export const updatePublisherThunk = createAsyncThunk(
+    "publisher/update",
+    async (publisher) => {
+        const status = await publisherService.updatePublisher(publisher);
+        return publisher;
+    }
+);
+
 // export const publisherLogoutThunk = createAsyncThunk(
 //     "publisher/logout", async () => {
 //         const response = await publisherService.logout();

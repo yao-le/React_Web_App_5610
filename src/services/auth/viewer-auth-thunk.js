@@ -16,6 +16,14 @@ export const viewerRegisterThunk = createAsyncThunk(
     }
 );
 
+export const updateViewerThunk = createAsyncThunk(
+    "viewer/update",
+    async (viewer) => {
+        const status = await viewerService.updateViewer(viewer);
+        return viewer;
+    }
+);
+
 // export const viewerLogoutThunk = createAsyncThunk(
 //     "user/logout", async () => {
 //         const response = await viewerService.logout();

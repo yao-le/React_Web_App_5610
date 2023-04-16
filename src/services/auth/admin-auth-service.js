@@ -14,6 +14,12 @@ export const register = async (newUser) => {
     return response.data;
 }
 
+export const updateAdmin = async (admin) => {
+    const response = await api.put(`${ADMINS_URL}/${admin._id}`, admin);
+    const status = response.data;
+    return status;
+};
+
 // export const login = async ({name, password}) => {
 //     const response = await api.post(`${ADMINS_URL}/login`, {name, password});
 //     // return current admin
