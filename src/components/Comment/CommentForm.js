@@ -16,7 +16,7 @@ const CommentForm = ({submitReview}) => {
     };
 
     return (
-        <form className="wd-review-form w-75" onSubmit={handleSubmit}>
+        <form className="wd-review-form wd-width-90" onSubmit={handleSubmit}>
             <div className="d-flex flex-column">
                 {
                     currentUser &&

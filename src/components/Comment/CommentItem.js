@@ -30,7 +30,7 @@ const CommentItem = ({ comment }) => {
     }
 
     return (
-        <div className="wd-commentItem w-75 d-flex">
+        <div className="wd-commentItem wd-width-90 d-flex">
             <div className="d-flex">
                 <Link to={`/profile/${commenter._id}`} className="wd-link-no-decoration">
                     <img className="wd-commenterImage" src={commenter.portrait} alt={commenter.name} />

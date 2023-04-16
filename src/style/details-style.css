@@ -22,6 +22,7 @@
 .wd-details-title {
     font-size: 46px;
     margin-bottom: 5px;
+    word-break: break-word;
 }
 
 
