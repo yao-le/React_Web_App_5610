@@ -7,6 +7,7 @@ import {useSelector} from "react-redux";
 import {useNavigate} from "react-router";
 import {createComment, getCommentForAlbum} from "../../services/comment-service";
 import CommentItem from "../Comment/CommentItem";
+import BookmarkIcon from "./BookmarkIcon";
 
 
 const AlbumDetails = ({albumId}) => {
@@ -104,10 +105,8 @@ const AlbumDetails = ({albumId}) => {
                             {album.tracks.items.length} {album.tracks.items.length > 1 ? "Songs" : "Song"}
                         </span>
 
-                        {/*collect the album*/}
-                        <i className="bi bi-bookmark-star-fill ms-3 fs-5 wd-bookmark"
-                           onClick={handleLikeClick}>
-                        </i>
+                        {/*Bookmark icon: used for collecting the album*/}
+                        <BookmarkIcon album={album} />
                     </div>
                 </div>
             </div>

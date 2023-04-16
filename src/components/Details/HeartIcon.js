@@ -3,6 +3,7 @@ import {createLikeTrack, deleteLikeTrack, findLikeTrack} from "../../services/li
 import {useNavigate} from "react-router";
 import {useSelector} from "react-redux";
 
+// like/dislike a song
 const HeartIcon = ({ track }) => {
     const {currentUser} = useSelector((state) => state.user);
 

@@ -18,7 +18,8 @@ const Profile = () => {
 
             {/*Profile*/}
             <div className="col-12 col-md-10">
-                {/*需要修改： 根据current user 的role，来显示不同样式的profile： viewerProfile, adminProfile, publisherProfile*/}
+                {/*需要修改： 根据current user 的role: currentUser.role，
+                来显示不同样式的profile： viewerProfile, adminProfile, publisherProfile*/}
                 <ViewerProfile/>
             </div>
 

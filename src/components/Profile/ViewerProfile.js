@@ -2,11 +2,13 @@ import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 import ProfileGrid from "../Summary/ProfileGrid";
 import {useEffect, useState} from "react";
+import AlbumGrid from "../Summary/AlbumGrid";
+import {getCollectedByUserId} from "../../services/collectAlbums-service";
+import {getAlbumById} from "../../services/album-service";
 
 // only for testing purpose
 import userArray from "../../utils/users.js";
-import albumArray from "../../utils/albums.js";
-import AlbumGrid from "../Summary/AlbumGrid";
+
 
 // current user's profile page
 const ViewerProfile = () => {
@@ -16,7 +18,7 @@ const ViewerProfile = () => {
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
 
-    const [collection, setCollection] = useState([]);
+    const [albumCollection, setAlbumCollection] = useState([]);
 
     // fetch current user's followers
     const fetchFollowers = async () => {
@@ -28,16 +30,24 @@ const ViewerProfile = () => {
 
     }
 
-    // fetch current user's album collection
-    const fetchCollection = async () => {
+    // fetch current user's album collections
+    const fetchAlbumCollection = async () => {
+        // return [{userId, spotifyAlbumId}] relations
+        const collectsRelations = await getCollectedByUserId(currentUser._id)
 
+        const albumPromises = collectsRelations.map(async (relation) => {
+            return await getAlbumById(relation.spotifyAlbumId)
+        });
+
+        const albums = await Promise.all(albumPromises);
+        setAlbumCollection([...albums]);
     }
 
 
     useEffect(() => {
         fetchFollowers();
         fetchFollowing();
-        fetchCollection();
+        fetchAlbumCollection();
     }, []);
 
 
@@ -80,10 +90,10 @@ const ViewerProfile = () => {
             </div>
 
 
-            {/*display current viewer's liked albums*/}
+            {/*display current viewer's album collections*/}
             <div className="mt-1">
-                <h3 className="fw-bold text-white wd-summary-title">Favourites</h3>
-                <AlbumGrid albums={albumArray} />
+                <h3 className="fw-bold text-white wd-summary-title">Album Collections</h3>
+                <AlbumGrid albums={albumCollection} />
             </div>
 
             <div className="mt-2">

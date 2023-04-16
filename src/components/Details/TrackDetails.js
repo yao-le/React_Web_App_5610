@@ -20,9 +20,9 @@ const TrackDetails = ({trackId}) => {
     }, []);
 
 
-    // if track is null, return an empty div
+    // if track is null
     if (!track) {
-        return <div></div>
+        return <div>Loading track details...</div>
     }
 
     const {
@@ -40,7 +40,10 @@ const TrackDetails = ({trackId}) => {
         <div className="wd-track-item d-flex flex-row align-items-center
                         wd-width-85 container">
             <div className="wd-track-album-cover">
-                <img src={album?.images[0].url} alt="album cover" className="img-fluid"/>
+                {/*album cover*/}
+                <Link to={`/details?album=${album?.id}`} className="wd-link-no-decoration">
+                    <img src={album?.images[0].url} alt="album cover" />
+                </Link>
             </div>
 
             <div className="wd-track-info d-flex flex-column ms-3">
