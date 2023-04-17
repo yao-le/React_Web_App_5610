@@ -7,6 +7,7 @@ import Navbar from "../Navbar";
 import {getRecommendations} from "../../services/track-service";
 import {useSelector} from "react-redux";
 import LikedSongs from "./LikedSongs";
+import NewMembers from "./NewMembers";
 
 const Home = () => {
     const {currentUser} = useSelector((state) => state.user);
@@ -59,6 +60,8 @@ const Home = () => {
             <div className="col-12 col-md-10">
                 <div className="wd-width-95">
                     <div className="wd-bg-color-black">
+                        {/*for both anonymous users and logged-in users*/}
+                        <NewMembers />
 
                         {/*only for logged-in users*/}
                         {

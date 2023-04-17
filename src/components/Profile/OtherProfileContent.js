@@ -15,6 +15,7 @@ import {
 
 
 // other viewer's profile page
+// TODO: still buggy
 const OtherProfileContent = ({user}) => {
     const {currentUser} = useSelector((state) => state.user);
 
