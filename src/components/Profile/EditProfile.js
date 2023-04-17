@@ -58,6 +58,7 @@ const EditProfile = () => {
                 portrait: currentUser.portrait,
                 selfIntro: currentUser.selfIntro,
             }}
+            userRole={currentUser.role}
             handleUpdate={handleUpdate}
             parentLink="/profile"
         />

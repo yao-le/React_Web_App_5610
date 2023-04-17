@@ -8,6 +8,7 @@ import {updateViewer} from "../../services/auth/viewer-auth-service";
 import {updatePublisher} from "../../services/auth/publisher-auth-service";
 import {updateAdmin} from "../../services/auth/admin-auth-service";
 
+// only admins can edit other users' profile
 const EditOtherProfile = () => {
     const [user, setUser] = useState(null);
     const {currentUser} = useSelector((state) => state.user);
@@ -72,6 +73,7 @@ const EditOtherProfile = () => {
                     portrait: user.portrait,
                     selfIntro: user.selfIntro,
                 }}
+                userRole={user.role}
                 handleUpdate={handleUpdate}
                 parentLink={`/profile/${userId}`}
             />

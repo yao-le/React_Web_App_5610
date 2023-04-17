@@ -4,6 +4,7 @@ import React, {useEffect, useState} from "react";
 
 const EditForm = ({
                       initialValues,
+                      userRole,
                       handleUpdate,
                       parentLink,
                   }) => {
@@ -97,18 +98,20 @@ const EditForm = ({
                     </div>
 
                     {/*self introduction field only for publishers*/}
-                    <div className="mb-3">
-                        <label htmlFor="intro" className="form-label wd-edit-profile-label">
-                            Description
-                        </label>
-                        <textarea
-                            className="form-control wd-edit-profile-input"
-                            id="intro"
-                            value={selfIntro}
-                            placeholder="Please introduce yourself"
-                            onChange={(event) => setSelfIntro(event.target.value)}
-                        ></textarea>
-                    </div>
+                    {userRole === 'publisher' &&
+                        <div className="mb-3">
+                            <label htmlFor="intro" className="form-label wd-edit-profile-label">
+                                Description
+                            </label>
+                            <textarea
+                                className="form-control wd-edit-profile-input"
+                                id="intro"
+                                value={selfIntro}
+                                placeholder="Please introduce yourself"
+                                onChange={(event) => setSelfIntro(event.target.value)}
+                            ></textarea>
+                        </div>
+                    }
 
                     {/* Favorite Genres */}
                     {/*<div className="mb-3">*/}
