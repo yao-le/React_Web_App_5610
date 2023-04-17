@@ -61,10 +61,18 @@ const ViewerProfile = () => {
                 />
                 <div className="wd-details-info ms-5">
                     <div className="mb-2 text-uppercase fw-bold text-muted">
-                        <span>Profile</span>
+                        <span>Your Profile</span>
                     </div>
 
                     <div className="wd-details-title">{currentUser.name}</div>
+
+                    {/*description field only for publishers*/}
+                    {currentUser.selfIntro &&
+                        <div className="fw-bold text-muted fs-6 mt-2">
+                            <i className="bi bi-star-fill"></i>
+                            <span className="ms-2">{currentUser.selfIntro}</span>
+                        </div>
+                    }
 
                     {/*user email*/}
                     {currentUser.email &&
@@ -79,6 +87,7 @@ const ViewerProfile = () => {
                         <i className="bi bi-calendar3"></i>
                         <span className="ms-2">Joined {currentUser.createdAt && currentUser.createdAt.slice(0, 7)}</span>
                     </div>
+
 
                     <div className="mt-2 fw-bold text-muted">
                         <Link to="/edit-profile" className="wd-link-no-decoration">

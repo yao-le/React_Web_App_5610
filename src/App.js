@@ -11,6 +11,9 @@ import Login from "./components/LogIn/Login";
 import Profile from "./components/Profile/Profile";
 import OtherProfile from "./components/Profile/OtherProfile";
 import EditProfile from "./components/Profile/EditProfile";
+import Admin from "./components/Admin";
+import EditOtherProfile from "./components/Profile/EditOtherProfile";
+import Publisher from "./components/Publisher";
 
 
 const store = configureStore(
@@ -32,7 +35,10 @@ function App() {
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/profile" element={<Profile/>}/>
                     <Route path="/edit-profile" element={<EditProfile/>}/>
+                    <Route path="/edit-profile/:userId" element={<EditOtherProfile/>}/>
                     <Route path="/profile/:userId" element={<OtherProfile/>}/>
+                    <Route path="/admin" element={<Admin/>}/>
+                    <Route path="/publisher/:pid" element={<Publisher />}/>
                 </Routes>
             </BrowserRouter>
         </Provider>

@@ -172,3 +172,7 @@ html {
   background-color: darkgreen;
   color: #fff;
 }
+
+.wd-cursor-pointer {
+  cursor: pointer;
+}

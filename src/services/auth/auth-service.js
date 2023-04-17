@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {deleteCommentsByUserId} from "../comment-service";
 
 
 const SERVER_API_URL = process.env.REACT_APP_SERVER_API_URL;
@@ -24,6 +25,17 @@ export const logout = async () => {
 
 export const getUserById = async (uid) => {
     const response = await api.get(`${USERS_URL}/${uid}`);
+    return response.data;
+}
+
+export const getAllUsers = async () => {
+    const response = await api.get(USERS_URL);
+    return response.data;
+}
+
+export const deleteUser = async (uid) => {
+    await deleteCommentsByUserId(uid); // delete all comments by this user
+    const response = await api.delete(`${USERS_URL}/${uid}`);
     return response.data;
 }
 

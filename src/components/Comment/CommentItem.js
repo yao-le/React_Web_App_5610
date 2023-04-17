@@ -47,8 +47,13 @@ const CommentItem = ({ comment }) => {
                 </div>
             </div>
             {/*delete button*/}
+            {/*admin can delete listeners and artists' comments*/}
+            {/*listeners/artists can delete their own comments*/}
+            {/*admin cannot delete other admins' comments*/}
             {
-                currentUser && currentUser._id === commenter._id &&
+                currentUser
+                && (commenter.role !== "admin")
+                && (currentUser._id === commenter._id || currentUser.role === "admin") &&
                 <div className="ms-auto me-2">
                     <i className="bi bi-x-circle wd-delete-icon"
                        onClick={handleDeleteComment}>

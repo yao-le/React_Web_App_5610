@@ -31,7 +31,8 @@ const Navbar = () => {
         <nav className="wd-navbar d-flex flex-column">
 
             <ul className="wd-navbar-menu">
-                {currentUser &&
+                {
+                    currentUser &&
                     <li className="wd-navbar-username mb-3">
                         <i className="bi bi-boombox-fill"></i>
                         <span className="ms-3 d-none d-xl-inline">{currentUser.name}</span>
@@ -51,7 +52,8 @@ const Navbar = () => {
                     </li>
                 </Link>
 
-                {!currentUser &&
+                {
+                    !currentUser &&
                     <Link to="/login" className="wd-link-no-decoration">
                         <li className="wd-navbar-menu-item">
                             <i className="bi bi-box-arrow-in-right"></i>
@@ -59,7 +61,8 @@ const Navbar = () => {
                         </li>
                 </Link>}
 
-                {currentUser &&
+                {
+                    currentUser &&
                     <Link to="/profile" className="wd-link-no-decoration">
                         <li className="wd-navbar-menu-item">
                             <i className="bi bi-person-circle"></i>
@@ -68,7 +71,28 @@ const Navbar = () => {
                     </Link>
                 }
 
-                {currentUser &&
+                {
+                    currentUser && currentUser.role === "admin" &&
+                    <Link to="/admin" className="wd-link-no-decoration">
+                        <li className="wd-navbar-menu-item">
+                            <i className="bi bi-person-fill-gear"></i>
+                            <span className="ms-3 d-none d-xl-inline">Admin</span>
+                        </li>
+                    </Link>
+                }
+
+                {
+                    currentUser && currentUser.role === "publisher" &&
+                    <Link to={`/publisher/${currentUser._id}`} className="wd-link-no-decoration">
+                        <li className="wd-navbar-menu-item">
+                            <i className="bi bi-music-note-list"></i>
+                            <span className="ms-3 d-none d-xl-inline">Publisher</span>
+                        </li>
+                    </Link>
+                }
+
+                {
+                    currentUser &&
                     <Link to="/" className="wd-link-no-decoration"
                             onClick={handleLogout}>
                         <li className="wd-navbar-menu-item">
@@ -78,7 +102,7 @@ const Navbar = () => {
                     </Link>
                 }
 
-                <li className="wd-navbar-menu-item wd-navbar-menu-item-back"
+                <li className="wd-navbar-menu-item wd-navbar-menu-item-back wd-cursor-pointer"
                     onClick={navigateBack}>
                     <i className="bi bi-backspace-fill"></i>
                     <span className="ms-3 d-none d-xl-inline">Back</span>

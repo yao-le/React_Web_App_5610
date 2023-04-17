@@ -27,6 +27,9 @@ const Login = () => {
     // used for registration
     const [email, setEmail] = useState('');
     const [portrait, setPortrait] = useState('');
+    const [selfIntro, setSelfIntro] = useState(''); // for publisher
+    const [firstName, setFirstName] = useState(''); // for admin
+    const [lastName, setLastName] = useState(''); // for admin
     //const [selectedOptions, setSelectedOptions] = useState([]);
 
     const navigate = useNavigate();
@@ -37,7 +40,10 @@ const Login = () => {
         let newUser = {
             name,
             password,
-            email
+            email,
+            selfIntro,
+            firstName,
+            lastName,
         };
 
         if (portrait !== '') {
@@ -91,6 +97,9 @@ const Login = () => {
         setPassword('')
         setRole('viewer')
         setPortrait('')
+        setFirstName('');
+        setLastName('');
+        setSelfIntro('');
         //setSelectedOptions([])
     }
 
@@ -131,45 +140,6 @@ const Login = () => {
 
 
                 <div>
-                    <div className="wd-login-form-group">
-                        <label className="wd-login-form-label">Username</label>
-                        <input
-                            type="text"
-                            className="wd-login-form-input"
-                            placeholder="your username"
-                            value={name}
-                            required
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="wd-login-form-group">
-                        <label className="wd-login-form-label">Password</label>
-                        <input
-                            type="password"
-                            className="wd-login-form-input"
-                            value={password}
-                            placeholder="your password"
-                            required
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </div>
-
-                    {/*only for register: email address (optional)*/}
-                    {
-                        !showLoginForm &&
-                        <div className="wd-login-form-group">
-                            <label className="wd-login-form-label">Email address (optional)</label>
-                            <input
-                                type="email"
-                                className="wd-login-form-input"
-                                placeholder="your email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </div>
-                    }
-
                     {/*only for register: select roles*/}
                     {
                         !showLoginForm &&
@@ -218,6 +188,90 @@ const Login = () => {
                             </div>
                         </div>
                     }
+                    <div className="wd-login-form-group">
+                        <label className="wd-login-form-label">Username</label>
+                        <input
+                            type="text"
+                            className="wd-login-form-input"
+                            placeholder="your username"
+                            value={name}
+                            required
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
+
+                    {/*only for register: admin firstname and lastname*/}
+                    {
+                        !showLoginForm &&
+                        role === "admin" &&
+                        <>
+                        <div className="wd-login-form-group">
+                            <label className="wd-login-form-label">Firstname</label>
+                            <input
+                                type="text"
+                                className="wd-login-form-input"
+                                placeholder="your firstname"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
+                            />
+                        </div>
+                        <div className="wd-login-form-group">
+                            <label className="wd-login-form-label">Lastname</label>
+                            <input
+                                type="text"
+                                className="wd-login-form-input"
+                                placeholder="your lastname"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
+                            />
+                        </div>
+                        </>
+                    }
+
+
+                    <div className="wd-login-form-group">
+                        <label className="wd-login-form-label">Password</label>
+                        <input
+                            type="password"
+                            className="wd-login-form-input"
+                            value={password}
+                            placeholder="your password"
+                            required
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+
+                    {/*only for register: email address (optional)*/}
+                    {
+                        !showLoginForm &&
+                        <div className="wd-login-form-group">
+                            <label className="wd-login-form-label">Email address (optional)</label>
+                            <input
+                                type="email"
+                                className="wd-login-form-input"
+                                placeholder="your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
+                    }
+
+
+                    {/*only for register: publisher description*/}
+                    {
+                        !showLoginForm &&
+                        role === "publisher" &&
+                        <div className="wd-login-form-group">
+                            <label className="wd-login-form-label">Description (optional)</label>
+                            <textarea
+                                className="wd-login-form-input"
+                                placeholder="Please introduce yourself"
+                                value={selfIntro}
+                                onChange={(e) => setSelfIntro(e.target.value)}
+                            ></textarea>
+                        </div>
+                    }
+
 
                     {/*select favorite genres*/}
                     {/*{*/}

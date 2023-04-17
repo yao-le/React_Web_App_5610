@@ -9,6 +9,8 @@
     padding: 16px;
     border-radius: 8px;
     transition: transform 0.2s ease-in-out;
+    min-width: 150px;
+    max-width: 300px;
 }
 
 .wd-profile-item:hover {
@@ -32,3 +34,24 @@
 .wd-profile-label {
     font-size: 14px;
 }
+
+
+
+.wd-profile-item-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.wd-profile-delete-icon {
+    cursor: pointer;
+    margin-top: 2px;
+    color: gray;
+    text-align: center;
+    font-size: 26px;
+}
+
+.wd-profile-delete-icon:hover {
+    color: white;
+}
+
