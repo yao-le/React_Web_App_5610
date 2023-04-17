@@ -154,7 +154,7 @@ const Login = () => {
                                         onChange={(e) => setRole(e.target.value)}
                                     />
                                     <label htmlFor="viewer" className="wd-login-radio-label">
-                                        Viewer
+                                        Listener
                                     </label>
                                 </div>
                                 <div>
@@ -167,7 +167,7 @@ const Login = () => {
                                         onChange={(e) => setRole(e.target.value)}
                                     />
                                     <label htmlFor="publisher" className="wd-login-radio-label">
-                                        Publisher
+                                        Artist
                                     </label>
                                 </div>
                                 <div>

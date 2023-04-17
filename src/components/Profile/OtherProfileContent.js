@@ -115,16 +115,9 @@ const OtherProfileContent = ({user}) => {
                 <div className="wd-details-info ms-5">
                     <div className="mb-2 text-uppercase fw-bold text-muted">
                         {
-                            user.role === "publisher" &&
-                                <span>Artist</span>
-                        }
-                        {
-                            (user.role === "viewer" || (currentUser.role !== "admin" && user.role === "admin"))
-                            && <span>Profile</span>
-                        }
-                        {
-                            currentUser.role === "admin" && user.role === "admin" &&
-                                <span>Admin</span>
+                            user.role === "publisher" ?
+                                <span>Artist</span> :
+                                <span>Profile</span>
                         }
                     </div>
 
