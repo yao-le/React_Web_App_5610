@@ -83,7 +83,7 @@ const Navbar = () => {
 
                 {
                     currentUser && currentUser.role === "publisher" &&
-                    <Link to={`/publisher/${currentUser._id}`} className="wd-link-no-decoration">
+                    <Link to="/publisher" className="wd-link-no-decoration">
                         <li className="wd-navbar-menu-item">
                             <i className="bi bi-music-note-list"></i>
                             <span className="ms-3 d-none d-xl-inline">Artist</span>

@@ -1,12 +1,16 @@
 import axios from 'axios';
 import {getHeaders} from "../utils/auth";
-import {seedArtists} from "../utils/seeds";
 
 
 const BASE_API = "https://api.spotify.com/v1/tracks";
 
-//const LOCAL_BASE_API = "http://localhost:4000/api/tracks"
+const SERVER_API_URL = process.env.REACT_APP_SERVER_API_URL;
+const TRACKS_URL = `${SERVER_API_URL}/tracks`
 
+
+const api = axios.create({
+    withCredentials: true,
+});
 
 const getSeeds= (seeds, n) => {
     if (seeds.length <= 5) {
@@ -32,15 +36,31 @@ export const getRecommendations = async (seedGenres, limit=20) => {
 export const getTrackById  = async (trackId) => {
     const headers = await getHeaders();
     const response = await axios.get(`${BASE_API}/${trackId}`, { headers });
+    return response.data;
+}
 
-    // const newTrack = {
-    //     trackId: response.data.id,
-    //     albumId: response.data.album.id,
-    //     artistIds: response.data.artists.map(a => a.id),
-    //     name: response.data.name
-    // }
 
-    // await axios.post(LOCAL_BASE_API, newTrack);
+export const getLocalTrackById = async (trackId) => {
+    const response = await api.get(`${TRACKS_URL}/${trackId}`);
+    return response.data;
+}
 
+export const createLocalTrack = async (newTrack) => {
+    const response = await api.post(TRACKS_URL, newTrack);
+    return response.data;
+}
+
+export const deleteLocalTrack = async (trackId) => {
+    const response = await api.delete(`${TRACKS_URL}/${trackId}`);
+    return response.data
+}
+
+export const updateLocalTrack = async (trackId, track) => {
+    const response = await api.put(`${TRACKS_URL}/${trackId}`, track);
+    return response.data;
+}
+
+export const getTracksByAlbumId = async (albumId) => {
+    const response = await api.get(`${TRACKS_URL}/album/${albumId}`);
     return response.data;
 }

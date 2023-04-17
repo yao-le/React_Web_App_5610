@@ -9,6 +9,7 @@ const NewMembers = () => {
 
     const fetchNewMembers = async () => {
         let members = await getAllUsers();
+        // only shows 6 members who newly joined
         if (members.length > 6) {
             members = members.slice(0, 6);
         }

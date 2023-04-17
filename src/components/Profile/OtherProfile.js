@@ -18,8 +18,6 @@ const OtherProfile = () => {
 
     // fetch other user
     const fetchUser = async () => {
-        // console.log(userId);
-
         // fetch user from database
         const fetchedUser = await getUserById(userId);
 

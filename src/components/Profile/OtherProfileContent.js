@@ -38,16 +38,13 @@ const OtherProfileContent = ({user}) => {
             // unfollow
             const response = await unFollowUser(currentUser._id, user._id);
             console.log(response);
-            if (response.deletedCount > 0) {
-                setIsFollowing(false);
-            }
+            setIsFollowing(false);
+
         } else {
             // follow
             const response = await followUser(currentUser._id, user._id);
             console.log(response);
-            if (response) {
-                setIsFollowing(true);
-            }
+            setIsFollowing(true);
         }
     };
 
@@ -59,38 +56,60 @@ const OtherProfileContent = ({user}) => {
         }
     }
 
-
-    useEffect(() => {
+    // bind them together in one function to fix the bug ?
+    const fetchUserData = async () => {
         if (currentUser) {
-            fetchFollowRelation();
+            await fetchFollowRelation();
         }
-    }, []);
+        const fetchedFollowers = await getFollowersByUserId(user._id);
+        const fetchedFollowings = await getFollowingsByUserId(user._id);
+
+        const followerUsers = await Promise.all(
+            fetchedFollowers.map((relation) => getUserById(relation.viewer))
+        );
+        const followingUsers = await Promise.all(
+            fetchedFollowings.map((relation) => getUserById(relation.publisher))
+        );
+        setFollowers(followerUsers);
+        setFollowing(followingUsers);
+    };
 
     useEffect(() => {
-        fetchFollowers();
-        fetchFollowing();
-    }, [isFollowing]);
+        fetchUserData();
+    }, [user, isFollowing]);
 
 
-    // fetch this user's followers
-    const fetchFollowers = async () => {
-        const fetchedFollowers = await getFollowersByUserId(user._id);
-        const users = fetchedFollowers.map(async (relation) => {
-            return await getUserById(relation.viewer);
-        });
-        const userArray = await Promise.all(users);
-        setFollowers([...userArray]) // relation array [{viewer, publisher}]
-    }
+    // useEffect(() => {
+    //     fetchFollowing();
+    //     if (currentUser) {
+    //         fetchFollowRelation();
+    //     }
+    // }, []);
+    //
+    // useEffect(() => {
+    //     fetchFollowers();
+    // }, [isFollowing]);
 
-    // fetch this user's following
-    const fetchFollowing = async () => {
-        const fetchedFollowings = await getFollowingsByUserId(user._id);
-        const users = fetchedFollowings.map(async (relation) => {
-            return await getUserById(relation.publisher);
-        });
-        const userArray = await Promise.all(users);
-        setFollowing([...userArray]);
-    }
+
+    // // fetch this user's followers
+    // const fetchFollowers = async () => {
+    //     const fetchedFollowers = await getFollowersByUserId(user._id);
+    //     const users = fetchedFollowers.map(async (relation) => {
+    //         return await getUserById(relation.viewer);
+    //     });
+    //     const userArray = await Promise.all(users);
+    //     setFollowers([...userArray]) // relation array [{viewer, publisher}]
+    // }
+    //
+    // // fetch this user's following
+    // const fetchFollowing = async () => {
+    //     const fetchedFollowings = await getFollowingsByUserId(user._id);
+    //     const users = fetchedFollowings.map(async (relation) => {
+    //         return await getUserById(relation.publisher);
+    //     });
+    //     const userArray = await Promise.all(users);
+    //     setFollowing([...userArray]);
+    // }
 
     // scroll to the top of the page whenever the path changes.
     useEffect(() => {
@@ -198,7 +217,7 @@ const OtherProfileContent = ({user}) => {
                 <h3 className="fw-bold text-white wd-summary-title">Following</h3>
                 {
                     following.length > 0 ?
-                        <ProfileGrid users={following} /> :
+                        <ProfileGrid users={following}/> :
                         <h4 className="fw-bold text-muted wd-summary-title mb-5">No following yet</h4>
                 }
             </div>
@@ -208,7 +227,7 @@ const OtherProfileContent = ({user}) => {
                 <h3 className="fw-bold text-white wd-summary-title">Followers</h3>
                 {
                     followers.length > 0 ?
-                        <ProfileGrid users={followers} /> :
+                        <ProfileGrid users={followers}/> :
                         <h4 className="fw-bold text-muted wd-summary-title mb-5">No followers yet</h4>
                 }
             </div>

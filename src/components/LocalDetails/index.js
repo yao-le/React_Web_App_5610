@@ -1,14 +1,10 @@
 import {useSearchParams} from "react-router-dom";
-import AlbumDetails from "./AlbumDetails";
-import PlayListDetails from "./PlayListDetails";
 import Navbar from "../Navbar";
+import LocalAlbumDetails from "./LocalAlbumDetails";
 
-
-const Details = () => {
+const LocalDetails = () => {
     const [searchParams] = useSearchParams();
     const albumId = searchParams.get("album");
-    // const playlistId = searchParams.get("playlist")
-
 
     return (
         <div className="row wd-bg-color-black wd-container">
@@ -19,15 +15,13 @@ const Details = () => {
             <div className="col-12 col-md-10">
                 <div className="wd-width-95">
                     <div className="wd-bg-color-black">
-                        {albumId && <AlbumDetails albumId={albumId}/>}
-                        {/*{playlistId && <PlayListDetails playlistId={playlistId}/>}*/}
+                        {albumId && <LocalAlbumDetails albumId={albumId}/>}
                     </div>
                 </div>
             </div>
-
         </div>
     )
 
 }
 
-export default Details;
+export default LocalDetails;

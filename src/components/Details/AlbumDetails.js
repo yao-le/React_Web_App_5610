@@ -12,26 +12,13 @@ import BookmarkIcon from "./BookmarkIcon";
 
 const AlbumDetails = ({albumId}) => {
     const [album, setAlbum] = useState(null);
+
     const [reviews, setReviews] = useState([]);
 
     const { currentUser } = useSelector((state) => state.user);
     const navigate = useNavigate();
 
-    // handle click on the heart button
-    const handleLikeClick = () => {
-        if (!currentUser) {
-            alert("Please login first");
-            navigate("/login");
-            return;
-        }
-        console.log("like an album");
-        // implement collect logic
 
-    }
-
-
-
-    // need to be modified
     const submitReview = async (reviewText) => {
         // log in before submitting review
         if (!currentUser) {
@@ -47,7 +34,6 @@ const AlbumDetails = ({albumId}) => {
             albumName: album.name,
         }
         const response = await createComment(newComment);// return a new comment object
-        console.log(response);
         setReviews([response, ...reviews]);
     };
 

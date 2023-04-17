@@ -1,3 +1,4 @@
+import ArtistScreen from "./ArtistScreen";
 import Navbar from "../Navbar";
 
 // publisher dashboard
@@ -12,11 +13,10 @@ const Publisher = () => {
             <div className="col-12 col-md-10">
                 <div className="wd-width-95">
                     <div className="wd-bg-color-black">
-                        <h3 className="fw-bold text-white wd-summary-title">Publisher Dashboard</h3>
+                        <ArtistScreen />
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }
