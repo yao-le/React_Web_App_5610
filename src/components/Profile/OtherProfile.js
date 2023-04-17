@@ -3,13 +3,9 @@ import "../../style/other-profile.css";
 import React, {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router";
 import Navbar from "../Navbar";
-import OtherViewerProfile from "./OtherViewerProfile";
-
-// hard code user for testing
-import userArray from "../../utils/users.js";
+import OtherProfileContent from "./OtherProfileContent";
 import {getUserById} from "../../services/auth/auth-service";
 import {useSelector} from "react-redux";
-import Profile from "./Profile";
 
 
 const OtherProfile = () => {
@@ -22,10 +18,7 @@ const OtherProfile = () => {
 
     // fetch other user
     const fetchUser = async () => {
-        console.log(userId);
-        // hard code only for testing purpose
-        // const index = userArray.findIndex(user => user._id === userId)
-        // setUser(userArray[index]);
+        // console.log(userId);
 
         // fetch user from database
         const fetchedUser = await getUserById(userId);
@@ -57,14 +50,10 @@ const OtherProfile = () => {
                     <Navbar/>
                 </div>
 
-                {/*需要修改：如何识别fetched user 的 role， profile 页面需要分成三种类型吗？other viewer profile,
-                 other publisher profile, other admin profile ?*/}
-                {/*Profile*/}
+                {/*Main Content*/}
                 <div className="col-12 col-md-10">
-                    <OtherViewerProfile user={user}/>
+                    <OtherProfileContent user={user}/>
                 </div>
-
-
             </div>
         </div>
     )

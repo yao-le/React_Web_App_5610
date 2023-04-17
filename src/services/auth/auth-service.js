@@ -1,5 +1,6 @@
 import axios from 'axios';
 import {deleteCommentsByUserId} from "../comment-service";
+import {deleteAllFollowRelationByUserId} from "../follow-service";
 
 
 const SERVER_API_URL = process.env.REACT_APP_SERVER_API_URL;
@@ -35,6 +36,7 @@ export const getAllUsers = async () => {
 
 export const deleteUser = async (uid) => {
     await deleteCommentsByUserId(uid); // delete all comments by this user
+    await deleteAllFollowRelationByUserId(uid); // delete all follow relations related to this user
     const response = await api.delete(`${USERS_URL}/${uid}`);
     return response.data;
 }

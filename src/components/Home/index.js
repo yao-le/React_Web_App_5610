@@ -18,7 +18,7 @@ const Home = () => {
 
 
     const fetchNewReleases = async () => {
-        const data = await getNewReleases("US", 16);
+        const data = await getNewReleases("US", 20);
         if (data.albums) {
             setNewReleases([...data.albums.items]);
         }

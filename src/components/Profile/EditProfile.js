@@ -57,6 +57,8 @@ const EditProfile = () => {
                 email: currentUser.email,
                 portrait: currentUser.portrait,
                 selfIntro: currentUser.selfIntro,
+                firstName: currentUser.firstName,
+                lastName: currentUser.lastName,
             }}
             userRole={currentUser.role}
             handleUpdate={handleUpdate}

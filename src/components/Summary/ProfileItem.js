@@ -13,9 +13,7 @@ const ProfileItem = ({user}) => {
                     alt={user.name}
                 />
                 <div className="wd-profile-info">
-                    <Link to={`/profile/${user._id}`} className="wd-link-no-decoration">
                         <div className="wd-profile-username">{user.name}</div>
-                    </Link>
                     <div className="wd-profile-label text-muted">Profile</div>
                 </div>
             </div>

@@ -5,13 +5,12 @@ import {useEffect, useState} from "react";
 import AlbumGrid from "../Summary/AlbumGrid";
 import {getCollectedByUserId} from "../../services/collectAlbums-service";
 import {getAlbumById} from "../../services/album-service";
-
-// only for testing purpose
-import userArray from "../../utils/users.js";
+import {getFollowersByUserId, getFollowingsByUserId} from "../../services/follow-service";
+import {getUserById} from "../../services/auth/auth-service";
 
 
 // current user's profile page
-const ViewerProfile = () => {
+const ProfileContent = () => {
 
     const { currentUser } = useSelector((state) => state.user);
 
@@ -22,12 +21,22 @@ const ViewerProfile = () => {
 
     // fetch current user's followers
     const fetchFollowers = async () => {
-
+        const fetchedFollowers = await getFollowersByUserId(currentUser._id);
+        const users = fetchedFollowers.map(async (relation) => {
+            return await getUserById(relation.viewer);
+        });
+        const userArray = await Promise.all(users);
+        setFollowers([...userArray]) // relation array [{viewer, publisher}]
     }
 
     // fetch current user's following
     const fetchFollowing = async () => {
-
+        const fetchedFollowings = await getFollowingsByUserId(currentUser._id);
+        const users = fetchedFollowings.map(async (relation) => {
+            return await getUserById(relation.publisher);
+        });
+        const userArray = await Promise.all(users);
+        setFollowing([...userArray]);
     }
 
     // fetch current user's album collections
@@ -88,6 +97,13 @@ const ViewerProfile = () => {
                         <span className="ms-2">Joined {currentUser.createdAt && currentUser.createdAt.slice(0, 7)}</span>
                     </div>
 
+                    {/*following and followers*/}
+                    <div className="fw-bold text-muted fs-6 mt-2">
+                        <i className="bi bi-people-fill"></i>
+                        <span className="ms-2"><span className="text-white">{following.length}</span> Following</span>
+                        <span className="ms-4"><span className="text-white">{followers.length}</span> Followers</span>
+                    </div>
+
 
                     <div className="mt-2 fw-bold text-muted">
                         <Link to="/edit-profile" className="wd-link-no-decoration">
@@ -109,20 +125,29 @@ const ViewerProfile = () => {
                 }
             </div>
 
-            <div className="mt-2">
-                <h3 className="fw-bold text-white wd-summary-title">Followers</h3>
-                {/*hard code for now*/}
-                <ProfileGrid users={userArray.slice(0, 5)} />
-            </div>
-
+            {/*current user's following*/}
             <div className="mt-2">
                 <h3 className="fw-bold text-white wd-summary-title">Following</h3>
-                {/*hard code for now*/}
-                <ProfileGrid users={userArray.slice(0, 5)} />
+                {
+                    following.length > 0 ?
+                        <ProfileGrid users={following} /> :
+                        <h4 className="fw-bold text-muted wd-summary-title mb-5">No following yet</h4>
+                }
             </div>
+
+            {/*current user's followers*/}
+            <div className="mt-2">
+                <h3 className="fw-bold text-white wd-summary-title">Followers</h3>
+                {
+                    followers.length > 0 ?
+                        <ProfileGrid users={followers} /> :
+                        <h4 className="fw-bold text-muted wd-summary-title mb-5">No followers yet</h4>
+                }
+            </div>
+
         </div>
 
     );
 }
 
-export default ViewerProfile;
+export default ProfileContent;

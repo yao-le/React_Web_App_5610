@@ -12,8 +12,6 @@ import { adminRegisterThunk }
     from "../../services/auth/admin-auth-thunk.js";
 import {loginThunk} from "../../services/auth/auth-thunks";
 import UploadImage from "./UploadImage";
-import MultiSelect from "./MultiSelect";
-import {genres} from "../../utils/genres";
 
 
 // need to be modified based on backend interfaces
@@ -144,7 +142,7 @@ const Login = () => {
                     {
                         !showLoginForm &&
                         <div className="wd-login-form-group">
-                            <label className="wd-login-form-label">Role</label>
+                            <label className="wd-login-form-label">Please select your role</label>
                             <div className="wd-login-radio-group">
                                 <div>
                                     <input
@@ -206,7 +204,7 @@ const Login = () => {
                         role === "admin" &&
                         <>
                         <div className="wd-login-form-group">
-                            <label className="wd-login-form-label">Firstname</label>
+                            <label className="wd-login-form-label">First name</label>
                             <input
                                 type="text"
                                 className="wd-login-form-input"
@@ -216,7 +214,7 @@ const Login = () => {
                             />
                         </div>
                         <div className="wd-login-form-group">
-                            <label className="wd-login-form-label">Lastname</label>
+                            <label className="wd-login-form-label">Last name</label>
                             <input
                                 type="text"
                                 className="wd-login-form-input"

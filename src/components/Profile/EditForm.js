@@ -14,6 +14,8 @@ const EditForm = ({
     const [email, setEmail] = useState('');
     const [portrait, setPortrait] = useState('');
     const [selfIntro, setSelfIntro] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
 
     useEffect(() => {
         if (initialValues) {
@@ -22,6 +24,8 @@ const EditForm = ({
             setEmail(initialValues.email);
             setPortrait(initialValues.portrait);
             setSelfIntro(initialValues.selfIntro);
+            setFirstName(initialValues.firstName);
+            setLastName(initialValues.lastName);
         }
     }, [initialValues]);
 
@@ -40,7 +44,7 @@ const EditForm = ({
     };
 
     const handleSubmit = () => {
-        handleUpdate({ name, password, email, portrait, selfIntro });
+        handleUpdate({ name, password, email, portrait, selfIntro, firstName, lastName });
     }
 
     return (
@@ -69,6 +73,38 @@ const EditForm = ({
                             onChange={(event) => setName(event.target.value)}
                         />
                     </div>
+
+                    {/* firstname */}
+                    {
+                        userRole === 'admin' &&
+                        <div className="mb-3">
+                            <label htmlFor="firstname" className="form-label wd-edit-profile-label">First name</label>
+                            <input
+                                type="text"
+                                className="form-control wd-edit-profile-input"
+                                id="firstname"
+                                placeholder="Your firstname"
+                                value={firstName}
+                                onChange={(event) => setFirstName(event.target.value)}
+                            />
+                        </div>
+                    }
+
+                    {/* lastname */}
+                    {
+                        userRole === 'admin' &&
+                        <div className="mb-3">
+                            <label htmlFor="lastname" className="form-label wd-edit-profile-label">Last name</label>
+                            <input
+                                type="text"
+                                className="form-control wd-edit-profile-input"
+                                id="lastname"
+                                placeholder="Your lastname"
+                                value={lastName}
+                                onChange={(event) => setLastName(event.target.value)}
+                            />
+                        </div>
+                    }
 
                     {/* Password */}
                     <div className="mb-3">

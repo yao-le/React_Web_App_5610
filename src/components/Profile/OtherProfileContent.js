@@ -2,33 +2,93 @@ import ProfileGrid from "../Summary/ProfileGrid";
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 
-import userArray from "../../utils/users.js";
 import {useLocation, useNavigate} from "react-router";
 import {Link} from "react-router-dom";
-import {deleteUser} from "../../services/auth/auth-service";
+import {deleteUser, getUserById} from "../../services/auth/auth-service";
+import {
+    findFollowRelation,
+    followUser,
+    getFollowersByUserId,
+    getFollowingsByUserId,
+    unFollowUser
+} from "../../services/follow-service";
 
 
 // other viewer's profile page
-const OtherViewerProfile = ({user}) => {
+const OtherProfileContent = ({user}) => {
     const {currentUser} = useSelector((state) => state.user);
 
     const {pathname} = useLocation();
     const navigate = useNavigate();
 
-    // 需要修改, 可以把以下代码放到OtherProfile.js中，然后传入isFollowing参数?
     const [isFollowing, setIsFollowing] = useState(false);
+    const [followers, setFollowers] = useState([]);
+    const [following, setFollowing] = useState([]);
 
 
-    const handleFollow = () => {
+    const handleFollowClick = async () => {
         if (!currentUser) {
             alert("Please login first");
             navigate("/login");
             return;
         }
-        // only logged-in user can follow other users
-        setIsFollowing(!isFollowing);
-        // add login
+        // only logged-in user can follow/unfollow other users
+        if (isFollowing) {
+            // unfollow
+            const response = await unFollowUser(currentUser._id, user._id);
+            //console.log(response);
+            if (response.deletedCount > 0) {
+                setIsFollowing(false);
+            }
+        } else {
+            // follow
+            const response = await followUser(currentUser._id, user._id);
+            //console.log(response);
+            if (response) {
+                setIsFollowing(true);
+            }
+        }
     };
+
+    const fetchFollowRelation = async () => {
+        const response = await findFollowRelation(currentUser._id, user._id);
+        //console.log(response);
+        if (response) {
+            setIsFollowing(true);
+        }
+    }
+
+
+    useEffect(() => {
+        fetchFollowing();
+        if (currentUser) {
+            fetchFollowRelation();
+        }
+    }, []);
+
+    useEffect(() => {
+        fetchFollowers();
+    }, [isFollowing]);
+
+    // fetch this user's followers
+    const fetchFollowers = async () => {
+        const fetchedFollowers = await getFollowersByUserId(user._id);
+        const users = fetchedFollowers.map(async (relation) => {
+            return await getUserById(relation.viewer);
+        });
+        const userArray = await Promise.all(users);
+        setFollowers([...userArray]) // relation array [{viewer, publisher}]
+    }
+
+    // fetch this user's following
+    const fetchFollowing = async () => {
+        const fetchedFollowings = await getFollowingsByUserId(user._id);
+        const users = fetchedFollowings.map(async (relation) => {
+            return await getUserById(relation.publisher);
+        });
+        const userArray = await Promise.all(users);
+        setFollowing([...userArray]);
+    }
 
     // scroll to the top of the page whenever the path changes.
     useEffect(() => {
@@ -55,13 +115,16 @@ const OtherViewerProfile = ({user}) => {
                 <div className="wd-details-info ms-5">
                     <div className="mb-2 text-uppercase fw-bold text-muted">
                         {
-                            user.role === "admin" && <span>Admin</span>
+                            user.role === "publisher" &&
+                                <span>Artist</span>
                         }
                         {
-                            user.role === "publisher" && <span>Artist</span>
+                            (user.role === "viewer" || (currentUser.role !== "admin" && user.role === "admin"))
+                            && <span>Profile</span>
                         }
                         {
-                            user.role === "viewer" && <span>Profile</span>
+                            currentUser.role === "admin" && user.role === "admin" &&
+                                <span>Admin</span>
                         }
                     </div>
 
@@ -80,6 +143,13 @@ const OtherViewerProfile = ({user}) => {
                     <div className="fw-bold text-muted fs-6 mt-2">
                         <i className="bi bi-calendar3"></i>
                         <span className="ms-2">Joined {user.createdAt && user.createdAt.slice(0, 7)}</span>
+                    </div>
+
+                    {/*following and followers*/}
+                    <div className="fw-bold text-muted fs-6 mt-2">
+                        <i className="bi bi-people-fill"></i>
+                        <span className="ms-2"><span className="text-white">{following.length}</span> Following</span>
+                        <span className="ms-4"><span className="text-white">{followers.length}</span> Followers</span>
                     </div>
 
                     {/*admin can edit other normal user's profile*/}
@@ -112,7 +182,7 @@ const OtherViewerProfile = ({user}) => {
                     <div className="mt-3 fw-bold text-muted">
                         <button
                             className={`wd-follow-button ${isFollowing ? 'following' : ''}`}
-                            onClick={handleFollow}
+                            onClick={handleFollowClick}
                         >
                             {isFollowing ? 'Following' : 'Follow'}
                         </button>
@@ -128,21 +198,28 @@ const OtherViewerProfile = ({user}) => {
                 </div>
             }
 
-            {/*user's followers*/}
-            <div className="mt-3">
-                <h3 className="fw-bold text-white wd-summary-title">Followers</h3>
-                {/*hard coded for now*/}
-                <ProfileGrid users={userArray.slice(0, 5)}/>
-            </div>
-
             {/*user's following*/}
             <div className="mt-3">
                 <h3 className="fw-bold text-white wd-summary-title">Following</h3>
-                {/*hard coded for now*/}
-                <ProfileGrid users={userArray.slice(0, 5)}/>
+                {
+                    following.length > 0 ?
+                        <ProfileGrid users={following} /> :
+                        <h4 className="fw-bold text-muted wd-summary-title mb-5">No following yet</h4>
+                }
             </div>
+
+            {/*user's followers*/}
+            <div className="mt-3">
+                <h3 className="fw-bold text-white wd-summary-title">Followers</h3>
+                {
+                    followers.length > 0 ?
+                        <ProfileGrid users={followers} /> :
+                        <h4 className="fw-bold text-muted wd-summary-title mb-5">No followers yet</h4>
+                }
+            </div>
+
         </div>
     );
 }
 
-export default OtherViewerProfile;
+export default OtherProfileContent;

@@ -1,13 +1,10 @@
 import React from 'react';
 import "../../style/details-style.css"
-import {useSelector} from "react-redux";
 import Navbar from "../Navbar";
-import ViewerProfile from "./ViewerProfile";
+import ProfileContent from "./ProfileContent";
 
 
 const Profile = () => {
-    // need modification
-    const { currentUser } = useSelector((state) => state.user)
 
     return <div>
         <div className="row wd-bg-color-black wd-container">
@@ -16,11 +13,9 @@ const Profile = () => {
                 <Navbar/>
             </div>
 
-            {/*Profile*/}
+            {/*Main Profile Content*/}
             <div className="col-12 col-md-10">
-                {/*需要修改： 根据current user 的role: currentUser.role，
-                来显示不同样式的profile： viewerProfile, adminProfile, publisherProfile*/}
-                <ViewerProfile/>
+                <ProfileContent/>
             </div>
 
         </div>
