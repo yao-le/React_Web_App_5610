@@ -36,14 +36,14 @@ const OtherProfileContent = ({user}) => {
         if (isFollowing) {
             // unfollow
             const response = await unFollowUser(currentUser._id, user._id);
-            //console.log(response);
+            console.log(response);
             if (response.deletedCount > 0) {
                 setIsFollowing(false);
             }
         } else {
             // follow
             const response = await followUser(currentUser._id, user._id);
-            //console.log(response);
+            console.log(response);
             if (response) {
                 setIsFollowing(true);
             }
@@ -60,7 +60,6 @@ const OtherProfileContent = ({user}) => {
 
 
     useEffect(() => {
-        fetchFollowing();
         if (currentUser) {
             fetchFollowRelation();
         }
@@ -68,7 +67,9 @@ const OtherProfileContent = ({user}) => {
 
     useEffect(() => {
         fetchFollowers();
+        fetchFollowing();
     }, [isFollowing]);
+
 
     // fetch this user's followers
     const fetchFollowers = async () => {

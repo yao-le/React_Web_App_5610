@@ -9,7 +9,7 @@ const ProfileItem = ({user}) => {
             <div className="wd-summary-card">
                 <img
                     className="wd-profile-avatar"
-                    src={user.portrait}
+                    src={user.portrait || "https://www.alaskapacific.edu/wp-content/uploads/2015/11/placeholder_profile_photo.png"}
                     alt={user.name}
                 />
                 <div className="wd-profile-info">
