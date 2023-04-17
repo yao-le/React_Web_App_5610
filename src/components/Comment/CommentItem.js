@@ -33,7 +33,8 @@ const CommentItem = ({ comment }) => {
         <div className="wd-commentItem wd-width-90 d-flex">
             <div className="d-flex">
                 <Link to={`/profile/${commenter._id}`} className="wd-link-no-decoration">
-                    <img className="wd-commenterImage" src={commenter.portrait} alt={commenter.name} />
+                    <img className="wd-commenterImage" src={commenter.portrait || "https://www.alaskapacific.edu/wp-content/uploads/2015/11/placeholder_profile_photo.png"}
+                         alt={commenter.name} />
                 </Link>
 
                 <div className="d-flex flex-column">

@@ -45,7 +45,7 @@ const EditProfile = () => {
             navigate("/profile");
         } else {
             console.log(response.error);
-            alert("Update failed");
+            alert("Update failed. Image size is too large.");
         }
     }
 

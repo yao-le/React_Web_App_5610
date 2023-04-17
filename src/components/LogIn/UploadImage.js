@@ -5,7 +5,7 @@ const UploadImage = ({ portrait, handlePortraitChange, fileInputRef, handleUploa
         <div className="d-flex justify-content-center align-items-center mb-2">
             <div className="wd-avatar-container d-flex flex-column align-items-center">
                 <img
-                    src={portrait || 'https://cdn2.iconfinder.com/data/icons/communication-489/24/account_profile_user_contact_person_avatar_placeholder-512.png'}
+                    src={portrait || 'https://www.alaskapacific.edu/wp-content/uploads/2015/11/placeholder_profile_photo.png'}
                     alt="avatar"
                     className="wd-avatar-image rounded-circle mb-2"
                 />

@@ -37,9 +37,13 @@ const EditForm = ({
     };
 
     const handlePortraitChange = (event) => {
-        if (event.target.files && event.target.files[0]) {
-            const imageUrl = URL.createObjectURL(event.target.files[0]);
-            setPortrait(imageUrl);
+        const reader = new FileReader();
+        reader.readAsDataURL(event.target.files[0]);
+        reader.onload = () => {
+            setPortrait(reader.result); // base64encoded string
+        }
+        reader.onerror = (error) => {
+            console.log("Error: ", error);
         }
     };
 

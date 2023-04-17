@@ -109,7 +109,7 @@ const OtherProfileContent = ({user}) => {
             <div className="wd-details-header">
                 <img
                     className="wd-details-img rounded-circle ms-2"
-                    src={user.portrait}
+                    src={user.portrait || "https://www.alaskapacific.edu/wp-content/uploads/2015/11/placeholder_profile_photo.png"}
                     alt="avatar"
                 />
                 <div className="wd-details-info ms-5">

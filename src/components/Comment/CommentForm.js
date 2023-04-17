@@ -24,7 +24,7 @@ const CommentForm = ({submitReview}) => {
                         <div className="mb-2 text-muted">Commenting as</div>
                         <div className="d-flex flex-row align-items-center">
                             <img className="rounded-circle me-2" width="60px" height="60px"
-                                 src={currentUser.portrait} alt="avatar"/>
+                                 src={currentUser.portrait || "https://www.alaskapacific.edu/wp-content/uploads/2015/11/placeholder_profile_photo.png"} alt="avatar"/>
                             <div className="wd-commenterName ms-2">{currentUser.name}</div>
                         </div>
                     </>

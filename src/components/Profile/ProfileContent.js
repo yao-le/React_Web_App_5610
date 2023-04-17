@@ -65,7 +65,7 @@ const ProfileContent = () => {
             <div className="wd-details-header">
                 <img
                     className="wd-details-img rounded-circle"
-                    src={currentUser.portrait}
+                    src={currentUser.portrait || "https://www.alaskapacific.edu/wp-content/uploads/2015/11/placeholder_profile_photo.png"}
                     alt="avatar"
                 />
                 <div className="wd-details-info ms-5">
@@ -114,10 +114,18 @@ const ProfileContent = () => {
                 </div>
             </div>
 
+            {/*publisher's works*/}
+            {
+                currentUser.role === "publisher" &&
+                <div className="mt-2">
+                    <h3 className="fw-bold text-white wd-summary-title">Releases</h3>
+                </div>
+            }
 
-            {/*display current viewer's album collections*/}
-            <div className="mt-1">
-                <h3 className="fw-bold text-white wd-summary-title mt-5">Album Collections</h3>
+
+            {/*display current user's album collections*/}
+            <div className="mt-2">
+                <h3 className="fw-bold text-white wd-summary-title mt-5">Collections</h3>
                 {
                     albumCollection.length > 0 ?
                         <AlbumGrid albums={albumCollection} /> :
