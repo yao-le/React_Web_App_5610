@@ -23,13 +23,15 @@ const TrackDetails = ({ track, onDislike }) => {
                 {
                     !track.isLocal &&
                     < Link to={`/details?album=${track.albumId}`} className="wd-link-no-decoration">
-                        <img src={track.albumImage} alt="album cover" />
+                        <img src={track.albumImage || "https://media.istockphoto.com/id/1153663901/vector/black-music-notes-icon-vector.jpg?s=612x612&w=0&k=20&c=9UACzmfKRu7aGtznDYPepgusXU8lqr_Xi21_E73RNhs="}
+                             alt="album cover" />
                     </Link>
                 }
                 {
                     track.isLocal &&
                     < Link to={`/details?localAlbum=${track.albumId}`} className="wd-link-no-decoration">
-                        <img src={track.albumImage} alt="album cover" />
+                        <img src={track.albumImage || "https://media.istockphoto.com/id/1153663901/vector/black-music-notes-icon-vector.jpg?s=612x612&w=0&k=20&c=9UACzmfKRu7aGtznDYPepgusXU8lqr_Xi21_E73RNhs="}
+                             alt="album cover" />
                     </Link>
                 }
             </div>

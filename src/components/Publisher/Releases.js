@@ -35,8 +35,16 @@ const Releases = ({artist}) => {
 
     return (
         <>
-            <h3 className="fw-bold text-white wd-summary-title">Your releases</h3>
-            <AlbumGrid albums={albums} />
+            <div className="mb-4">
+                <h3 className="fw-bold text-white wd-summary-title">Album Releases</h3>
+                {
+                    albums.length > 0 ?
+                    <AlbumGrid albums={albums} /> :
+                    <h4 className="fw-bold text-muted wd-summary-title">
+                        No releases yet
+                    </h4>
+                }
+            </div>
         </>
     )
 }

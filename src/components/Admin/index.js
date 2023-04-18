@@ -9,7 +9,7 @@ import AlbumGrid from "../Summary/AlbumGrid";
 
 const Admin = () => {
 
-    const {currentUser} = useSelector((state) => state.user);
+    // const {currentUser} = useSelector((state) => state.user);
 
     // all local users
     const [allUsers, setAllUsers] = useState([]);
