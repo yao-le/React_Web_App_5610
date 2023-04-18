@@ -72,6 +72,8 @@ const EditOtherProfile = () => {
                     email: user.email,
                     portrait: user.portrait,
                     selfIntro: user.selfIntro,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
                 }}
                 userRole={user.role}
                 handleUpdate={handleUpdate}

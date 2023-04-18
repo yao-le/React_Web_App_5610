@@ -4,8 +4,11 @@ import {getLocalAlbumById, updateLocalAlbum} from "../../services/album-service"
 import {getTracksByAlbumId, updateLocalTrack} from "../../services/track-service";
 import UploadImage from "../LogIn/UploadImage";
 import {Link} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const EditAlbum = () => {
+
+    const {currentUser} = useSelector((state) => state.user);
 
     const { albumId } = useParams(); // local album id
 
@@ -79,7 +82,12 @@ const EditAlbum = () => {
             });
             await Promise.all(responses);
             console.log("album updated");
-            navigate(`/details?localAlbum=${albumId}`);
+            // navigate based on role
+            if (currentUser.role === "publisher") {
+                navigate(`/details?localAlbum=${albumId}`);
+            } else {
+                navigate("/admin");
+            }
         } catch (err) {
             console.log(err);
             alert("Failed to update album. Try to upload a smaller image.")

@@ -18,6 +18,7 @@ const Home = () => {
     // from spotify
     const fetchNewReleases = async () => {
         const data = await getNewReleases("US", 20);
+        console.log(data);
         if (data.albums) {
             return data.albums.items.map((album) => ({
                 id: album.id,

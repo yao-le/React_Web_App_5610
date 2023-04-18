@@ -170,7 +170,7 @@ const OtherProfileContent = ({user}) => {
                     {/*admin can edit other normal user's profile*/}
                     {
                         currentUser
-                        && (user.role !== "admin")
+                        // && (user.role !== "admin")
                         && currentUser.role === "admin" &&
                         <>
                             <div className="d-flex flex-row mb-3">
