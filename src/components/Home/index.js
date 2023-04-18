@@ -71,13 +71,13 @@ const Home = () => {
             <div className="col-12 col-md-10">
                 <div className="wd-width-95">
                     <div className="wd-bg-color-black">
-                        {/*for both anonymous users and logged-in users*/}
-                        <NewMembers/>
-
                         {/*only for logged-in users*/}
                         {
                             currentUser && <LikedSongs/>
                         }
+
+                        {/*for both anonymous users and logged-in users*/}
+                        <NewMembers/>
 
                         <h3 className="fw-bold text-white wd-summary-title">New Album Releases</h3>
                         <AlbumGrid albums={newReleases}/>

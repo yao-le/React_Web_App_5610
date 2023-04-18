@@ -16,6 +16,7 @@ const EditForm = ({
     const [selfIntro, setSelfIntro] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const isAlbum = false;
 
     useEffect(() => {
         if (initialValues) {
@@ -62,7 +63,7 @@ const EditForm = ({
                         fileInputRef={fileInputRef}
                         handlePortraitChange={handlePortraitChange}
                         handleUploadClick={handleUploadClick}
-                        isAlbum={false}
+                        isAlbum={isAlbum}
                     />
 
                     {/* Username */}

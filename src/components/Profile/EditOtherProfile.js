@@ -57,7 +57,7 @@ const EditOtherProfile = () => {
             navigate(`/admin`); //?
         } else {
             console.log(response.error);
-            alert("Update failed");
+            alert("Update failed. Try to upload a smaller image.");
         }
     }
 

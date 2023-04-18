@@ -18,6 +18,7 @@ import UploadImage from "./UploadImage";
 const Login = () => {
     // used to toggle between login and register form
     const [showLoginForm, setShowLoginForm] = useState(true);
+    const isAlbum = false;
 
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -79,7 +80,7 @@ const Login = () => {
         } else {
             console.log(response.error);
             resetForm();
-            alert("Register failed");
+            alert("Register failed. Chooses a smaller image and try again later.");
         }
     }
 
@@ -135,7 +136,7 @@ const Login = () => {
                         fileInputRef={fileInputRef}
                         handlePortraitChange={handlePortraitChange}
                         handleUploadClick={handleUploadClick}
-                        isAlbum={false}
+                        isAlbum={isAlbum}
                     />
                 }
 

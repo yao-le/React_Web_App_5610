@@ -182,13 +182,14 @@ const OtherProfileContent = ({user}) => {
                                     </Link>
                                 </div>
 
+                                {/*TODO: there is a bug here, need to fix it. need to delete all data related to the user*/}
                                 {/*admin can delete other users*/}
-                                <div className="mt-2 fw-bold text-muted ms-3">
-                                    <i className="bi bi-person-dash"></i>
-                                    <span className="ms-2 wd-cursor-pointer" onClick={handleDelete}>
-                                        Delete account
-                                    </span>
-                                </div>
+                                {/*<div className="mt-2 fw-bold text-muted ms-3">*/}
+                                {/*    <i className="bi bi-person-dash"></i>*/}
+                                {/*    <span className="ms-2 wd-cursor-pointer" onClick={handleDelete}>*/}
+                                {/*        Delete account*/}
+                                {/*    </span>*/}
+                                {/*</div>*/}
                             </div>
                         </>
                     }

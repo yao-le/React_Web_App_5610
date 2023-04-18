@@ -15,6 +15,7 @@ import Admin from "./components/Admin";
 import EditOtherProfile from "./components/Profile/EditOtherProfile";
 import Publisher from "./components/Publisher";
 import UploadAlbum from "./components/Publisher/UploadAlbum";
+import EditAlbum from "./components/Publisher/EditAlbum";
 
 
 const store = configureStore(
@@ -41,6 +42,7 @@ function App() {
                     <Route path="/admin" element={<Admin/>}/>
                     <Route path="/publisher" element={<Publisher />}/>
                     <Route path="/upload-album" element={<UploadAlbum />}/>
+                    <Route path="/edit-album/:albumId" element={<EditAlbum />}/>
                 </Routes>
             </BrowserRouter>
         </Provider>

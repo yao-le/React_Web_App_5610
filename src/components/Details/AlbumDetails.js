@@ -87,12 +87,12 @@ const AlbumDetails = ({album}) => {
                     <p className="wd-details-artist fw-bold text-muted">
                         {album.artists}
                     </p>
-                    <div>
+                    <div className="text-muted">
                         {
                             album.description &&
                             <>
                                 <i className="bi bi-star-fill"></i>
-                                <span className="wd-details-artist fw-bold text-muted ms-2" >{album.description}</span>
+                                <span className="wd-details-artist fw-bold ms-2" >{album.description}</span>
                             </>
                         }
                     </div>
@@ -109,20 +109,20 @@ const AlbumDetails = ({album}) => {
                     </div>
 
                     <div>
+                        {/*only artists who published the work and administrators can edit and delete*/}
                         {
-                            currentUser
-                            && album.publisherId
-                            && currentUser._id === album.publisherId
+                            currentUser &&
+                            ((album.publisherId && currentUser._id === album.publisherId) || currentUser.role === "admin")
                             &&
                             <>
                                 <div className="d-flex flex-row">
                                     {/*TODO: Edit and Delete*/}
-                                    {/*<div className="mt-2 fw-bold text-muted">*/}
-                                    {/*    <Link to="/" className="wd-link-no-decoration">*/}
-                                    {/*        <i className="bi bi-pencil-square"></i>*/}
-                                    {/*        <span className="ms-2">Edit</span>*/}
-                                    {/*    </Link>*/}
-                                    {/*</div>*/}
+                                    <div className="mt-2 fw-bold text-muted">
+                                        <Link to={`/edit-album/${album.id}`} className="wd-link-no-decoration">
+                                            <i className="bi bi-pencil-square"></i>
+                                            <span className="ms-2">Edit</span>
+                                        </Link>
+                                    </div>
 
 
                                     {/*<div className="mt-2 fw-bold text-muted ms-3">*/}

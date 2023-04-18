@@ -34,6 +34,7 @@ export const getAllUsers = async () => {
     return response.data;
 }
 
+// bugs
 export const deleteUser = async (uid) => {
     await deleteCommentsByUserId(uid); // delete all comments by this user
     await deleteAllFollowRelationByUserId(uid); // delete all follow relations related to this user

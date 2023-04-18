@@ -1,44 +1,37 @@
-import React, {useRef, useState} from "react";
-import "../../style/login-screen.css";
-import {Link} from "react-router-dom";
-import {useSelector} from "react-redux";
-import {createLocalAlbum} from "../../services/album-service";
-import {createLocalTrack} from "../../services/track-service";
+import {useNavigate, useParams} from "react-router";
+import React, {useEffect, useRef, useState} from "react";
+import {getLocalAlbumById, updateLocalAlbum} from "../../services/album-service";
+import {getTracksByAlbumId, updateLocalTrack} from "../../services/track-service";
 import UploadImage from "../LogIn/UploadImage";
-import {useNavigate} from "react-router";
+import {Link} from "react-router-dom";
 
+const EditAlbum = () => {
 
-const UploadAlbum = () => {
+    const { albumId } = useParams(); // local album id
 
-    const {currentUser} = useSelector((state) => state.user);
-
-    const [album, setAlbum] = useState({
-        albumName: "",
-        coverPic: "",
-        description: "",
-    });
-
+    const [album, setAlbum] = useState();
     const [tracks, setTracks] = useState([]);
-    const isAlbum = true;
 
+    const isAlbum = true;
     const navigate = useNavigate();
 
+    const fetchAlbum = async () => {
+        // fetch album from database
+        const fetchedAlbum = await getLocalAlbumById(albumId);
+        console.log(fetchedAlbum)
+        setAlbum(fetchedAlbum);
+    }
 
-    const addTrack = () => {
-        setTracks([
-            ...tracks,
-            {
-                trackName: "",
-                duration: "",
-            },
-        ]);
-    };
+    const fetchTracks = async () => {
+        const fetchedTracks = await getTracksByAlbumId(albumId);
+        console.log(fetchedTracks);
+        setTracks(fetchedTracks);
+    }
 
-    const deleteTrack = () => {
-        if (tracks.length > 0) {
-            setTracks(tracks.slice(0, tracks.length - 1));
-        }
-    };
+    useEffect(() => {
+        fetchAlbum();
+        fetchTracks();
+    }, []);
 
 
     const handleInputChange = (e, index) => {
@@ -58,8 +51,7 @@ const UploadAlbum = () => {
         }
     };
 
-
-    // handle image upload, need modification?
+    // handle image upload
     const fileInputRef = useRef(null);
 
     const handleUploadClick = () => {
@@ -77,30 +69,27 @@ const UploadAlbum = () => {
         }
     };
 
-    // handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Process the form data and make API calls to upload the album
-        const albumData = {
-            ...album,
-            publisher: currentUser._id,
-            //publisherName: currentUser.name,
-            totalTracks: tracks.length
-        };
+
         try {
-            const newAlbum = await createLocalAlbum(albumData);
+            await updateLocalAlbum(albumId, album);
             const responses = tracks.map(async (track) => {
-                const trackData = {...track, album: newAlbum._id, artistName: currentUser.username};
-                return await createLocalTrack(trackData);
+                return await updateLocalTrack(track._id, track);
             });
-            const newTracks = await Promise.all(responses);
-            console.log(newTracks)
-            navigate("/publisher");
-        } catch (e) {
-            console.log(e);
-            alert("Failed to upload album. Try to upload a smaller image.");
+            await Promise.all(responses);
+            console.log("album updated");
+            navigate(`/details?localAlbum=${albumId}`);
+        } catch (err) {
+            console.log(err);
+            alert("Failed to update album. Try to upload a smaller image.")
         }
-    };
+    }
+
+
+    if (!album) {
+        return <div>Loading...</div>
+    }
 
     return (
         <div className="wd-login-screen wd-bg-color-black text-white">
@@ -124,7 +113,7 @@ const UploadAlbum = () => {
                             name="albumName"
                             placeholder="Album Name"
                             required
-                            value={album.name}
+                            value={album.albumName}
                             onChange={handleInputChange}
                             className="form-control"
                         />
@@ -151,7 +140,7 @@ const UploadAlbum = () => {
                                 id={`trackName-${index}`}
                                 name="trackName"
                                 placeholder="Track Name"
-                                value={track.name}
+                                value={track.trackName}
                                 onChange={(e) => handleInputChange(e, index)}
                                 className="form-control"
                             />
@@ -171,35 +160,18 @@ const UploadAlbum = () => {
                     ))}
 
                     <div className="d-flex flex-row justify-content-end mt-3">
-                        <button
-                            type="button"
-                            onClick={addTrack}
-                            className="btn btn-success"
-                        >
-                            Add Track
-                        </button>
-
-                        <button
-                            type="button"
-                            onClick={deleteTrack}
-                            className="btn btn-danger ms-2"
-                        >
-                            Delete Track
-                        </button>
-
 
                         <button type="submit" className="btn btn-success ms-4">
-                            Submit
+                            Update
                         </button>
-                        <Link to="/publisher" className="btn btn-primary ms-2">
+                        <Link to={`/details?localAlbum=${albumId}`} className="btn btn-primary ms-2">
                             Cancel
                         </Link>
                     </div>
                 </form>
             </div>
         </div>
-    );
-
+    )
 }
 
-export default UploadAlbum;
+export default EditAlbum;
