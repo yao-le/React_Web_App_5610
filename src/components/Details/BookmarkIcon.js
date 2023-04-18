@@ -23,7 +23,8 @@ const BookmarkIcon = ({ album }) => {
             console.log("collects an album");
             const newCollectRelation = {
                 userId: currentUser._id,
-                spotifyAlbumId: album.id,
+                albumId: album.id,
+                isLocal: album.isLocal, // album from local or spotify
             }
             const response = await createCollectAlbum(newCollectRelation);
             if (response) {

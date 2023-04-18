@@ -176,3 +176,26 @@ html {
 .wd-cursor-pointer {
   cursor: pointer;
 }
+
+.wd-upload-new-album-button {
+  background-color: #1db954;
+  border: none;
+  border-radius: 25px;
+  color: white;
+  cursor: pointer;
+  font-family: 'Circular Std', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 30px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition-duration: 0.2s;
+}
+
+.wd-upload-new-album-button:hover {
+  background-color: #18a34e;
+  color: white;
+}
+
+

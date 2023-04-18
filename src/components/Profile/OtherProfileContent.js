@@ -12,6 +12,7 @@ import {
     getFollowingsByUserId,
     unFollowUser
 } from "../../services/follow-service";
+import Releases from "../Publisher/Releases";
 
 
 // other viewer's profile page
@@ -208,7 +209,7 @@ const OtherProfileContent = ({user}) => {
             {
                 user.role === "publisher" &&
                 <div className="mt-3">
-                    <h3 className="fw-bold text-white wd-summary-title">Releases</h3>
+                    <Releases artist={user}/>
                 </div>
             }
 

@@ -23,12 +23,14 @@ const NewMembers = () => {
     return (
         <div className="mb-5">
             <h3 className="fw-bold text-white wd-summary-title">New Members</h3>
+            <div className="ms-2">
             {
                 newMembers.length > 0 ?
                     <ProfileGrid users={newMembers} />
                     :
                     <h4 className="fw-bold text-muted wd-summary-title">No members yet</h4>
             }
+            </div>
         </div>
     )
 }

@@ -1,4 +1,3 @@
-import {getAlbumById} from '../../services/album-service';
 import {useEffect, useState} from 'react';
 import '../../style/details-style.css';
 import TrackItem from './TrackItem';
@@ -8,10 +7,12 @@ import {useNavigate} from "react-router";
 import {createComment, getCommentForAlbum} from "../../services/comment-service";
 import CommentItem from "../Comment/CommentItem";
 import BookmarkIcon from "./BookmarkIcon";
+import {Link} from "react-router-dom";
+import {deleteLocalAlbum} from "../../services/album-service";
+import {deleteCollectAlbum} from "../../services/collectAlbums-service";
 
 
-const AlbumDetails = ({albumId}) => {
-    const [album, setAlbum] = useState(null);
+const AlbumDetails = ({album}) => {
 
     const [reviews, setReviews] = useState([]);
 
@@ -29,30 +30,38 @@ const AlbumDetails = ({albumId}) => {
         // only logged-in user can submit review
         const newComment = {
             commenter: currentUser._id,
-            albumId: albumId,
+            albumId: album.id,
             content: reviewText,
             albumName: album.name,
+            isLocal: album.isLocal,
         }
         const response = await createComment(newComment);// return a new comment object
         setReviews([response, ...reviews]);
     };
 
 
-    const fetchAlbumInfo = async () => {
-        const albumInfo = await getAlbumById(albumId);
-        setAlbum(albumInfo);
-    };
 
     const fetchAlbumReviews = async() => {
-        const albumReviews = await getCommentForAlbum(albumId);
+        const albumReviews = await getCommentForAlbum(album.id);
         setReviews(albumReviews);
     }
 
 
     useEffect(() => {
-        fetchAlbumInfo();
         fetchAlbumReviews();
     },[reviews]);
+
+
+
+    const handleDelete = async () => {
+        await deleteLocalAlbum(album.id);
+        await deleteCollectAlbum(currentUser._id, album.id);
+
+        // deleteAll track
+        // delete liketrack relation
+
+        navigate("/publisher");
+    }
 
 
     if (!album) {
@@ -65,41 +74,73 @@ const AlbumDetails = ({albumId}) => {
                 {/*cover image of album*/}
                 <img
                     className="wd-details-img"
-                    src={album.images[0]?.url}
+                    src={album.image}
                     alt={album.name}
                 />
 
                 {/*details of album*/}
                 <div className="wd-details-info ms-4">
                     <div className="mb-2 text-uppercase fw-bold text-muted">
-                        {album.type}
+                        Album
                     </div>
                     <div className="wd-details-title text-uppercase">{album.name}</div>
                     <p className="wd-details-artist fw-bold text-muted">
-                        {album.artists.map((artist, index) => (
-                            <span key={artist.id}>
-                                {artist.name}
-                                {index !== album.artists.length - 1 ? ', ' : ''}
-                            </span>
-                        ))}
+                        {album.artists}
                     </p>
+                    <div>
+                        {
+                            album.description &&
+                            <>
+                                <i className="bi bi-star-fill"></i>
+                                <span className="wd-details-artist fw-bold text-muted ms-2" >{album.description}</span>
+                            </>
+                        }
+                    </div>
                     <div className="wd-details-meta fw-bold text-muted fs-6 mt-2">
                         <span className="wd-details-release-date">
-                            {album.release_date}
+                            {album.releaseDate}
                         </span>
                         <span className="wd-details-total-tracks ms-3">
-                            {album.tracks.items.length} {album.tracks.items.length > 1 ? "Songs" : "Song"}
+                            {album.totalTracks} {album.totalTracks > 1 ? "Songs" : "Song"}
                         </span>
 
                         {/*Bookmark icon: used for collecting the album*/}
                         <BookmarkIcon album={album} />
+                    </div>
+
+                    <div>
+                        {
+                            currentUser
+                            && album.publisherId
+                            && currentUser._id === album.publisherId
+                            &&
+                            <>
+                                <div className="d-flex flex-row">
+                                    {/*TODO: Edit and Delete*/}
+                                    {/*<div className="mt-2 fw-bold text-muted">*/}
+                                    {/*    <Link to="/" className="wd-link-no-decoration">*/}
+                                    {/*        <i className="bi bi-pencil-square"></i>*/}
+                                    {/*        <span className="ms-2">Edit</span>*/}
+                                    {/*    </Link>*/}
+                                    {/*</div>*/}
+
+
+                                    {/*<div className="mt-2 fw-bold text-muted ms-3">*/}
+                                    {/*    <i className="bi bi-file-earmark-x-fill"></i>*/}
+                                    {/*    <span className="ms-2 wd-cursor-pointer" onClick={handleDelete}>*/}
+                                    {/*    Delete*/}
+                                    {/*</span>*/}
+                                    {/*</div>*/}
+                                </div>
+                            </>
+                        }
                     </div>
                 </div>
             </div>
 
             {/*Comment Form*/}
             <div>
-                <CommentForm submitReview={submitReview} albumId={albumId}/>
+                <CommentForm submitReview={submitReview} albumId={album.id}/>
             </div>
 
             {/*Comment from users*/}
@@ -117,9 +158,9 @@ const AlbumDetails = ({albumId}) => {
 
             {/*Track List*/}
             <div className="wd-details-tracks my-5">
-                {album.tracks.items.length > 0 && <h3 className="text-muted">Tracks</h3>}
+                {album.totalTracks > 0 && <h3 className="text-muted">Tracks</h3>}
 
-                {album.tracks.items.map((track) => (
+                {album.tracks.map((track) => (
                     <TrackItem key={track.id} track={track}/>
                 ))}
             </div>

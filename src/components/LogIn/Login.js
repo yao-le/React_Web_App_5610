@@ -135,6 +135,7 @@ const Login = () => {
                         fileInputRef={fileInputRef}
                         handlePortraitChange={handlePortraitChange}
                         handleUploadClick={handleUploadClick}
+                        isAlbum={false}
                     />
                 }
 

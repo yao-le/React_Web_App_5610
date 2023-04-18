@@ -1,11 +1,14 @@
-// 1.upload form button
-// 2.new album releases
-// 3.new comments from other users
+// 1.upload button
+// 2.released albums
 
-import NewReleases from "./NewReleases";
+import Releases from "./Releases";
 import {useNavigate} from "react-router";
+import {useSelector} from "react-redux";
 
+
+// Artist Dashboard
 const ArtistScreen = () => {
+    const {currentUser} = useSelector((state) => state.user);
 
     const navigate = useNavigate();
 
@@ -17,13 +20,17 @@ const ArtistScreen = () => {
     return (
         <div>
             <h3 className="fw-bold text-white wd-summary-title">Artist Dashboard</h3>
-            <button type="button" onClick={handleClick}>
+
+            <button type="button" onClick={handleClick}
+                    className="wd-upload-new-album-button ms-2 mt-4">
                 Upload New Album
             </button>
-            <NewReleases />
+
+            <div className="mt-4">
+                <Releases artist={currentUser} />
+            </div>
         </div>
     )
-
 }
 
 export default ArtistScreen;

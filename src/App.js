@@ -15,7 +15,6 @@ import Admin from "./components/Admin";
 import EditOtherProfile from "./components/Profile/EditOtherProfile";
 import Publisher from "./components/Publisher";
 import UploadAlbum from "./components/Publisher/UploadAlbum";
-import LocalDetails from "./components/LocalDetails";
 
 
 const store = configureStore(
@@ -34,7 +33,6 @@ function App() {
                     <Route path="/" element={<Home/>}/>
                     <Route path="/search" element={<Search/>}/>
                     <Route path="/details" element={<Details/>}/>
-                    <Route path="/local-details" element={<LocalDetails/>}/>
                     <Route path="/login" element={<Login/>}/>
                     <Route path="/profile" element={<Profile/>}/>
                     <Route path="/edit-profile" element={<EditProfile/>}/>

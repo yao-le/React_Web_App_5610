@@ -1,53 +1,64 @@
 import {useState, useEffect} from "react";
-import {getNewReleases} from "../../services/album-service";
-import {getFeaturedPlaylists} from "../../services/playlist-service";
+import {findAllLocalAlbums, getNewReleases} from "../../services/album-service";
 import AlbumGrid from "../Summary/AlbumGrid";
-import PlaylistGrid from "../Summary/PlaylistGrid";
 import Navbar from "../Navbar";
-import {getRecommendations} from "../../services/track-service";
 import {useSelector} from "react-redux";
 import LikedSongs from "./LikedSongs";
 import NewMembers from "./NewMembers";
+import {getUserById} from "../../services/auth/auth-service";
 
 const Home = () => {
     const {currentUser} = useSelector((state) => state.user);
 
+    // const [localReleases, setLocalReleases] = useState([]);
+    // const [spotifyReleases, setSpotifyReleases] = useState([]);
 
     const [newReleases, setNewReleases] = useState([]);
-    // const [featuredPlaylists, setFeaturedPlaylists] = useState([]);
-    // const [recommendedAlbums, setRecommendedAlbums] = useState([]);
 
-
+    // from spotify
     const fetchNewReleases = async () => {
         const data = await getNewReleases("US", 20);
         if (data.albums) {
-            setNewReleases([...data.albums.items]);
+            return data.albums.items.map((album) => ({
+                id: album.id,
+                albumName: album.name,
+                artistName: album.artists[0].name,
+                albumImage: album.images && album.images[1]?.url,
+                isLocal: false,
+            }));
         }
-    }
+        return [];
+    };
 
-    // const fetchRecommendedAlbums = async () => {
-    //     if (!currentUser && currentUser.role !== "user") {
-    //         return;
-    //     }
-    //     const data = await getRecommendations(currentUser.favoriteGenres, 16);
-    //     if (data.tracks) {
-    //         const albums = data.tracks.map((track) => track.album);
-    //         setRecommendedAlbums([...albums]);
-    //     }
-    // }
+    // from local
+    const fetchLocalNewReleases = async () => {
+        const data = await findAllLocalAlbums();
+        if (data) {
+            const albumsPromises = data.map(async (album) => {
+                const artist = await getUserById(album.publisher);
+                return {
+                    id: album._id,
+                    albumName: album.albumName,
+                    artistName: artist.name,
+                    albumImage: album.coverPic,
+                    isLocal: true,
+                };
+            });
+            const albums = await Promise.all(albumsPromises);
+            return albums;
+        }
+        return [];
+    };
 
-    // const fetchFeaturedPlaylists = async () => {
-    //     const data = await getFeaturedPlaylists("US", 10);
-    //     if (data.playlists) {
-    //         setFeaturedPlaylists([...data.playlists.items]);
-    //     }
-    // }
 
+    const fetchData = async () => {
+        const localNewReleases = await fetchLocalNewReleases();
+        const spotifyNewReleases = await fetchNewReleases();
+        setNewReleases([...localNewReleases, ...spotifyNewReleases]);
+    };
 
     useEffect(() => {
-        fetchNewReleases();
-        // fetchRecommendedAlbums()
-        //fetchFeaturedPlaylists();
+        fetchData();
     }, []);
 
 
@@ -61,29 +72,15 @@ const Home = () => {
                 <div className="wd-width-95">
                     <div className="wd-bg-color-black">
                         {/*for both anonymous users and logged-in users*/}
-                        <NewMembers />
+                        <NewMembers/>
 
                         {/*only for logged-in users*/}
                         {
-                            currentUser && <LikedSongs />
+                            currentUser && <LikedSongs/>
                         }
 
                         <h3 className="fw-bold text-white wd-summary-title">New Album Releases</h3>
                         <AlbumGrid albums={newReleases}/>
-
-                        {/*不需要的功能*/}
-                        {/*/!*for viewers*!/*/}
-                        {/*{*/}
-                        {/*    currentUser && currentUser.role === "viewer" &&*/}
-                        {/*    recommendedAlbums.length > 0 &&*/}
-                        {/*    <>*/}
-                        {/*    <h3 className="fw-bold text-white wd-summary-title">Recommendation</h3>*/}
-                        {/*    <AlbumGrid albums={recommendedAlbums}/>*/}
-                        {/*    </>*/}
-                        {/*}*/}
-
-                        {/*<h3 className="fw-bold text-white wd-summary-title">Featured Playlists</h3>*/}
-                        {/*<PlaylistGrid playlists={featuredPlaylists}/>*/}
                     </div>
                 </div>
             </div>

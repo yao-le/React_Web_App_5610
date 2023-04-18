@@ -4,7 +4,7 @@ import {useNavigate} from "react-router";
 import {useSelector} from "react-redux";
 
 // like/dislike a song
-const HeartIcon = ({ track }) => {
+const HeartIcon = ({ track, onDislike }) => {
     const {currentUser} = useSelector((state) => state.user);
 
     const [liked, setLiked] = useState(false);
@@ -23,7 +23,8 @@ const HeartIcon = ({ track }) => {
             console.log("likes a song");
             const newLikeRelation = {
                 userId: currentUser._id,
-                spotifyTrackId: track.id,
+                trackId: track.id,
+                isLocal: track.isLocal,
             }
             const data = await createLikeTrack(newLikeRelation);
             if (data) {
@@ -34,6 +35,9 @@ const HeartIcon = ({ track }) => {
             const response = await deleteLikeTrack(currentUser._id, track.id);
             if (response.deletedCount > 0) {
                 setLiked(false);
+                if (onDislike) {
+                    onDislike(track.id);
+                }
             }
         }
     }

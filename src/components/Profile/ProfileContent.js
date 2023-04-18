@@ -2,11 +2,10 @@ import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 import ProfileGrid from "../Summary/ProfileGrid";
 import {useEffect, useState} from "react";
-import AlbumGrid from "../Summary/AlbumGrid";
-import {getCollectedByUserId} from "../../services/collectAlbums-service";
-import {getAlbumById} from "../../services/album-service";
 import {getFollowersByUserId, getFollowingsByUserId} from "../../services/follow-service";
 import {getUserById} from "../../services/auth/auth-service";
+import Releases from "../Publisher/Releases";
+import Collections from "./Collections";
 
 
 // current user's profile page
@@ -17,7 +16,6 @@ const ProfileContent = () => {
     const [followers, setFollowers] = useState([]);
     const [following, setFollowing] = useState([]);
 
-    const [albumCollection, setAlbumCollection] = useState([]);
 
     // fetch current user's followers
     const fetchFollowers = async () => {
@@ -39,24 +37,10 @@ const ProfileContent = () => {
         setFollowing([...userArray]);
     }
 
-    // fetch current user's album collections
-    const fetchAlbumCollection = async () => {
-        // return [{userId, spotifyAlbumId}] relations
-        const collectsRelations = await getCollectedByUserId(currentUser._id)
-
-        const albumPromises = collectsRelations.map(async (relation) => {
-            return await getAlbumById(relation.spotifyAlbumId)
-        });
-
-        const albums = await Promise.all(albumPromises);
-        setAlbumCollection([...albums]);
-    }
-
 
     useEffect(() => {
         fetchFollowers();
         fetchFollowing();
-        fetchAlbumCollection();
     }, []);
 
 
@@ -117,20 +101,15 @@ const ProfileContent = () => {
             {/*publisher's works*/}
             {
                 currentUser.role === "publisher" &&
-                <div className="mt-2">
-                    <h3 className="fw-bold text-white wd-summary-title">Releases</h3>
+                <div className="mt-4">
+                    <Releases artist={currentUser} />
                 </div>
             }
 
 
             {/*display current user's album collections*/}
             <div className="mt-2">
-                <h3 className="fw-bold text-white wd-summary-title mt-5">Collections</h3>
-                {
-                    albumCollection.length > 0 ?
-                        <AlbumGrid albums={albumCollection} /> :
-                        <h4 className="fw-bold text-muted wd-summary-title mb-5">No album collections yet</h4>
-                }
+               <Collections />
             </div>
 
             {/*current user's following*/}

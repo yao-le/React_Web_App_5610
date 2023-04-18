@@ -36,7 +36,6 @@ export const getLocalAlbumById = async (albumId) => {
 }
 
 export const createLocalAlbum = async (album) => {
-    console.log(album);
     const response = await api.post(ALBUMS_URL, album);
     return response.data;
 }

@@ -62,6 +62,7 @@ const EditForm = ({
                         fileInputRef={fileInputRef}
                         handlePortraitChange={handlePortraitChange}
                         handleUploadClick={handleUploadClick}
+                        isAlbum={false}
                     />
 
                     {/* Username */}
