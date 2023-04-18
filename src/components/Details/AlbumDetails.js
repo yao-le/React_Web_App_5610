@@ -74,7 +74,7 @@ const AlbumDetails = ({album}) => {
                 {/*cover image of album*/}
                 <img
                     className="wd-details-img"
-                    src={album.image}
+                    src={album.image || "https://media.istockphoto.com/id/1153663901/vector/black-music-notes-icon-vector.jpg?s=612x612&w=0&k=20&c=9UACzmfKRu7aGtznDYPepgusXU8lqr_Xi21_E73RNhs="}
                     alt={album.name}
                 />
 
