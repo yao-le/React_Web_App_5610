@@ -195,14 +195,16 @@ const OtherProfileContent = ({user}) => {
                     }
 
                     {/*follow button*/}
-                    <div className="mt-3 fw-bold text-muted">
-                        <button
-                            className={`wd-follow-button ${isFollowing ? 'following' : ''}`}
-                            onClick={handleFollowClick}
-                        >
-                            {isFollowing ? 'Following' : 'Follow'}
-                        </button>
-                    </div>
+                    { currentUser.role !== "admin" && user.role !== "admin" &&
+                        <div className="mt-3 fw-bold text-muted">
+                            <button
+                                className={`wd-follow-button ${isFollowing ? 'following' : ''}`}
+                                onClick={handleFollowClick}
+                            >
+                                {isFollowing ? 'Following' : 'Follow'}
+                            </button>
+                        </div>
+                    }
                 </div>
             </div>
 
