@@ -108,29 +108,35 @@ const ProfileContent = () => {
 
 
             {/*display current user's album collections*/}
-            <div className="mt-2">
-               <Collections />
-            </div>
+            { currentUser.role !== "admin" &&
+                <div className="mt-2">
+                   <Collections />
+                </div>
+            }
 
             {/*current user's following*/}
-            <div className="mt-2">
-                <h3 className="fw-bold text-white wd-summary-title">Following</h3>
-                {
-                    following.length > 0 ?
-                        <ProfileGrid users={following} /> :
-                        <h4 className="fw-bold text-muted wd-summary-title mb-5">No following yet</h4>
-                }
-            </div>
+            {currentUser.role !== "admin" &&
+                <div className="mt-2">
+                    <h3 className="fw-bold text-white wd-summary-title">Following</h3>
+                    {
+                        following.length > 0 ?
+                            <ProfileGrid users={following}/> :
+                            <h4 className="fw-bold text-muted wd-summary-title mb-5">No following yet</h4>
+                    }
+                </div>
+            }
 
             {/*current user's followers*/}
-            <div className="mt-2">
-                <h3 className="fw-bold text-white wd-summary-title">Followers</h3>
-                {
-                    followers.length > 0 ?
-                        <ProfileGrid users={followers} /> :
-                        <h4 className="fw-bold text-muted wd-summary-title mb-5">No followers yet</h4>
-                }
-            </div>
+            {currentUser.role !== "admin" &&
+                <div className="mt-2">
+                    <h3 className="fw-bold text-white wd-summary-title">Followers</h3>
+                    {
+                        followers.length > 0 ?
+                            <ProfileGrid users={followers}/> :
+                            <h4 className="fw-bold text-muted wd-summary-title mb-5">No followers yet</h4>
+                    }
+                </div>
+            }
 
         </div>
 
