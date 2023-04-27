@@ -172,7 +172,7 @@ const EditAlbum = () => {
                         <button type="submit" className="btn btn-success ms-4">
                             Update
                         </button>
-                        <Link to={`/details?localAlbum=${albumId}`} className="btn btn-primary ms-2">
+                        <Link to={ currentUser.role === "publisher" ? "/publisher" : "/admin"} className="btn btn-primary ms-2">
                             Cancel
                         </Link>
                     </div>

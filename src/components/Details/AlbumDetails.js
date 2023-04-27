@@ -140,7 +140,10 @@ const AlbumDetails = ({album}) => {
 
             {/*Comment Form*/}
             <div>
-                <CommentForm submitReview={submitReview} albumId={album.id}/>
+                {
+                    currentUser &&
+                    <CommentForm submitReview={submitReview} albumId={album.id}/>
+                }
             </div>
 
             {/*Comment from users*/}
