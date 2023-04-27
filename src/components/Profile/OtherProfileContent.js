@@ -195,7 +195,7 @@ const OtherProfileContent = ({user}) => {
                     }
 
                     {/*follow button*/}
-                    { currentUser.role !== "admin" && user.role !== "admin" &&
+                    { currentUser && currentUser.role !== "admin" && user.role !== "admin" &&
                         <div className="mt-3 fw-bold text-muted">
                             <button
                                 className={`wd-follow-button ${isFollowing ? 'following' : ''}`}
