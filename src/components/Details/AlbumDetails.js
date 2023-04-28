@@ -147,17 +147,19 @@ const AlbumDetails = ({album}) => {
             </div>
 
             {/*Comment from users*/}
-            <div className="mt-3">
-                {reviews.length === 0 && <h3 className="text-muted">No comments yet</h3>}
-                {reviews.length > 0 && <h3 className="text-muted">Comments</h3>}
+            {currentUser &&
+                <div className="mt-3">
+                    {reviews.length === 0 && <h3 className="text-muted">No comments yet</h3>}
+                    {reviews.length > 0 && <h3 className="text-muted">Comments</h3>}
 
-                <div>
-                    {reviews.map((review) => (
-                        <CommentItem key={review._id} comment={review}/>
-                    ))}
+                    <div>
+                        {reviews.map((review) => (
+                            <CommentItem key={review._id} comment={review}/>
+                        ))}
+                    </div>
+
                 </div>
-
-            </div>
+            }
 
             {/*Track List*/}
             <div className="wd-details-tracks my-5">
